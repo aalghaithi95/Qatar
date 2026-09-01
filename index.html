@@ -1178,7 +1178,7 @@ body.immonthly #imWrap .imcard{max-width:1500px}
     <div class="field f-area">
       <span>Cust Group</span>
       <div class="ms" id="msAArea">
-        <button class="ms-btn" type="button" data-role="btn"><b>All cust groups</b></button>
+        <button class="ms-btn" type="button" data-role="btn"><b>Cust Groups</b></button>
         <div class="ms-pop">
           <div class="ms-search"><input type="text" placeholder="Search cust group…" data-role="search"></div>
           <div class="ms-tools"><button type="button" data-role="all">Select all</button><button type="button" data-role="none">Clear</button><span data-role="stat"></span></div>
@@ -1282,11 +1282,11 @@ body.immonthly #imWrap .imcard{max-width:1500px}
   </div>
   <div class="filters">
     <div class="field f-area">
-      <span>Area</span>
+      <span>Cust Group</span>
       <div class="ms" id="msOArea">
-        <button class="ms-btn" type="button" data-role="btn"><b>All areas</b></button>
+        <button class="ms-btn" type="button" data-role="btn"><b>Cust Groups</b></button>
         <div class="ms-pop">
-          <div class="ms-search"><input type="text" placeholder="Search area…" data-role="search"></div>
+          <div class="ms-search"><input type="text" placeholder="Search Cust Group…" data-role="search"></div>
           <div class="ms-tools"><button type="button" data-role="all">Select all</button><button type="button" data-role="none">Clear</button><span data-role="stat"></span></div>
           <div class="ms-list" data-role="list"></div>
         </div>
@@ -1381,11 +1381,11 @@ body.immonthly #imWrap .imcard{max-width:1500px}
 
   <div class="filters">
     <div class="field f-area">
-      <span>Area</span>
+      <span>Cust Group</span>
       <div class="ms" id="msPArea">
-        <button class="ms-btn" type="button" data-role="btn"><b>All areas</b></button>
+        <button class="ms-btn" type="button" data-role="btn"><b>Cust Groups</b></button>
         <div class="ms-pop">
-          <div class="ms-search"><input type="text" placeholder="Search area…" data-role="search"></div>
+          <div class="ms-search"><input type="text" placeholder="Search Cust Group…" data-role="search"></div>
           <div class="ms-tools"><button type="button" data-role="all">Select all</button><button type="button" data-role="none">Clear</button><span data-role="stat"></span></div>
           <div class="ms-list" data-role="list"></div>
         </div>
@@ -1524,6 +1524,7 @@ body.immonthly #imWrap .imcard{max-width:1500px}
 <script>
 (function(){
 'use strict';
+/* Qatar Tab 2–4 filter/export revision: Cust Group labels, description-only item pickers, Tab 3 CSV cleanup. */
 /* ================= data: loaded once, then everything is local ================= */
 var SHEET_ID = '1OBLszdQLvFZPoc8yEtvmjcI2XOd8RisIUwbBMKOyaFU';
 var SHEET_TAB = '';
@@ -5342,7 +5343,7 @@ function analysisCustomerOptions(){
 }
 function initAnalysis(){
   msAArea = MultiSelect('msAArea', {
-    allLabel:'All cust groups',
+    allLabel:'Cust Groups',
     options: function(){
       var A2 = (F && state.yrB) ? analysisScan() : null;
       var seen = {}, out = [];
@@ -5578,7 +5579,7 @@ function promoItemOptions(){
   for (var i=0;i<NI;i++){
     if (!promoItemOk(i)) continue;
     if (state.pCat !== null && catOf[i] !== state.pCat) continue;
-    out.push({id:i, label:ITEMS[i][1], tag:String(ITEMS[i][0])});
+    out.push({id:i, label:ITEMS[i][1]});
   }
   return out.sort(function(a,b){ return a.label < b.label ? -1 : 1; });
 }
@@ -5598,7 +5599,7 @@ function buildPromoCats(){
 
 function initPromo(){
   msPArea = MultiSelect('msPArea', {
-    allLabel:'All areas',
+    allLabel:'Cust Groups',
     options:promoAreaOptions,
     sel:function(){ return state.pArea; },
     changed:function(){
@@ -7240,7 +7241,7 @@ function renderOutlet(){
     periodLabel() + ' ' + state.yrA + ' vs ' + state.yrB + ' · ' + depLabel() +
     (state.oArea.size ? ' · ' + (state.oArea.size === 1
         ? (function(){ var n=''; state.oArea.forEach(function(a){ n = areaLabel(a); }); return n; })()
-        : state.oArea.size + ' areas') : '') +
+        : state.oArea.size + ' cust groups') : '') +
     (state.oSales !== 'all' ? ' · ' + (state.oSales === 'promo' ? 'promo only' : 'regular only') : '') +
     (state.oCat !== null ? ' · ' + CATS[state.oCat] : '') +
     (state.oItems.size ? ' · ' + state.oItems.size + ' item' + (state.oItems.size>1?'s':'') : '') +
@@ -7282,13 +7283,13 @@ function outletItemOptions(){
     if (state.oSales === 'promo' && ITEMS[i][3] !== 'Promotion') continue;
     if (state.oSales === 'reg' && ITEMS[i][3] === 'Promotion') continue;
     if (state.oCat !== null && catOf[i] !== state.oCat) continue;
-    out.push({id:i, label:ITEMS[i][1], tag:String(ITEMS[i][0])});
+    out.push({id:i, label:ITEMS[i][1]});
   }
   return out.sort(function(a,b){ return a.label < b.label ? -1 : 1; });
 }
 function initOutlet(){
   msOArea = MultiSelect('msOArea', {
-    allLabel:'All areas',
+    allLabel:'Cust Groups',
     options: function(){
       /* only areas that still have a trading outlet, exactly as the other tabs
          build their lists — a spelling that survives on a dead outlet drops out */
@@ -7374,7 +7375,7 @@ document.getElementById('oReset').addEventListener('click', function(){
 /* ---------- export: item-level detail, the way the Analysis tab does it ---------- */
 document.getElementById('oCsv').addEventListener('click', function(){
   var A2 = analysisScan(), ref = A2.ref;
-  var head = ['Customer','Area','Customer Site','Site Code','Channel','Last Active Salesman',
+  var head = ['Customer','Cust Group','Customer Site','Channel',
               'Category','Item Code','Item Description',
               state.yrA+' QTY', state.yrB+' QTY','QTY Difference',
               state.yrA+' Value', state.yrB+' Value','Difference','% Change',
@@ -7394,8 +7395,8 @@ document.getElementById('oCsv').addEventListener('click', function(){
         var lt = outletLastPlain(lp, la);
         var pc = vA ? ((vB/vA - 1) * 100).toFixed(1) : (vB ? 'NEW' : '');
         lines.push([
-          q(CUSTOMERS[g.cid]), q(areaLabel(areaOf[st.s])), q(SITES[st.s][1]), SITES[st.s][2],
-          SITES[st.s][3], q(SITES[st.s][5] || ''),
+          q(CUSTOMERS[g.cid]), q(areaLabel(areaOf[st.s])), q(SITES[st.s][1]),
+          SITES[st.s][3],
           q(ITEMS[i][2]), ITEMS[i][0], q(ITEMS[i][1]),
           qA.toFixed(2), qB.toFixed(2), (qB-qA).toFixed(2),
           vA.toFixed(2), vB.toFixed(2), (vB-vA).toFixed(2), pc,
