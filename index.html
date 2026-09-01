@@ -3413,7 +3413,7 @@ function buildSelectors(){
   msSite = MultiSelect('msSite', {
     allLabel:'All sites',
     options: function(){
-      return scopeSites().map(function(s){ return {id:s, label:SITES[s][1], tag:SITES[s][3]}; })
+      return scopeSites().map(function(s){ return {id:s, label:SITES[s][1]}; })
                          .sort(function(a,b){ return a.label < b.label ? -1 : 1; });
     },
     sel: function(){ return state.site; },
