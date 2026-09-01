@@ -1176,11 +1176,11 @@ body.immonthly #imWrap .imcard{max-width:1500px}
   </div>
   <div class="filters">
     <div class="field f-area">
-      <span>Area</span>
+      <span>Cust Group</span>
       <div class="ms" id="msAArea">
-        <button class="ms-btn" type="button" data-role="btn"><b>All areas</b></button>
+        <button class="ms-btn" type="button" data-role="btn"><b>All cust groups</b></button>
         <div class="ms-pop">
-          <div class="ms-search"><input type="text" placeholder="Search area…" data-role="search"></div>
+          <div class="ms-search"><input type="text" placeholder="Search cust group…" data-role="search"></div>
           <div class="ms-tools"><button type="button" data-role="all">Select all</button><button type="button" data-role="none">Clear</button><span data-role="stat"></span></div>
           <div class="ms-list" data-role="list"></div>
         </div>
@@ -1265,7 +1265,6 @@ body.immonthly #imWrap .imcard{max-width:1500px}
           <th class="r a-vb" id="anYrB"></th>
           <th class="r a-diff">Difference</th>
           <th class="r a-stock">Stock</th>
-          <th class="r a-astock">Area Stock</th>
           <th class="a-last">Last Supplied</th>
         </tr></thead>
         <tbody id="anBody"></tbody>
@@ -5201,12 +5200,12 @@ function renderAnalysis(){
               '<td class="num">' + fmtS(gB) + '</td>' +
               '<td class="num"><span class="' + (cDiff>0?'up':(cDiff<0?'down':'flat')) + '">' +
                 (cDiff>=0?'+':'−') + nf0.format(Math.abs(Math.round(cDiff))) + '</span></td>' +
-              '<td></td><td></td><td></td></tr>';
+              '<td></td><td></td></tr>';
     }
     inCust++;
     if (inCust > AN_PER_CUST){
       if (inCust === AN_PER_CUST + 1){
-        html += '<tr class="more"><td colspan="11">' + (perCust[d.cid] - AN_PER_CUST) +
+        html += '<tr class="more"><td colspan="10">' + (perCust[d.cid] - AN_PER_CUST) +
                 ' more gaps for ' + esc(CUSTOMERS[d.cid]) + ' — filter to this customer, or export the CSV, to see them all</td></tr>';
       }
       continue;
@@ -5225,7 +5224,6 @@ function renderAnalysis(){
       '<td class="num a-diff"><span class="' + (diff>0?'up':(diff<0?'down':'flat')) + '">' +
         (rA || rB ? (diff>=0?'+':'−') + nf0.format(Math.abs(Math.round(diff))) : '–') + '</span></td>' +
       '<td class="num a-stock">' + (STOCK ? (stockOf(d.i) > 0 ? nf0.format(Math.round(stockOf(d.i))) : '<span class="nostock">0</span>') : '<span class="dash">–</span>') + '</td>' +
-      '<td class="num a-astock">' + areaStockCell(areaStockSite(d.i, d.s)) + '</td>' +
       '<td class="a-last">' + gapLabel(d.lp, d.la, A2.ref) + '</td></tr>';
   }
   if (html) html += '</tbody>';
@@ -5233,7 +5231,7 @@ function renderAnalysis(){
   var olds = tbl.querySelectorAll('tbody');
   for (var ob=0; ob<olds.length; ob++) olds[ob].parentNode.removeChild(olds[ob]);
   tbl.insertAdjacentHTML('beforeend', html ||
-    '<tbody id="anBody"><tr><td colspan="11" class="empty">No gaps match these filters — every item is being supplied.</td></tr></tbody>');
+    '<tbody id="anBody"><tr><td colspan="10" class="empty">No gaps match these filters — every item is being supplied.</td></tr></tbody>');
   document.getElementById('anCount').textContent =
     nf0.format(anRows.length) + ' opportunities · ' + Object.keys(perCust).length + ' customers' +
     (anRows.length > printed ? ' · showing the worst ' + AN_PER_CUST + ' per customer' : '');
@@ -5244,7 +5242,7 @@ function renderAnalysis(){
     periodLabel() + ' ' + state.yrA + ' vs ' + state.yrB + ' · gap of ' + state.aGap + '+ months' +
     (state.aArea.size ? ' · ' + (state.aArea.size === 1
         ? (function(){ var n=''; state.aArea.forEach(function(a){ n = areaLabel(a); }); return n; })()
-        : state.aArea.size + ' areas') : '') +
+        : state.aArea.size + ' cust groups') : '') +
     (A2.dormant ? ' · ' + A2.dormant + ' customers and ' + A2.closedSites + ' sites with no ' +
         (state.dep === 'FSD' ? 'Food Service' : (state.dep === 'CPD' ? 'CPD' : '')) +
         ' sales this year excluded' : '') +
@@ -5255,8 +5253,13 @@ function renderAnalysis(){
    list holds dressings only */
 /* Analysis on Food Service looks at the catering active list alone — retail packs
    bought by a restaurant are not the food service opportunity. */
+var ANALYSIS_INACTIVE_CODES = {
+  'DLC110DRY00176': 1,  /* DELICIO HOT SAUCE 100 ML */
+  'DLC110DRY00002': 1   /* DELICIO TOMATO KETCHUP 500 G */
+};
 function analysisItemInDep(i){
   if (isOther(i)) return false;                    /* an unnamed code is not an opportunity */
+  if (ANALYSIS_INACTIVE_CODES[String(ITEMS[i][0] || '').trim().toUpperCase()]) return false;
   if (state.dep === 'FSD') return isFsdItem(i);
   if (state.dep === 'CPD') return !isFsdItem(i);
   return true;
@@ -5267,7 +5270,7 @@ function analysisItemOptions(){
     if (ITEMS[i][3] === 'Promotion') continue;
     if (!analysisItemInDep(i)) continue;
     if (state.aCat !== null && catOf[i] !== state.aCat) continue;
-    out.push({id:i, label:ITEMS[i][1], tag:String(ITEMS[i][0])});
+    out.push({id:i, label:ITEMS[i][1]});
   }
   out.sort(function(a,b){ return a.label < b.label ? -1 : (a.label > b.label ? 1 : 0); });
   return out;
@@ -5339,7 +5342,7 @@ function analysisCustomerOptions(){
 }
 function initAnalysis(){
   msAArea = MultiSelect('msAArea', {
-    allLabel:'All areas',
+    allLabel:'All cust groups',
     options: function(){
       var A2 = (F && state.yrB) ? analysisScan() : null;
       var seen = {}, out = [];
@@ -5416,10 +5419,10 @@ document.getElementById('anReset').addEventListener('click', function(){
 });
 document.getElementById('anCsv').addEventListener('click', function(){
   var A2 = analysisScan();
-  var head = ['Customer','Area','Customer Site','Category','Item Code','Item Description',
+  var head = ['Customer','Cust Group','Customer Site','Category','Item Code','Item Description',
               state.yrA+' QTY', state.yrB+' QTY','QTY Difference',
               state.yrA+' Value', state.yrB+' Value','Difference',
-              'Warehouse Stock','Area Stock','Last Supplied','Months Since','Last Active Salesman'];
+              'Warehouse Stock','Last Supplied','Months Since'];
   var lines = [head.join(',')];
   anRows.forEach(function(d){
     var e = effLast(d.lp, d.la);
@@ -5435,9 +5438,7 @@ document.getElementById('anCsv').addEventListener('click', function(){
       d.qA.toFixed(2), d.qB.toFixed(2), (d.qB-d.qA).toFixed(2),
       d.vA.toFixed(2), d.vB.toFixed(2), (d.vB-d.vA).toFixed(2),
       STOCK ? Math.round(stockOf(d.i)) : '',
-      (function(){ var v = areaStockSite(d.i, d.s); return v === null ? '' : Math.round(v); })(),
-      lt, d.never ? '' : (A2.ref - e),
-      '"'+String(SITES[d.s][5] || '').replace(/"/g,'""')+'"'
+      lt, d.never ? '' : (A2.ref - e)
     ].join(','));
   });
   var blob = new Blob([lines.join('\n')], {type:'text/csv;charset=utf-8;'});
