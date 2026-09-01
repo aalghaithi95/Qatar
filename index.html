@@ -874,6 +874,11 @@ body.immonthly #imWrap .imcard{max-width:1500px}
   color:transparent
 }
 .mvtable td.zero{color:var(--muted)}
+.mvtable th,.mvtable td{overflow:hidden}
+.mvtable tbody td.mvcat,.mvtable tbody td.mvcode,.mvtable tbody td.mvname{
+  white-space:normal;overflow-wrap:anywhere;word-break:break-word
+}
+.mvtable td.neg{background:#F8C7CC!important;color:var(--neg);font-weight:700}
 .mvnote{font-size:10px;color:var(--muted);text-align:center;margin-top:9px}
 @media (max-width:760px){
   body.immonthly #imWrap{padding:10px 8px}
@@ -993,6 +998,20 @@ body.immonthly #imWrap .imcard{max-width:1500px}
 .deps{display:none!important}
 #areaCards{display:none!important}
 
+
+/* Qatar Tab 1 refinements */
+@media (min-width:761px){
+  #tbl th[data-k="stock"],#tbl td.d-stock{width:82px;min-width:82px;max-width:82px;padding-left:7px;padding-right:7px}
+}
+.imtbl.sitelist col.w-name{width:25%}
+.imtbl.sitelist col.w-area{width:18%}
+.imtbl.sitelist col.w-site{width:32%}
+.imtbl.sitelist col.w-open{width:10%}
+.imtbl.sitelist col.w-val{width:15%}
+.imtbl.sitelist th,.imtbl.sitelist td{overflow:hidden}
+.imtbl.sitelist td.c-name,.imtbl.sitelist td.c-site,.imtbl.sitelist td.c-area{
+  white-space:normal;overflow-wrap:anywhere;word-break:break-word;line-height:1.25;text-align:left
+}
 </style>
 </head>
 <body>
@@ -1502,7 +1521,7 @@ body.immonthly #imWrap .imcard{max-width:1500px}
 
 <div id="reportWrap"><div class="rep" id="report"></div></div>
 
-<script id="items" type="application/json">[["DLC110DRY00004","DELICIO BOLOGNESE PASTA SAUCE 500 G","Pasta","Regular",1],["DLC110DRY00008","DELICIO PINEAPPLE ESSENCE 28 ML","C&E","Regular",1],["DLC110DRY00010","DELICIO FRENCH DRESSING 532 ML","Salad Dressing","Regular",1],["DLC110DRY00012","DELICIO 1000 ISLAND DRESSING 532 ML","Salad Dressing","Regular",1],["DLC110DRY00015","DELICIO ITALIAN DRESSING 532 ML","Salad Dressing","Regular",1],["DLC110DRY00017","DELICIO MUSTARD SAUCE 325 ML","Sauces","Regular",1],["DLC110DRY00020","DELICIO GREEN COLOR 28 ML","C&E","Regular",1],["DLC110DRY00025","DELICIO RANCH DRESSING 532 ML","Salad Dressing","Regular",1],["DLC110DRY00026","DELICIO BRILLIANT BLUE COLOR 28 ML","C&E","Regular",1],["DLC110DRY00027","DELICIO BLUE CHEESE DRESSING 267 ML","Salad Dressing","Regular",1],["DLC110DRY00028","DELICIO PASTA SAUCE MARINARA 500 G","Pasta","Regular",1],["DLC110DRY00030","DELICIO ARABBIATA PASTA SAUCE 500 G","Pasta","Regular",1],["DLC110DRY00032","DELICIO RED COLOR 28 ML","C&E","Regular",1],["DLC110DRY00034","DELICIO CEASOR DRESSING 267 ML","Salad Dressing","Regular",1],["DLC110DRY00036","DELICIO FRENCH DRESSING 267 ML","Salad Dressing","Regular",1],["DLC110DRY00037","DELICIO ITALIAN DRESSING 267 ML","Salad Dressing","Regular",1],["DLC110DRY00038","DELICIO 1000 ISLAND DRESSING 267 ML","Salad Dressing","Regular",1],["DLC110DRY00041","DELICIO YELLOW COLOR 28 ML","C&E","Regular",1],["DLC110DRY00042","DELICIO RANCH DRESSING 267 ML","Salad Dressing","Regular",1],["DLC110DRY00044","DELICIO VANILLA ESSENCE 28 ML","C&E","Regular",1],["DLC110DRY00101","DELICIO SWEET THAI CHILLI SAUCE 370 G X 3PCS  SP","Sauces","Promotion",0],["DLC110DRY00114","DELICIO REAL MAYONNAISE 300 ML","Mayonnaise","Regular",1],["DLC110DRY00115","DELICIO MAYOCHUP 300 ML","Mayonnaise","Regular",1],["DLC110DRY00116","DELICIO CHILI MAYONNAISE 300 ML","Mayonnaise","Regular",1],["DLC110DRY00118","DELICIO REAL MAYONNAISE 946 ML","Mayonnaise","Regular",1],["DLC110DRY00119","DELICIO GARLIC MAYONAISE 300 ML","Mayonnaise","Regular",1],["DLC110DRY00122","DELICIO LITE MAYONNAISE 500 ML","Mayonnaise","Regular",1],["DLC110DRY00123","DELICIO REAL MAYONANISE 500 ML","Mayonnaise","Regular",1],["DLC110DRY00124","DELICIO LITE MAYONNAISE 946 ML","Mayonnaise","Regular",1],["DLC110DRY00132","DELICIO MAYONNAISE (5B) 946 ML","Mayonnaise","Regular",1],["DLC110DRY00148","DELICIO LEMON PICKLE SAUCE 175 ML","Hot Sauce","Regular",1],["DLC110DRY00149","DELICIO SWEET JALAPENO SAUCE 175 ML","Hot Sauce","Regular",1],["DLC110DRY00150","DELICIO CHILLI GARLIC SAUCE 175 ML","Hot Sauce","Regular",1],["DLC110DRY00151","DELICIO CHIPOTLE SAUCE 175 ML","Hot Sauce","Regular",1],["DLC110DRY00171","DELICIO SMOKY BBQ SAUCE 532 ML","Sauces","Regular",1],["DLC110DRY00179","DELICIO SPICY RANCH DRESSING 267 ML","Salad Dressing","Regular",1],["DLC110DRY00222","DELICIO HONEY BBQ SAUCE 532 ML","Sauces","Regular",1],["DLC110DRY00223","DELICIO SPICY BBQ SAUCE 532 ML","Sauces","Regular",1],["DLC110DRY00237","DELICIO FRENCH SALAD DRESSING 532 ML @25% OFF","Salad Dressing","Promotion",0],["DLC110DRY00238","DELICIO RANCH SALAD DRESSING 532 ML @25% OFF","Salad Dressing","Promotion",0],["DLC110DRY00244","DELICIO FRENCH SALAD DRESSING 532 ML & 267 ML Free","Salad Dressing","Promotion",0],["DLC110DRY00245","DELICIO RANCH SALAD DRESSING 532 ML & 267 ML Free","Salad Dressing","Promotion",0],["DLC110DRY00246","DELICIO FRENCH SALAD DRESSING 532 ML & CHILI MAYO 300 ML FREE","Salad Dressing","Promotion",0],["DLC110DRY00247","DELICIO RANCH SALAD DRESSING 532 ML & CHILI MAYO 300 ML Free","Dressing + Mayo","Promotion",0],["DLC110DRY00250","DELICIO FRENCH SALAD DRESSING 532 ML & REAL MAYO 300 ML Free","Dressing + Mayo","Promotion",0],["DLC110DRY00251","DELICIO RANCH SALAD DRESSING 532 ML & REAL MAYO 300 ML Free","Dressing + Mayo","Promotion",0],["DLC110DRY00252","DELICIO REAL MAYONNAISE 300 ML @20% OFF","Mayonnaise","Promotion",0],["DLC110DRY00254","DELICIO PIZZA SAUCE 500 G","Pasta","Regular",1],["DLC110DRY00255","DELICIO BLACK TRUFLE MAYONAISE 300 ML","Mayonnaise","Regular",1],["DLC110DRY00256","DELICIO CHIPOTLE MAYONAISE 300 ML","Mayonnaise","Regular",1],["DLC110DRY00257","DELICIO HABANERO RANCH 267 ML","Salad Dressing","Regular",1],["DLC110DRY00258","DELICIO CHIPOTLE RANCH 267 ML","Salad Dressing","Regular",1],["DLC110DRY00261","DELICIO FRENCH 532 ML & HABANERO RANCH 267 ML Free","Salad Dressing","Promotion",0],["DLC110DRY00262","DELICIO RANCH 532 ML & CHIPOTLE RANCH 267 ML Free","Salad Dressing","Promotion",0],["DLC110DRY00263","DELICIO PIZZA SAUCE 500 G  SP","Pasta","Promotion",0],["DLC110DRY00264","DELICIO CHIPOTLE MAYO 300 ML & BLACK TRUFFLE 300 ML SP","Mayonnaise","Promotion",0],["DLC110DRY00265","DELICIO LIGHT RANCH 267 ML","Salad Dressing","Regular",1],["DLC110DRY00266","DELICIO LIGHT FRENCH 267 ML","Salad Dressing","Regular",1],["DLC110DRY00267","DELICIO SRIRACHA RANCH 267 ML","Salad Dressing","Regular",1],["DLC110DRY00268","DELICIO SWEET THAI CHILI SAUCE 267 ML","Sauces","Regular",1],["DLC110DRY00269","DELICIO SRIRACHA MAYONAISE 300 G","Mayonnaise","Regular",1],["DLC110DRY00270","DELICIO DYNAMITE SAUCE 300 G","Sauces","Regular",1],["DLC110DRY00271","DELICIO CHEESE SAUCE 300 ML","Sauces","Regular",1],["DLC110DRY00272","DELICIO TOMATO KETCHUP 340 G","Ketchup","Regular",1],["DLC110DRY00273","DELICIO TOMATO KETCHUP 910 G","Ketchup","Regular",1],["DLC110DRY00274","DELICIO TOMATO KETCHUP 500 G & REAL MAYONNAISE 300 ML SP","Dressing + Ketchup","Promotion",0],["DLC110DRY00275","DELICIO TOMATO KETCHUP 500 G","Ketchup","Regular",1],["DLC110DRY00276","DELICIO TOMATO KETCHUP 910 G SP","Ketchup","Promotion",0],["DLC110DRY00279","DELICIO REAL MAYONNAISE 946 ML SP","Mayonnaise","Promotion",0],["DLC110DRY00280","DELICIO RANCH 532 ML & DYNAMITE SAUCE 300 ML SP","Dressing + Sauce","Promotion",0],["DLC110DRY00281","DELICIO FRENCH 532 ML & CHEESE SAUCE 300 ML SP","Dressing + Sauce","Promotion",0],["DLC110DRY00282","DELICIO REAL MAYO 300 ML & CHILI MAYO 300 ML SP","Mayonnaise","Promotion",0],["DLC110DRY00283","PRODELICIO TOMATO KETCHUP 500 GMPLUS REAL MAYONNAISE 300 MLPROMOINT","Dressing + Ketchup","Promotion",0],["DLC110DRY00284","DELICIO STRAWBERRY JAM 360 G","Jam","Regular",1],["DLC110DRY00285","DELICIO FIG JAM 360 G","Jam","Regular",1],["DLC110DRY00286","DELICIO APRICOAT JAM 360 G","Jam","Regular",1],["DLC110DRY00287","DELICIO ORANGE JAM 360 G","Jam","Regular",1],["DLC110DRY00288","DELICIO MIX FRUIT JAM 360 G","Jam","Regular",1],["DLC110DRY00289","DELICIO CLASSIC BURGER SAUCE 300 ML","Sauces","Regular",1],["DLC110DRY00290","DELICIO SMOKY FRENCH DRESSING 267 ML","Salad Dressing","Regular",1],["DLC110DRY00291","DELICIO BUTTERMILK RANCH DRESSING 267 ML","Salad Dressing","Regular",1]]</script>
+<script id="items" type="application/json">[["DLC110DRY00004","DELICIO BOLOGNESE PASTA SAUCE 500 G","Pasta","Regular",1],["DLC110DRY00008","DELICIO PINEAPPLE ESSENCE 28 ML","C&E","Regular",1],["DLC110DRY00010","DELICIO FRENCH DRESSING 532 ML","Salad Dressing","Regular",1],["DLC110DRY00012","DELICIO 1000 ISLAND DRESSING 532 ML","Salad Dressing","Regular",1],["DLC110DRY00015","DELICIO ITALIAN DRESSING 532 ML","Salad Dressing","Regular",1],["DLC110DRY00017","DELICIO MUSTARD SAUCE 325 ML","Sauces","Regular",1],["DLC110DRY00020","DELICIO GREEN COLOR 28 ML","C&E","Regular",1],["DLC110DRY00025","DELICIO RANCH DRESSING 532 ML","Salad Dressing","Regular",1],["DLC110DRY00026","DELICIO BRILLIANT BLUE COLOR 28 ML","C&E","Regular",1],["DLC110DRY00027","DELICIO BLUE CHEESE DRESSING 267 ML","Salad Dressing","Regular",1],["DLC110DRY00028","DELICIO PASTA SAUCE MARINARA 500 G","Pasta","Regular",1],["DLC110DRY00030","DELICIO ARABBIATA PASTA SAUCE 500 G","Pasta","Regular",1],["DLC110DRY00032","DELICIO RED COLOR 28 ML","C&E","Regular",1],["DLC110DRY00034","DELICIO CEASOR DRESSING 267 ML","Salad Dressing","Regular",1],["DLC110DRY00036","DELICIO FRENCH DRESSING 267 ML","Salad Dressing","Regular",1],["DLC110DRY00037","DELICIO ITALIAN DRESSING 267 ML","Salad Dressing","Regular",1],["DLC110DRY00038","DELICIO 1000 ISLAND DRESSING 267 ML","Salad Dressing","Regular",1],["DLC110DRY00041","DELICIO YELLOW COLOR 28 ML","C&E","Regular",1],["DLC110DRY00042","DELICIO RANCH DRESSING 267 ML","Salad Dressing","Regular",1],["DLC110DRY00044","DELICIO VANILLA ESSENCE 28 ML","C&E","Regular",1],["DLC110DRY00101","DELICIO SWEET THAI CHILLI SAUCE 370 G X 3PCS  SP","Sauces","Promotion",0],["DLC110DRY00114","DELICIO REAL MAYONNAISE 300 ML","Mayonnaise","Regular",1],["DLC110DRY00115","DELICIO MAYOCHUP 300 ML","Mayonnaise","Regular",1],["DLC110DRY00116","DELICIO CHILI MAYONNAISE 300 ML","Mayonnaise","Regular",1],["DLC110DRY00118","DELICIO REAL MAYONNAISE 946 ML","Mayonnaise","Regular",1],["DLC110DRY00119","DELICIO GARLIC MAYONAISE 300 ML","Mayonnaise","Regular",1],["DLC110DRY00122","DELICIO LITE MAYONNAISE 500 ML","Mayonnaise","Regular",1],["DLC110DRY00123","DELICIO REAL MAYONANISE 500 ML","Mayonnaise","Regular",1],["DLC110DRY00124","DELICIO LITE MAYONNAISE 946 ML","Mayonnaise","Regular",1],["DLC110DRY00132","DELICIO MAYONNAISE (5B) 946 ML","Mayonnaise","Regular",1],["DLC110DRY00148","DELICIO LEMON PICKLE SAUCE 175 ML","Hot Sauce","Regular",1],["DLC110DRY00149","DELICIO SWEET JALAPENO SAUCE 175 ML","Hot Sauce","Regular",1],["DLC110DRY00150","DELICIO CHILLI GARLIC SAUCE 175 ML","Hot Sauce","Regular",1],["DLC110DRY00151","DELICIO CHIPOTLE SAUCE 175 ML","Hot Sauce","Regular",1],["DLC110DRY00171","DELICIO SMOKY BBQ SAUCE 532 ML","Sauces","Regular",1],["DLC110DRY00179","DELICIO SPICY RANCH DRESSING 267 ML","Salad Dressing","Regular",1],["DLC110DRY00222","DELICIO HONEY BBQ SAUCE 532 ML","Sauces","Regular",1],["DLC110DRY00223","DELICIO SPICY BBQ SAUCE 532 ML","Sauces","Regular",1],["DLC110DRY00237","DELICIO FRENCH SALAD DRESSING 532 ML @25% OFF","Salad Dressing","Promotion",0],["DLC110DRY00238","DELICIO RANCH SALAD DRESSING 532 ML @25% OFF","Salad Dressing","Promotion",0],["DLC110DRY00244","DELICIO FRENCH SALAD DRESSING 532 ML & 267 ML Free","Salad Dressing","Promotion",0],["DLC110DRY00245","DELICIO RANCH SALAD DRESSING 532 ML & 267 ML Free","Salad Dressing","Promotion",0],["DLC110DRY00246","DELICIO FRENCH SALAD DRESSING 532 ML & CHILI MAYO 300 ML FREE","Salad Dressing","Promotion",0],["DLC110DRY00247","DELICIO RANCH SALAD DRESSING 532 ML & CHILI MAYO 300 ML Free","Dressing + Mayo","Promotion",0],["DLC110DRY00250","DELICIO FRENCH SALAD DRESSING 532 ML & REAL MAYO 300 ML Free","Dressing + Mayo","Promotion",0],["DLC110DRY00251","DELICIO RANCH SALAD DRESSING 532 ML & REAL MAYO 300 ML Free","Dressing + Mayo","Promotion",0],["DLC110DRY00252","DELICIO REAL MAYONNAISE 300 ML @20% OFF","Mayonnaise","Promotion",0],["DLC110DRY00254","DELICIO PIZZA SAUCE 500 G","Pasta","Regular",1],["DLC110DRY00255","DELICIO BLACK TRUFLE MAYONAISE 300 ML","Mayonnaise","Regular",1],["DLC110DRY00256","DELICIO CHIPOTLE MAYONAISE 300 ML","Mayonnaise","Regular",1],["DLC110DRY00257","DELICIO HABANERO RANCH 267 ML","Salad Dressing","Regular",1],["DLC110DRY00258","DELICIO CHIPOTLE RANCH 267 ML","Salad Dressing","Regular",1],["DLC110DRY00261","DELICIO FRENCH 532 ML & HABANERO RANCH 267 ML Free","Salad Dressing","Promotion",0],["DLC110DRY00262","DELICIO RANCH 532 ML & CHIPOTLE RANCH 267 ML Free","Salad Dressing","Promotion",0],["DLC110DRY00263","DELICIO PIZZA SAUCE 500 G  SP","Pasta","Promotion",0],["DLC110DRY00264","DELICIO CHIPOTLE MAYO 300 ML & BLACK TRUFFLE 300 ML SP","Mayonnaise","Promotion",0],["DLC110DRY00265","DELICIO LIGHT RANCH 267 ML","Salad Dressing","Regular",1],["DLC110DRY00266","DELICIO LIGHT FRENCH 267 ML","Salad Dressing","Regular",1],["DLC110DRY00267","DELICIO SRIRACHA RANCH 267 ML","Salad Dressing","Regular",1],["DLC110DRY00268","DELICIO SWEET THAI CHILI SAUCE 267 ML","Sauces","Regular",1],["DLC110DRY00269","DELICIO SRIRACHA MAYONAISE 300 G","Mayonnaise","Regular",1],["DLC110DRY00270","DELICIO DYNAMITE SAUCE 300 G","Sauces","Regular",1],["DLC110DRY00271","DELICIO CHEESE SAUCE 300 ML","Sauces","Regular",1],["DLC110DRY00272","DELICIO TOMATO KETCHUP 340 G","Ketchup","Regular",1],["DLC110DRY00273","DELICIO TOMATO KETCHUP 910 G","Ketchup","Regular",1],["DLC110DRY00274","DELICIO TOMATO KETCHUP 500 G & REAL MAYONNAISE 300 ML SP","Dressing + Ketchup","Promotion",0],["DLC110DRY00275","DELICIO TOMATO KETCHUP 500 G","Ketchup","Regular",1],["DLC110DRY00276","DELICIO TOMATO KETCHUP 910 G SP","Ketchup","Promotion",0],["DLC110DRY00279","DELICIO REAL MAYONNAISE 946 ML SP","Mayonnaise","Promotion",0],["DLC110DRY00280","DELICIO RANCH 532 ML & DYNAMITE SAUCE 300 ML SP","Dressing + Sauce","Promotion",0],["DLC110DRY00281","DELICIO FRENCH 532 ML & CHEESE SAUCE 300 ML SP","Dressing + Sauce","Promotion",0],["DLC110DRY00282","DELICIO REAL MAYO 300 ML & CHILI MAYO 300 ML SP","Mayonnaise","Promotion",0],["DLC110DRY00283","PRODELICIO TOMATO KETCHUP 500 GMPLUS REAL MAYONNAISE 300 MLPROMOINT","Dressing + Ketchup","Promotion",0],["DLC110DRY00284","DELICIO STRAWBERRY JAM 360 G","Jam","Regular",1],["DLC110DRY00285","DELICIO FIG JAM 360 G","Jam","Regular",1],["DLC110DRY00286","DELICIO APRICOAT JAM 360 G","Jam","Regular",1],["DLC110DRY00287","DELICIO ORANGE JAM 360 G","Jam","Regular",1],["DLC110DRY00288","DELICIO MIX FRUIT JAM 360 G","Jam","Regular",1],["DLC110DRY00289","DELICIO CLASSIC BURGER SAUCE 300 ML","Sauces","Regular",1],["DLC110DRY00290","DELICIO SMOKY FRENCH DRESSING 267 ML","Salad Dressing","Regular",1],["DLC110DRY00291","DELICIO BUTTERMILK RANCH DRESSING 267 ML","Salad Dressing","Regular",1],["DLC110DRY00002","DELICIO TOMATO KETCHUP 500 G","Ketchup","Regular",0],["DLC110DRY00176","DELICIO HOT SAUCE 100 ML","Hot Sauce","Regular",0]]</script>
 <script>
 (function(){
 'use strict';
@@ -1621,7 +1640,7 @@ function depLabel(){ return 'CPD'; }
 var YEARS = [], NY = 0, LASTM = 11;
 var F = null;            /* {s,i,p,v,q} typed arrays — the whole dataset, in memory */
 var loadedAt = null;
-var DATA_VERSION = 22;
+var DATA_VERSION = 23;
 
 /* ---------- gviz over JSONP (no CORS, works from a static page) ---------- */
 var gvSeq = 0;
@@ -2700,7 +2719,7 @@ function COLS(){
     {k:'vB',    t:yy(state.yrB) + ' Value', r:1},
     {k:'dv',    t:'Change', r:1},
     {k:'delta', t:'Vs ' + yy(state.yrA), r:1},
-    {k:'stock', t:'Stock (Cases)', r:1},
+    {k:'stock', t:'Stock', r:1},
     {k:'last',  t:'Last Supp'}
   ];
 }
@@ -2955,6 +2974,7 @@ function render(){
   /* no supply in the current year */
   var lost = [], ib = yIdx(state.yrB);
   for (i=0;i<NI;i++){
+    if (!itemVisible(i)) continue;
     if (!itemInDep(i)) continue;
     if (A.last[i] >= 0 && Math.floor(A.last[i]/12) >= ib) continue;
     if (!(A.vA[i] || A.qA[i])) continue;
@@ -3498,7 +3518,7 @@ var catWired = false;
 function buildCatFilter(){
   var sel = document.getElementById('catSel');
   var live = {};
-  for (var i=0;i<NI;i++) if (itemInDep(i)) live[catOf[i]] = 1;
+  for (var i=0;i<NI;i++) if (itemVisible(i) && itemInDep(i)) live[catOf[i]] = 1;
   var order = CATS.map(function(n,i){ return {i:i, n:n}; })
                   .filter(function(o){ return live[o.i]; })
                   .sort(function(a,b){ return a.n<b.n?-1:1; });
@@ -3856,7 +3876,7 @@ function exportMonthlyDetailXlsx(){
     exportYears.forEach(function(){
       for (var m=0;m<12;m++) h += cellString(MONTHS[m],'Head');
     });
-    h += cellString('Stock (Cases)','Head') + '</Row>';
+    h += cellString('Stock','Head') + '</Row>';
     rows.push(h);
 
     function itemRow(i){
@@ -3872,7 +3892,8 @@ function exportMonthlyDetailXlsx(){
             r += blankCell(isValue?'Int':'Dec');
           } else {
             var v=arr[i*span+yi*12+m] || 0;
-            r += cellNumber(v,isValue?'Int':'Dec');
+            var cellStyle = isValue ? (v<0?'IntNeg':'Int') : (v<0?'DecNeg':'Dec');
+            r += cellNumber(v,cellStyle);
           }
         }
       });
@@ -3990,6 +4011,22 @@ function exportMonthlyDetailXlsx(){
           '<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>' +
           '<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>' +
           '<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/></Borders>' +
+          '<NumberFormat ss:Format="#,##0"/></Style>' +
+
+        '<Style ss:ID="DecNeg"><Alignment ss:Horizontal="Center" ss:Vertical="Center"/>' +
+          '<Borders><Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>' +
+          '<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>' +
+          '<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>' +
+          '<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/></Borders>' +
+          '<Font ss:Color="#B4402E" ss:Bold="1"/><Interior ss:Color="#F8C7CC" ss:Pattern="Solid"/>' +
+          '<NumberFormat ss:Format="#,##0.00"/></Style>' +
+
+        '<Style ss:ID="IntNeg"><Alignment ss:Horizontal="Center" ss:Vertical="Center"/>' +
+          '<Borders><Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>' +
+          '<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>' +
+          '<Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>' +
+          '<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/></Borders>' +
+          '<Font ss:Color="#B4402E" ss:Bold="1"/><Interior ss:Color="#F8C7CC" ss:Pattern="Solid"/>' +
           '<NumberFormat ss:Format="#,##0"/></Style>' +
 
         '<Style ss:ID="GroupTotal"><Alignment ss:Horizontal="Left" ss:Vertical="Center"/>' +
@@ -4255,7 +4292,7 @@ function itemCasesChart(i){
       '<span class="lg"><span class="sw prev"></span>' + YEARS[prev] + '</span>' +
       '<span class="lg"><span class="sw curr"></span>' + YEARS[latest] + '</span>' +
     '</div>' +
-    '<div class="chnote">Hover around any monthly dot to see the month, cases and exact OMR sales value. ' +
+    '<div class="chnote">Hover around any monthly dot to see the month, cases and exact QAR sales value. ' +
       YEARS[latest] + ' continues through ' + MONTHS[LASTM] + '; later months stay blank until data is available.</div>' +
     '<div class="imtip" id="imTip"></div>' +
   '</div>';
@@ -4382,6 +4419,11 @@ function visitMonthlyValueSeries(){
     var a = new Array(12);
     for (var m=0;m<12;m++) a[m] = (y === YEARS[NY-1] && m > LASTM) ? null : 0;
     for (var i=0;i<NI;i++){
+      if (!itemVisible(i)) continue;
+      if (state.cat !== null && catOf[i] !== state.cat) continue;
+      var isPromo = ITEMS[i][3] === 'Promotion';
+      if (isPromo && !state.showPromo) continue;
+      if (!isPromo && !state.showRegular) continue;
       var base = i * span + yi * 12;
       for (var m2=0;m2<12;m2++){
         if (a[m2] === null) continue;
@@ -4469,8 +4511,10 @@ function visitValueChart(){
     '</svg>';
 
   return visitViewButtons('chart') +
-    '<div class="cht">Monthly value trend, OMR (Jan–Dec)</div>' +
-    '<div class="chs">' + depLabel() + ' · ' + scopeNames() + ' · ' + prevYear + ' vs ' + currYear + ' YTD</div>' +
+    '<div class="cht">Monthly value trend, QAR (Jan–Dec)</div>' +
+    '<div class="chs">' + depLabel() + ' · ' + scopeNames() +
+      ' · ' + (state.cat === null ? 'All categories' : CATS[state.cat]) +
+      ' · ' + prevYear + ' vs ' + currYear + ' YTD</div>' +
     svg +
     '<div class="chlegend">' +
       '<span class="lg"><span class="sw prev"></span>' + prevYear + '</span>' +
@@ -4795,7 +4839,7 @@ function renderVisitValueChart(){
       return;
     }
     tip.innerHTML = MONTHS[+p.dataset.month] + ' ' + p.dataset.year +
-      '<b>OMR ' + nf0.format(+p.dataset.value) + '</b>';
+      '<b>QAR ' + nf0.format(+p.dataset.value) + '</b>';
     var r = box.getBoundingClientRect();
     var left = e.clientX - r.left + 12;
     var top = e.clientY - r.top - 48;
@@ -4942,7 +4986,7 @@ document.getElementById('imBody').addEventListener('pointermove', function(e){
   tip.innerHTML =
     '<div class="imtmonth">' + month + ' ' + year + '</div>' +
     '<div class="imtmetric">Cases: ' + nf2.format(cases) + '</div>' +
-    '<div class="imtmetric">OMR: ' + nf0.format(Math.round(value)) + '</div>';
+    '<div class="imtmetric">QAR: ' + nf0.format(Math.round(value)) + '</div>';
 
   var r = chart.getBoundingClientRect();
   var left = e.clientX - r.left + 12;
@@ -6251,19 +6295,19 @@ function openSiteList(kind){
       '</div>' +
       '<table class="imtbl vhist sitelist">' +
       (isNew
-        ? '<colgroup><col class="w-name"><col class="w-site"><col class="w-open"><col class="w-area"><col class="w-val"></colgroup>'
-        : '<colgroup><col class="w-name"><col class="w-site"><col class="w-area"><col class="w-val"></colgroup>') +
+        ? '<colgroup><col class="w-name"><col class="w-area"><col class="w-site"><col class="w-open"><col class="w-val"></colgroup>'
+        : '<colgroup><col class="w-name"><col class="w-area"><col class="w-site"><col class="w-val"></colgroup>') +
       '<thead>' +
         '<tr class="cap"><th colspan="' + (isNew ? 5 : 4) + '">' + (isNew ? 'Gained' : 'Lost') + ' this year</th></tr>' +
-        '<tr><th class="c-name">Customer</th><th class="c-site">Customer Site</th>' +
+        '<tr><th class="c-name">Customer</th><th class="c-area">Cust Group</th><th class="c-site">Customer Site</th>' +
         (isNew ? '<th class="c-open">Open Month</th>' : '') +
-        '<th class="c-area">Cust Group</th><th class="n c-val">' + esc(valHead) + '</th></tr>' +
+        '<th class="n c-val">' + esc(valHead) + '</th></tr>' +
       '</thead><tbody>' +
       out.map(function(r){
         return '<tr><td class="c-name">' + esc(SITES[r.s][0]) + '</td>' +
+               '<td class="c-area">' + esc(areaLabel(areaOf[r.s])) + '</td>' +
                '<td class="c-site">' + esc(SITES[r.s][1]) + '</td>' +
                (isNew ? '<td class="c-open">' + esc(openMonth(r.s)) + '</td>' : '') +
-               '<td class="c-area">' + esc(areaLabel(areaOf[r.s])) + '</td>' +
                '<td class="n c-val">' + (r.v ? nf0.format(Math.round(r.v)) : '<span class="z">–</span>') + '</td></tr>';
       }).join('') +
       '</tbody><tfoot><tr><th colspan="' + (isNew ? 4 : 3) + '">Total</th>' +
@@ -6301,14 +6345,14 @@ function siteListName(ext){
 }
 function siteListCsv(){
   if (!siteListData || !siteListData.rows.length) return;
-  var head = ['Customer','Customer Site','Cust Group','Channel', siteListData.valHead];
+  var head = ['Customer','Cust Group','Customer Site','Channel', siteListData.valHead];
   var lines = [head.join(',')];
   siteListData.rows.forEach(function(r){
     var s = SITES[r.s];
     lines.push([
       '"' + String(s[0]).replace(/"/g,'""') + '"',
-      '"' + String(s[1]).replace(/"/g,'""') + '"',
       '"' + String(areaLabel(areaOf[r.s])).replace(/"/g,'""') + '"',
+      '"' + String(s[1]).replace(/"/g,'""') + '"',
       s[3],
       r.v.toFixed(2)
     ].join(','));
@@ -6327,20 +6371,19 @@ function siteListPdf(){
   var stamp = d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
   var rows = siteListData.rows.map(function(r){
     var s = SITES[r.s];
-    return [s[0], s[1], areaLabel(areaOf[r.s]), s[5] || '-',
+    return [s[0], areaLabel(areaOf[r.s]), s[1],
             r.v ? nf0.format(Math.round(r.v)) : '-'];
   });
-  rows.push(['TOTAL', '', '', '', nf0.format(Math.round(siteListData.total))]);
+  rows.push(['TOTAL', '', '', nf0.format(Math.round(siteListData.total))]);
   var bytes = reportPdf({
     title: siteListData.isNew ? 'New customer sites' : 'Lost customer sites',
     period: yearsLabel(),
     yrA: state.yrA, yrB: state.yrB,
     cols: [
-      {t:'CUSTOMER',      w:150},
-      {t:'CUSTOMER SITE', w:150},
-      {t:'AREA',          w:58},
-      {t:'SALESMAN',      w:78},
-      {t:siteListData.valHead.toUpperCase(), w:79, a:'r'}
+      {t:'CUSTOMER',      w:145},
+      {t:'CUST GROUP',    w:105},
+      {t:'CUSTOMER SITE', w:175},
+      {t:siteListData.valHead.toUpperCase(), w:90, a:'r'}
     ],
     note: (siteListData.isNew
       ? 'Outlets that bought in ' + state.yrB + ' and never in ' + state.yrA + '.'
@@ -6782,9 +6825,9 @@ function monthlyViewBody(){
       var v=monthValue(i,m);
       if (v===null){ h+='<td class="off"></td>'; continue; }
       total+=v;
-      h+='<td>'+f(v)+'</td>';
+      h+='<td class="'+(v<0?'neg':'')+'">'+f(v)+'</td>';
     }
-    h+='<td>'+f(total)+'</td></tr>';
+    h+='<td class="'+(total<0?'neg':'')+'">'+f(total)+'</td></tr>';
     return h;
   }
   function totalRow(label,ids,cls){
@@ -6793,9 +6836,9 @@ function monthlyViewBody(){
       var v=groupMonth(ids,m);
       if (v===null){ h+='<td class="off"></td>'; continue; }
       total+=v;
-      h+='<td>'+f(v)+'</td>';
+      h+='<td class="'+(v<0?'neg':'')+'">'+f(v)+'</td>';
     }
-    h+='<td>'+f(total)+'</td></tr>';
+    h+='<td class="'+(total<0?'neg':'')+'">'+f(total)+'</td></tr>';
     return h;
   }
 
@@ -6827,7 +6870,7 @@ function monthlyViewBody(){
   if (secondary.length) h+=totalRow(groups.secondaryLabel,secondary,'mvgt');
 
   h+='</tbody></table></div>'+
-    '<div class="mvnote">This view follows the current Area, Customer, Site, category, Regular/Promo and All/CPD/FSD selections. Unsold promotion items are hidden for the displayed year. '+
+    '<div class="mvnote">This view follows the current Cust Group, Customer, Site, category and Regular/Promo selections. Unsold promotion items are hidden for the displayed year. '+
     (latest ? 'Months after '+MONTHS[LASTM]+' remain blank.' : 'The selected comparison year is shown in full.')+
     '</div>';
 
