@@ -54,8 +54,17 @@ button,select,input{font-family:inherit;font-size:inherit;color:inherit}
 .field{display:flex;flex-direction:column;gap:5px;min-width:0}
 .field>span{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .f-cust{flex:1 1 340px}
-.f-site{flex:1 1 340px}
+.f-site,.f-cat{flex:1 1 340px}
 .f-search{flex:0 1 220px}
+/* Category uses the exact same left-aligned multiselect geometry as Customer Site. */
+.f-cat .ms{width:100%}
+.f-cat .ms-btn{width:100%;text-align:left!important}
+.f-cat .ms-pop{left:0!important;right:0!important;width:auto;text-align:left}
+.f-cat .ms-search,.f-cat .ms-search input,.f-cat .ms-tools,.f-cat .ms-list,.f-cat .ms-opt{
+  text-align:left!important
+}
+.f-cat .ms-opt{justify-content:flex-start}
+.f-cat .ms-opt>span:not(.tag){text-align:left;white-space:normal}
 .f-search input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:var(--r);background:#fff}
 .btn{background:var(--ink);border:1px solid var(--ink);color:#fff;padding:8px 13px;border-radius:var(--r);cursor:pointer;font-size:12px;font-weight:500}
 .btn:hover{background:var(--ink-2)}
@@ -234,6 +243,28 @@ tr.ok td.desc{color:var(--pos)}
 .ovmetricbtn.on{background:var(--ink);color:#fff}
 .ovmetricbtn:hover:not(.on){background:#F3F5F4;color:var(--ink)}
 
+/* Promo % / Monthly Run Down / Category Wise controls — Oman benchmark format. */
+.ovmetricgroups{
+  position:absolute;top:12px;left:14px;right:auto;z-index:5;
+  display:flex;align-items:center;gap:8px
+}
+.ovmetricgroups .ovmetricbar.catmetric{
+  position:static;top:auto;left:auto;right:auto;z-index:auto;margin:0
+}
+.ovmetricgroups .promo-yearbox{padding:2px}
+.cwsalestypebox{
+  height:34px;padding:2px;border:1px solid var(--line);border-radius:4px;background:#fff;
+  display:flex;align-items:center
+}
+.cwsalestypebox select{
+  height:28px;min-width:82px;border:0;background:#fff;color:var(--ink);
+  padding:0 25px 0 8px;border-radius:3px;cursor:pointer;
+  font-size:10px;font-weight:700;letter-spacing:.035em;text-transform:uppercase;
+  outline:none
+}
+.cwsalestypebox select:hover{background:#F3F5F4}
+.cwsalestypebox select:focus-visible{outline:2px solid var(--accent);outline-offset:0}
+
 /* Category Wise follows the same visual language as Monthly Run Down. */
 .ovcatwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-top:5px}
 .ovcatmonthly{width:100%;min-width:1080px;border-collapse:collapse;table-layout:fixed;font-size:12px;margin-top:8px}
@@ -258,6 +289,13 @@ tr.ok td.desc{color:var(--pos)}
   .ovtools{gap:4px;flex-wrap:wrap;justify-content:flex-end;max-width:68%}
   .ovviewbtn{padding:6px 8px;font-size:9.5px}
   .ovmetricbar.catmetric{position:static;margin:6px 0 8px;justify-content:center}
+  .ovmetricgroups{
+    position:static;display:flex;justify-content:center;align-items:center;
+    gap:7px;margin:6px 0 8px
+  }
+  .ovmetricgroups .ovmetricbar.catmetric{margin:0}
+  .cwsalestypebox{height:34px}
+  .cwsalestypebox select{height:28px;min-width:78px;font-size:9.5px;padding-left:7px}
   .ovmetricbtn{min-width:54px;height:28px;padding:0 8px;font-size:9.5px;line-height:28px}
   .ovcatmonthly{min-width:900px;font-size:10px}
   .ovcatmonthly tbody th,.ovcatmonthly tbody td{padding:7px 5px}
@@ -278,7 +316,7 @@ tr.ok td.desc{color:var(--pos)}
   .chips{width:100%;justify-content:space-between}
   .chip{flex:1;text-align:center}
   .filters{padding:10px;gap:9px}
-  .f-cust,.f-site,.f-search{flex:1 1 100%}
+  .f-cust,.f-site,.f-cat,.f-search{flex:1 1 100%}
   .filters .btn{flex:1 1 45%}
   .kpis{grid-template-columns:1fr 1fr}
   .kpi .v{font-size:19px}
@@ -359,9 +397,10 @@ tr.ok td.desc{color:var(--pos)}
 .status.stale .dot{background:var(--accent)}
 .status.error{border-color:#E3B5AA;background:var(--neg-bg);color:var(--neg)}
 .status.error .dot{background:var(--neg)}
-#refreshBtn{flex:none;background:none;border:1px solid var(--line);color:var(--ink);
+#refreshBtn,#convertBtn{flex:none;background:none;border:1px solid var(--line);color:var(--ink);
   padding:4px 9px;border-radius:var(--r);cursor:pointer;font-size:11px}
-#refreshBtn:hover{border-color:var(--ink-3)}
+#refreshBtn:hover,#convertBtn:hover{border-color:var(--ink-3)}
+#convertBtn.on{background:var(--accent);border-color:var(--accent);color:#20180A;font-weight:600}
 .yrsel{display:flex;align-items:center;gap:5px}
 .yrsel select{background:var(--ink-2);border:1px solid #2E5462;color:#EAF2F0;padding:5px 7px;border-radius:var(--r);font-size:12px}
 .yrsel span{color:#5C8189;font-size:11px}
@@ -816,10 +855,11 @@ body.neopen .necard{transform:translateY(0)}
 }
 
 /* ---------- desktop: refresh by the compare filter, visit history in the panel head ---------- */
-.railslot{display:flex;align-items:center;margin-right:12px}
-.railslot #refreshBtn{background:none;border:1px solid #2E5462;color:#9DBDB8;
+.railslot{display:flex;align-items:center;gap:5px;margin-right:12px}
+.railslot #refreshBtn,.railslot #convertBtn{background:none;border:1px solid #2E5462;color:#9DBDB8;
   padding:5px 11px;border-radius:var(--r);font-size:11px;cursor:pointer}
-.railslot #refreshBtn:hover{color:#fff;border-color:#5C8189}
+.railslot #refreshBtn:hover,.railslot #convertBtn:hover{color:#fff;border-color:#5C8189}
+.railslot #convertBtn.on{background:var(--accent);border-color:var(--accent);color:#20180A;font-weight:600}
 .headslot{display:inline-flex;align-items:center;gap:5px}
 .headslot #visitHist,.headslot #monthlyViewBtn{padding:5px 11px;font-size:11.5px}
 @media (max-width:760px){
@@ -1024,7 +1064,7 @@ body.immonthly #imWrap .imcard{max-width:1500px}
 <div class="rail">
   <div class="brand">
     <h1>Delicio</h1><span class="sep"></span>
-    <span class="sub">Qatar · CPD · Customer Performance</span>
+    <span class="sub">Qatar · Customer Performance</span>
   </div>
   <div class="spacer"></div>
   <div class="railslot" id="refreshSlot"></div>
@@ -1093,9 +1133,16 @@ body.immonthly #imWrap .imcard{max-width:1500px}
         </div>
       </div>
     </div>
-    <div class="field f-search">
+    <div class="field f-cat">
       <span>Category</span>
-      <select id="catSel" style="padding:8px 8px;border:1px solid var(--line);border-radius:var(--r);background:#fff;width:100%"></select>
+      <div class="ms category-ms" id="msCat">
+        <button class="ms-btn" type="button" data-role="btn"><b>All categories</b></button>
+        <div class="ms-pop">
+          <div class="ms-search"><input type="text" placeholder="Search category…" data-role="search"></div>
+          <div class="ms-tools"><button type="button" data-role="all">Select all</button><button type="button" data-role="none">Clear</button><span data-role="stat"></span></div>
+          <div class="ms-list" data-role="list"></div>
+        </div>
+      </div>
     </div>
     <button class="btn ghost" id="reset">Reset filters</button>
     <div class="expwrap">
@@ -1107,7 +1154,7 @@ body.immonthly #imWrap .imcard{max-width:1500px}
     </div>
   </div>
 
-  <div class="status loading" id="status"><span class="dot"></span><span class="msg" id="statusMsg">Connecting…</span><button id="refreshBtn" type="button">Refresh</button></div>
+  <div class="status loading" id="status"><span class="dot"></span><span class="msg" id="statusMsg">Connecting…</span><button id="refreshBtn" type="button" title="Reload everything from the Google Sheet">Refresh</button><button id="convertBtn" class="on" type="button" aria-pressed="true" title="Case conversion is active">Convert</button></div>
 
   <div class="ovchart" id="visitValueChart"></div>
 
@@ -1197,9 +1244,16 @@ body.immonthly #imWrap .imcard{max-width:1500px}
         </div>
       </div>
     </div>
-    <div class="field f-search">
+    <div class="field f-cat">
       <span>Category</span>
-      <select id="anCat" style="padding:8px;border:1px solid var(--line);border-radius:var(--r);background:#fff;width:100%"></select>
+      <div class="ms category-ms" id="msACat">
+        <button class="ms-btn" type="button" data-role="btn"><b>All categories</b></button>
+        <div class="ms-pop">
+          <div class="ms-search"><input type="text" placeholder="Search category…" data-role="search"></div>
+          <div class="ms-tools"><button type="button" data-role="all">Select all</button><button type="button" data-role="none">Clear</button><span data-role="stat"></span></div>
+          <div class="ms-list" data-role="list"></div>
+        </div>
+      </div>
     </div>
     <div class="field f-item">
       <span>Item Description</span>
@@ -1311,9 +1365,16 @@ body.immonthly #imWrap .imcard{max-width:1500px}
         <option value="promo">Promo</option>
       </select>
     </div>
-    <div class="field f-search">
+    <div class="field f-cat">
       <span>Category</span>
-      <select id="oCat" style="padding:8px;border:1px solid var(--line);border-radius:var(--r);background:#fff;width:100%"></select>
+      <div class="ms category-ms" id="msOCat">
+        <button class="ms-btn" type="button" data-role="btn"><b>All categories</b></button>
+        <div class="ms-pop">
+          <div class="ms-search"><input type="text" placeholder="Search category…" data-role="search"></div>
+          <div class="ms-tools"><button type="button" data-role="all">Select all</button><button type="button" data-role="none">Clear</button><span data-role="stat"></span></div>
+          <div class="ms-list" data-role="list"></div>
+        </div>
+      </div>
     </div>
     <div class="field f-item">
       <span>Item Description</span>
@@ -1404,9 +1465,16 @@ body.immonthly #imWrap .imcard{max-width:1500px}
       </div>
     </div>
 
-    <div class="field f-search">
+    <div class="field f-cat">
       <span>Category</span>
-      <select id="pCat" style="padding:8px;border:1px solid var(--line);border-radius:var(--r);background:#fff;width:100%"></select>
+      <div class="ms category-ms" id="msPCat">
+        <button class="ms-btn" type="button" data-role="btn"><b>All categories</b></button>
+        <div class="ms-pop">
+          <div class="ms-search"><input type="text" placeholder="Search category…" data-role="search"></div>
+          <div class="ms-tools"><button type="button" data-role="all">Select all</button><button type="button" data-role="none">Clear</button><span data-role="stat"></span></div>
+          <div class="ms-list" data-role="list"></div>
+        </div>
+      </div>
     </div>
 
     <div class="field f-item">
@@ -1524,6 +1592,26 @@ body.immonthly #imWrap .imcard{max-width:1500px}
 <script>
 (function(){
 'use strict';
+/* Live Qatar dashboard: load the latest data from the linked Google Sheet. */
+var CHATGPT_PREVIEW = false;
+function embeddedSnapshot(){
+  var el=document.getElementById('embeddedQatarSnapshot');
+  if (!el) return null;
+  var o=JSON.parse(el.textContent);
+  o.f.s=new Int32Array(o.f.s);
+  o.f.i=new Int32Array(o.f.i);
+  o.f.p=new Int32Array(o.f.p);
+  o.f.v=new Float64Array(o.f.v);
+  o.f.qRaw=new Float64Array(o.f.qRaw);
+  o.f.qConv=new Float64Array(o.f.qConv);
+  o.f.d=new Uint8Array(o.f.d);
+  o.f.q=CASE_CONVERT ? o.f.qConv : o.f.qRaw;
+  o.stockRaw=new Float64Array(o.stockRaw);
+  o.stockConv=new Float64Array(o.stockConv);
+  o.stock=o.stockConv;
+  return o;
+}
+
 /* Qatar Tab 2–4 filter/export revision: Cust Group labels, description-only item pickers, Tab 3 CSV cleanup. */
 /* ================= data: loaded once, then everything is local ================= */
 var SHEET_ID = '1OBLszdQLvFZPoc8yEtvmjcI2XOd8RisIUwbBMKOyaFU';
@@ -1638,9 +1726,10 @@ function itemVisible(i){ return !isOther(i); }
 function itemAuditable(i){ return isActiveRegularItem(i); }
 function depLabel(){ return 'CPD'; }
 var YEARS = [], NY = 0, LASTM = 11;
-var F = null;            /* {s,i,p,v,q} typed arrays — the whole dataset, in memory */
+var F = null;            /* facts; q points to raw pieces or converted cases */
 var loadedAt = null;
-var DATA_VERSION = 23;
+var CASE_CONVERT = true;  /* Volume (N) and Stock (O) ÷ Units Per Case (G); active by default */
+var DATA_VERSION = 24;
 
 /* ---------- gviz over JSONP (no CORS, works from a static page) ---------- */
 var gvSeq = 0;
@@ -1677,7 +1766,7 @@ function gviz(query, ok, fail){
 function cell(r, i){ var c = r.c && r.c[i]; return (c && c.v !== null && c.v !== undefined) ? c.v : null; }
 function num(v){ return typeof v === 'number' ? v : cnum(v); }
 
-var COL = {dep:'A', item:'C', cust:'F', code:'I', site:'I', group:'H', chan:'J', yr:'K', mnth:'L', sales:'M', cases:'N', stock:'O'};
+var COL = {dep:'A', item:'C', cust:'F', code:'I', site:'I', group:'H', chan:'J', yr:'K', mnth:'L', sales:'M', cases:'N', stock:'O', conv:'G'};
 
 /* ---------- on-device snapshot (IndexedDB; localStorage is far too small) ---------- */
 var IDB_NAME = 'delicio-qatar', IDB_STORE = 'snapshot';
@@ -1714,11 +1803,44 @@ function snapshotClear(cb){
   });
 }
 
+function syncConvertButton(){
+  var b=document.getElementById('convertBtn');
+  if (!b) return;
+  b.classList.toggle('on', CASE_CONVERT);
+  b.setAttribute('aria-pressed', CASE_CONVERT ? 'true' : 'false');
+  b.title=CASE_CONVERT
+    ? 'Conversion is active: Volume and Stock ÷ Units Per Case (Column G)'
+    : 'Conversion is off: showing raw pieces for Volume and Stock';
+}
+function syncStockConversion(){
+  STOCK = CASE_CONVERT ? (STOCK_CONV || STOCK_RAW) : STOCK_RAW;
+}
+function applyCaseConversion(){
+  if (F){
+    if (!F.qRaw) F.qRaw=F.q;
+    if (!F.qConv) F.qConv=F.qRaw;
+    F.q=CASE_CONVERT ? F.qConv : F.qRaw;
+  }
+  syncStockConversion();
+  A=null; LIVE=null; AN=null; PRSCAN=null; AREASCAN=null;
+  syncConvertButton();
+}
+
 function applySnapshot(snap){
   if (snap && snap.f && !snap.f.d) snap.f.d = new Uint8Array(snap.f.s.length);
   SITES = snap.sites; YEARS = snap.years.slice(); NY = YEARS.length;
   F = snap.f; loadedAt = snap.at;
-  if (snap.stock && snap.stock.length === NI){ STOCK = snap.stock; stockAt = snap.stockAt || null; }
+  if (F){
+    if (!F.qRaw) F.qRaw=F.q;
+    if (!F.qConv) F.qConv=F.qRaw;
+    F.q=CASE_CONVERT ? F.qConv : F.qRaw;
+  }
+  STOCK_RAW = (snap.stockRaw && snap.stockRaw.length === NI) ? snap.stockRaw
+            : ((snap.stock && snap.stock.length === NI) ? snap.stock : null);
+  STOCK_CONV = (snap.stockConv && snap.stockConv.length === NI) ? snap.stockConv : STOCK_RAW;
+  stockAt = snap.stockAt || null;
+  syncStockConversion();
+  syncConvertButton();
   CUSTOMERS = []; sitesByCust = {};
   var seen = {};
   ASTOCK = null; ASTOCK_RAW = (snap && snap.aStock) ? snap.aStock : null;
@@ -1759,13 +1881,14 @@ function csvUrl(){
 
 /* column positions in the sheet */
 var C_DEP = 0, C_ITEM = 2, C_CUST = 5, C_CODE = 8, C_SITE = 8, C_CHAN = 9,
-    C_YR = 10, C_MNTH = 11, C_SALES = 12, C_CASES = 13, C_STOCK = 14, /* O = Stock Cases */
-    C_COLL = -1, C_CITY = 7,                        /* no collector; H = Cust Group */
-    C_ASTOCK = 999;                                 /* Qatar has no area-level stock column */
+    C_YR = 10, C_MNTH = 11, C_SALES = 12, C_CASES = 13, C_STOCK = 14, /* N = raw volume, O = raw stock */
+    C_CONV = 6,                                      /* G = Units Per Case divisor */
+    C_COLL = -1, C_CITY = 7,                         /* no collector; H = Cust Group */
+    C_ASTOCK = 999;                                  /* Qatar has no area-level stock column */
 
 /* Warehouse stock, looked up VLOOKUP-style: the same figure repeats on every row
    of an item, so it is ASSIGNED per item code, never summed. */
-var STOCK = null, stockAt = null, stockNote = '', stockFrom = '';
+var STOCK = null, STOCK_RAW = null, STOCK_CONV = null, stockAt = null, stockNote = '', stockFrom = '';
 function stockOf(i){ return STOCK ? STOCK[i] : 0; }
 function colLetter(i){
   var out = ''; i = i + 1;
@@ -1778,20 +1901,24 @@ function fetchStockViaGviz(done){
   var settled = false;
   function once(n){ if (settled) return; settled = true; done(n); }
   setTimeout(function(){ once(0); }, 12000);
-  gviz("select " + COL.item + ", max(" + COL.stock + ") where " + COL.dep + " = 'CPD' group by " + COL.item,
+  gviz("select " + COL.item + ", max(" + COL.stock + "), max(" + COL.conv + ") where " + COL.dep + " = 'CPD' group by " + COL.item,
     function(t){
-      var arr = new Float64Array(NI), matched = 0;
+      var rawArr = new Float64Array(NI), convArr = new Float64Array(NI), matched = 0;
       for (var r=0;r<t.rows.length;r++){
-        var code = cell(t.rows[r],0), v = cell(t.rows[r],1);
+        var code = cell(t.rows[r],0), v = cell(t.rows[r],1), conv = cell(t.rows[r],2);
         if (code === null || v === null) continue;
         var ii = imap[itemKey(code)];
         if (ii === undefined) continue;
-        arr[ii] = (typeof v === 'number') ? v : cnum(v);
+        var raw = (typeof v === 'number') ? v : cnum(v);
+        var div = (typeof conv === 'number') ? conv : cnum(conv);
+        rawArr[ii] = raw;
+        convArr[ii] = Math.abs(div) > 0.0000000001 ? (raw / div) : raw;
         matched++;
       }
       if (matched){
-        STOCK = arr; stockAt = new Date().toISOString(); stockNote = '';
-        stockFrom = 'live sheet query (Stock Cases) · ' + matched + ' of ' + NI + ' items matched';
+        STOCK_RAW = rawArr; STOCK_CONV = convArr; syncStockConversion();
+        stockAt = new Date().toISOString(); stockNote = '';
+        stockFrom = 'live sheet query (Stock ÷ Units Per Case) · ' + matched + ' of ' + NI + ' items matched';
       }
       once(matched);
     },
@@ -1803,22 +1930,24 @@ function Buckets(){
   this.cap = 1 << 16; this.n = 0;
   this.key = new Float64Array(this.cap);
   this.v = new Float64Array(this.cap);
-  this.q = new Float64Array(this.cap);
+  this.qRaw = new Float64Array(this.cap);
+  this.qConv = new Float64Array(this.cap);
 }
-Buckets.prototype.add = function(k, v, q){
+Buckets.prototype.add = function(k, v, qRaw, qConv){
   var slot = this.map[k];
   if (slot === undefined){
     if (this.n === this.cap){
       this.cap *= 2;
       var K = new Float64Array(this.cap); K.set(this.key); this.key = K;
       var V = new Float64Array(this.cap); V.set(this.v); this.v = V;
-      var Q = new Float64Array(this.cap); Q.set(this.q); this.q = Q;
+      var QR = new Float64Array(this.cap); QR.set(this.qRaw); this.qRaw = QR;
+      var QC = new Float64Array(this.cap); QC.set(this.qConv); this.qConv = QC;
     }
     slot = this.n++;
     this.map[k] = slot;
     this.key[slot] = k;
   }
-  this.v[slot] += v; this.q[slot] += q;
+  this.v[slot] += v; this.qRaw[slot] += qRaw; this.qConv[slot] += qConv;
 };
 
 /* Numbers arrive formatted the way the sheet displays them: "1,234.5", sometimes
@@ -1885,9 +2014,9 @@ function splitCsv(line){
 
 function loadAll(progress, ok, fail){
   var sites = [], codeIdx = {}, siteLastP = [], sitePosP = [], yearSeen = {}, B = new Buckets();
-  var STOCK_FIRST = 14, STOCK_LAST = 14, stockMaps = [], stockHits = [];
+  var STOCK_FIRST = 14, STOCK_LAST = 14, stockRawMaps = [], stockConvMaps = [], stockHits = [];
   var aStockMap = {}, aStockHits = 0;
-  for (var sc=STOCK_FIRST; sc<=STOCK_LAST; sc++){ stockMaps[sc] = {}; stockHits[sc] = 0; }
+  for (var sc=STOCK_FIRST; sc<=STOCK_LAST; sc++){ stockRawMaps[sc] = {}; stockConvMaps[sc] = {}; stockHits[sc] = 0; }
   var headers = [], namedCol = -1, widest = 0;
   var rows = 0, bytes = 0, header = true, tail = '', badItems = 0;
 
@@ -1908,6 +2037,8 @@ function loadAll(progress, ok, fail){
     /* stock is read before any CPD / item-list filtering, so a value sitting on a
        row the dashboard otherwise skips is still picked up */
     var rawCode = itemKey(f[C_ITEM]);
+    var rowConv = (f.length > C_CONV) ? cnum(f[C_CONV]) : 0;
+    function rowConverted(raw){ return Math.abs(rowConv) > 0.0000000001 ? (raw / rowConv) : raw; }
     /* column T holds the stock sitting in that row's own area, so it is kept per
        item AND per area rather than as a single figure per item */
     if (rawCode && f.length > C_ASTOCK){
@@ -1924,8 +2055,10 @@ function loadAll(progress, ok, fail){
         if (sTxt === undefined) continue;
         sTxt = String(sTxt).trim();
         if (sTxt === '' || !/\d/.test(sTxt)) continue;
-        if (stockMaps[cc][rawCode] === undefined) stockHits[cc]++;
-        stockMaps[cc][rawCode] = cnum(sTxt);
+        if (stockRawMaps[cc][rawCode] === undefined) stockHits[cc]++;
+        var sRaw = cnum(sTxt);
+        stockRawMaps[cc][rawCode] = sRaw;
+        stockConvMaps[cc][rawCode] = rowConverted(sRaw);
       }
     }
     /* both departments are loaded now; each fact remembers which one it is so the
@@ -1962,19 +2095,22 @@ function loadAll(progress, ok, fail){
     if (ii === undefined){ badItems++; ii = OTHER; }    /* counted, never listed */
     if (abs < 0) return;
     var m = mm, y = yy;
-    var v = cnum(f[C_SALES]), q = qtyExcludedCustomer(f[C_CUST]) ? 0 : cnum(f[C_CASES]);
+    var v = cnum(f[C_SALES]);
+    var qRaw = qtyExcludedCustomer(f[C_CUST]) ? 0 : cnum(f[C_CASES]);
+    var qConv = Math.abs(rowConv) > 0.0000000001 ? (qRaw / rowConv) : qRaw;
     /* last active salesman = whoever serviced the outlet on its most recent
-       shipping month; returns alone do not count as activity */
-    if (q > 0 && abs >= (sitePosP[si] === undefined ? -1 : sitePosP[si])){
+       shipping month; returns alone do not count as activity. Conversion does not
+       change the sign, so the raw quantity is sufficient for activity. */
+    if (qRaw > 0 && abs >= (sitePosP[si] === undefined ? -1 : sitePosP[si])){
       sitePosP[si] = abs;
       var coll = (f[C_COLL] || '').trim();
       if (coll) sites[si][5] = coll;
     }
-    if (!v && !q) return;
+    if (!v && !qRaw) return;
     yearSeen[y] = 1;
     rows++;
     /* one bucket per site x item x year x month */
-    B.add(((((si * NI + ii) * 64 + (y - 2000)) * 12 + m) * 2) + dep, v, q);
+    B.add(((((si * NI + ii) * 64 + (y - 2000)) * 12 + m) * 2) + dep, v, qRaw, qConv);
   }
 
   function feed(text){
@@ -2009,7 +2145,7 @@ function loadAll(progress, ok, fail){
 
     var n = B.n;
     var fs = new Int32Array(n), fi = new Int32Array(n), fp = new Int32Array(n),
-        fv = new Float64Array(n), fq = new Float64Array(n), fd = new Uint8Array(n);
+        fv = new Float64Array(n), fqRaw = new Float64Array(n), fqConv = new Float64Array(n), fd = new Uint8Array(n);
     for (var k=0;k<n;k++){
       var key = B.key[k];
       var dp = key % 2; key = (key - dp) / 2;
@@ -2017,7 +2153,7 @@ function loadAll(progress, ok, fail){
       var y = (key % 64) + 2000; key = (key - (y - 2000)) / 64;
       var ii = key % NI;
       var si = (key - ii) / NI;
-      fs[k] = si; fi[k] = ii; fp[k] = yIndex[y]*12 + m; fv[k] = B.v[k]; fq[k] = B.q[k]; fd[k] = dp;
+      fs[k] = si; fi[k] = ii; fp[k] = yIndex[y]*12 + m; fv[k] = B.v[k]; fqRaw[k] = B.qRaw[k]; fqConv[k] = B.qConv[k]; fd[k] = dp;
     }
     B = null;
 
@@ -2032,25 +2168,31 @@ function loadAll(progress, ok, fail){
     }
     var stockPending = false;
     if (pick >= 0){
-      var sArr = new Float64Array(NI), matched = 0, map = stockMaps[pick];
+      var sRawArr = new Float64Array(NI), sConvArr = new Float64Array(NI), matched = 0;
+      var rawMap = stockRawMaps[pick], convMap = stockConvMaps[pick];
       for (var mi=0; mi<NI; mi++){
-        var mv = map[ITEMS[mi][0]];
-        if (mv !== undefined){ sArr[mi] = mv; matched++; }
+        var codeNow = ITEMS[mi][0], mvRaw = rawMap[codeNow], mvConv = convMap[codeNow];
+        if (mvRaw !== undefined){
+          sRawArr[mi] = mvRaw;
+          sConvArr[mi] = (mvConv !== undefined ? mvConv : mvRaw);
+          matched++;
+        }
       }
-      STOCK = sArr; stockAt = new Date().toISOString(); stockNote = '';
+      STOCK_RAW = sRawArr; STOCK_CONV = sConvArr; syncStockConversion();
+      stockAt = new Date().toISOString(); stockNote = '';
       stockFrom = 'column ' + colLetter(pick) +
                   (headers[pick] ? ' (' + String(headers[pick]).trim() + ')' : '') +
                   ' · ' + matched + ' of ' + NI + ' items matched';
     } else {
-      STOCK = null; stockFrom = '';
+      STOCK = null; STOCK_RAW = null; STOCK_CONV = null; stockFrom = '';
       stockNote = 'No stock found in the Stock Cases column of the sheet. Widest row: ' + widest + ' columns.';
       stockPending = true;
     }
     var snap = {version:DATA_VERSION, at:new Date().toISOString(), years:years, sites:sites,
                 aStock: aStockHits ? aStockMap : null,
-                f:{s:fs, i:fi, p:fp, v:fv, q:fq, d:fd}};
+                f:{s:fs, i:fi, p:fp, v:fv, qRaw:fqRaw, qConv:fqConv, q:(CASE_CONVERT ? fqConv : fqRaw), d:fd}};
     function complete(){
-      snap.stock = STOCK; snap.stockAt = stockAt;
+      snap.stockRaw = STOCK_RAW; snap.stockConv = STOCK_CONV; snap.stock = STOCK; snap.stockAt = stockAt;
       applySnapshot(snap);
       snapshotSave(snap);
       ok();
@@ -2116,23 +2258,26 @@ function Grow(){
   this.cap = 1 << 16; this.n = 0;
   this.s = new Int32Array(this.cap); this.i = new Int32Array(this.cap);
   this.p = new Int32Array(this.cap); this.v = new Float64Array(this.cap);
-  this.q = new Float64Array(this.cap);
+  this.qRaw = new Float64Array(this.cap); this.qConv = new Float64Array(this.cap);
 }
-Grow.prototype.push = function(s, i, p, v, q){
+Grow.prototype.push = function(s, i, p, v, qRaw, qConv){
   if (this.n === this.cap){
     this.cap *= 2;
     var S = new Int32Array(this.cap); S.set(this.s); this.s = S;
     var I = new Int32Array(this.cap); I.set(this.i); this.i = I;
     var P = new Int32Array(this.cap); P.set(this.p); this.p = P;
     var V = new Float64Array(this.cap); V.set(this.v); this.v = V;
-    var Q = new Float64Array(this.cap); Q.set(this.q); this.q = Q;
+    var QR = new Float64Array(this.cap); QR.set(this.qRaw); this.qRaw = QR;
+    var QC = new Float64Array(this.cap); QC.set(this.qConv); this.qConv = QC;
   }
   var n = this.n++;
-  this.s[n] = s; this.i[n] = i; this.p[n] = p; this.v[n] = v; this.q[n] = q;
+  this.s[n] = s; this.i[n] = i; this.p[n] = p; this.v[n] = v;
+  this.qRaw[n] = qRaw; this.qConv[n] = qConv;
 };
 Grow.prototype.done = function(){
+  var qr=this.qRaw.slice(0,this.n), qc=this.qConv.slice(0,this.n);
   return {s:this.s.slice(0,this.n), i:this.i.slice(0,this.n), p:this.p.slice(0,this.n),
-          v:this.v.slice(0,this.n), q:this.q.slice(0,this.n)};
+          v:this.v.slice(0,this.n), qRaw:qr, qConv:qc, q:(CASE_CONVERT ? qc : qr)};
 };
 
 function loadViaGviz(progress, ok, fail){
@@ -2190,7 +2335,7 @@ function loadViaGviz(progress, ok, fail){
   }
   function runChunk(c, attempt){
     active++;
-    gviz("select " + COL.code + ", " + COL.item + ", sum(" + COL.sales + "), sum(" + COL.cases + ") " +
+    gviz("select " + COL.code + ", " + COL.item + ", sum(" + COL.sales + "), sum(" + COL.cases + "), max(" + COL.conv + ") " +
          "where " + COL.dep + " = 'CPD' and " + COL.yr + " = " + c.y +
          " and " + COL.mnth + " = '" + String(c.mLabel).replace(/'/g,"''") + "'" +
          " group by " + COL.code + ", " + COL.item,
@@ -2204,10 +2349,11 @@ function loadViaGviz(progress, ok, fail){
           if (si === undefined) continue;
           var ii = imap[itemKey(item)];
           if (ii === undefined) continue;               /* not on the master item list */
-          var val = num(cell(rows[r],2)), qty = num(cell(rows[r],3));
-          if (qtyExcludedCustomer(sites[si][0])) qty = 0;
-          if (!val && !qty) continue;
-          buf.push(si, ii, p, val, qty);
+          var val = num(cell(rows[r],2)), qtyRaw = num(cell(rows[r],3)), div = num(cell(rows[r],4));
+          if (qtyExcludedCustomer(sites[si][0])) qtyRaw = 0;
+          var qtyConv = Math.abs(div) > 0.0000000001 ? (qtyRaw / div) : qtyRaw;
+          if (!val && !qtyRaw) continue;
+          buf.push(si, ii, p, val, qtyRaw, qtyConv);
         }
         t.rows = null; rows = null;
         active--; finished++; doneRows += c.n;
@@ -2226,17 +2372,21 @@ function loadViaGviz(progress, ok, fail){
 
   function finish(){
     progress('Preparing the dashboard…', 0.98);
-    var snap = {
-      version: DATA_VERSION, stock: STOCK, stockAt: stockAt,
-      at: new Date().toISOString(),
-      years: years,
-      sites: sites,
-      f: buf.done()
-    };
+    var facts = buf.done();
     buf = null;
-    applySnapshot(snap);
-    snapshotSave(snap);
-    ok();
+    progress('Loading stock conversion…', 0.99);
+    fetchStockViaGviz(function(){
+      var snap = {
+        version: DATA_VERSION, stockRaw: STOCK_RAW, stockConv: STOCK_CONV, stock: STOCK, stockAt: stockAt,
+        at: new Date().toISOString(),
+        years: years,
+        sites: sites,
+        f: facts
+      };
+      applySnapshot(snap);
+      snapshotSave(snap);
+      ok();
+    });
   }
 }
 
@@ -2598,16 +2748,27 @@ function reportPdf(info, rows){
 var state = {
   yrA: 0, yrB: 0, m1: 0, m2: 11,
   cust: new Set(), site: new Set(),
-  cat: null, q: '', area: new Set(), dep: 'CPD',
-  aArea: new Set(), aCust: new Set(), aCat: null, aItems: new Set(), aGap: 3, aNever: 'exclude',
+  cat: new Set(), q: '', area: new Set(), dep: 'CPD',
+  aArea: new Set(), aCust: new Set(), aCat: new Set(), aItems: new Set(), aGap: 3, aNever: 'exclude',
   aMetric: 'value', oMetric: 'value',
-  oArea: new Set(), oCust: new Set(), oCat: null, oItems: new Set(), oStatus: 'all', oSales: 'all',
-  pArea: new Set(), pCust: new Set(), pCat: null, pItems: new Set(), pRet: 10,
+  oArea: new Set(), oCust: new Set(), oCat: new Set(), oItems: new Set(), oStatus: 'all', oSales: 'all',
+  pArea: new Set(), pCust: new Set(), pCat: new Set(), pItems: new Set(), pRet: 10,
   sort: {key:'vB', dir:-1},
   showRegular: true, showPromo: true, showDecline: false,
   group: true, hideZero: true, onlyUnchecked: false,
   checked: new Set()
 };
+
+function catSetAllows(set, i){ return !set.size || set.has(catOf[i]); }
+function catSetLabel(set){
+  if (!set || !set.size) return 'All categories';
+  if (set.size === 1){ var n=''; set.forEach(function(c){ n=CATS[c] || ''; }); return n || '1 category'; }
+  return set.size + ' categories';
+}
+function pruneCategorySet(set, options){
+  var ok={}; options.forEach(function(o){ ok[o.id]=1; });
+  Array.from(set).forEach(function(c){ if (!ok[c]) set.delete(c); });
+}
 
 var nf0 = new Intl.NumberFormat('en-US',{maximumFractionDigits:0});
 var nf1 = new Intl.NumberFormat('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});
@@ -2698,8 +2859,10 @@ function setStatus(kind, msg){
   var when = loadedAt ? new Date(loadedAt) : null;
   var stamp = when ? when.toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}) : '';
   var base = kind === 'ok'
-    ? 'All data loaded — filtering runs on this device' + (stamp ? ' · from the sheet ' + stamp : '') +
-      (stockFrom ? ' · stock from ' + stockFrom : '')
+    ? (CHATGPT_PREVIEW
+       ? 'Preview data loaded inside ChatGPT — filtering and case conversion run locally' + (stamp ? ' · snapshot ' + stamp : '')
+       : 'All data loaded — filtering runs on this device' + (stamp ? ' · from the sheet ' + stamp : '') +
+         (stockFrom ? ' · stock from ' + stockFrom : ''))
     : (msg || '');
   document.getElementById('statusMsg').textContent = base;
 }
@@ -2760,7 +2923,7 @@ function buildRows(){
       if (promoNeverSold || promoNegativeThenNonPositive) continue;
     }
     if (state.onlyUnchecked && (!itemAuditable(i) || state.checked.has(i))) continue;
-    if (state.cat !== null && catOf[i] !== state.cat) continue;
+    if (state.cat.size && !state.cat.has(catOf[i])) continue;
     var it = ITEMS[i];
     if (q && (String(it[0]).indexOf(q) < 0 && it[1].toLowerCase().indexOf(q) < 0)) continue;
     rows.push({
@@ -2978,7 +3141,7 @@ function render(){
     if (!itemInDep(i)) continue;
     if (A.last[i] >= 0 && Math.floor(A.last[i]/12) >= ib) continue;
     if (!(A.vA[i] || A.qA[i])) continue;
-    if (state.cat !== null && catOf[i] !== state.cat) continue;
+    if (state.cat.size && !state.cat.has(catOf[i])) continue;
     lost.push({i:i, v:A.vA[i], q:A.qA[i], p:A.last[i]});
   }
   lost.sort(function(a,b){ return b.v-a.v; });
@@ -3438,6 +3601,11 @@ function buildSelectors(){
       }
       reload();
     }
+  });  msCat = MultiSelect('msCat', {
+    allLabel:'All categories',
+    options: visitCategoryOptions,
+    sel: function(){ return state.cat; },
+    changed: function(){ render(); }
   });
 }
 function reload(){
@@ -3496,10 +3664,7 @@ function wirePeriod(){
     state.yrB = +this.value; renderHead(); renderActiveTab(); syncPresets();
   });
   PRESETS = [
-    {n:'YTD', a:0, b:LASTM},
-    {n:'Q1', a:0, b:2},
-    {n:'Q2', a:3, b:5},
-    {n:'Full yr', a:0, b:11}
+    {n:'YTD', a:0, b:LASTM}
   ];
   document.getElementById('presets').innerHTML = PRESETS.map(function(p,i){
     return '<button class="chip" data-i="'+i+'">'+p.n+'</button>';
@@ -3514,38 +3679,36 @@ function wirePeriod(){
 }
 
 /* ---------- filters ---------- */
-var catWired = false;
-function buildCatFilter(){
-  var sel = document.getElementById('catSel');
-  var live = {};
+var msCat = null, msACat = null, msOCat = null, msPCat = null;
+function visitCategoryOptions(){
+  var live = {}, out = [];
   for (var i=0;i<NI;i++) if (itemVisible(i) && itemInDep(i)) live[catOf[i]] = 1;
-  var order = CATS.map(function(n,i){ return {i:i, n:n}; })
-                  .filter(function(o){ return live[o.i]; })
-                  .sort(function(a,b){ return a.n<b.n?-1:1; });
-  if (state.cat !== null && !live[state.cat]) state.cat = null;
-  sel.innerHTML = '<option value="">All categories</option>' +
-    order.map(function(o){ return '<option value="'+o.i+'">'+esc(o.n)+'</option>'; }).join('');
-  sel.value = state.cat === null ? '' : String(state.cat);
-  if (!catWired){
-    catWired = true;
-    sel.addEventListener('change', function(){
-      state.cat = this.value === '' ? null : +this.value;
-      render();
-    });
-  }
-  /* the analysis category list follows the same rule */
-  var asel = document.getElementById('anCat');
-  if (asel && asel.options.length){
-    var hasReg = {};
-    for (var ci=0; ci<NI; ci++) if (ITEMS[ci][3] !== 'Promotion' && analysisItemInDep(ci)) hasReg[catOf[ci]] = 1;
-    if (state.aCat !== null && !hasReg[state.aCat]) state.aCat = null;
-    asel.innerHTML = '<option value="">All categories</option>' +
-      CATS.map(function(n,i){ return {i:i, n:n}; })
-          .filter(function(o){ return hasReg[o.i]; })
-          .sort(function(a,b){ return a.n<b.n?-1:1; })
-          .map(function(o){ return '<option value="'+o.i+'">'+esc(o.n)+'</option>'; }).join('');
-    asel.value = state.aCat === null ? '' : String(state.aCat);
-  }
+  CATS.forEach(function(n,i){ if (live[i]) out.push({id:i,label:n}); });
+  return out.sort(function(a,b){ return a.label < b.label ? -1 : 1; });
+}
+function analysisCategoryOptions(){
+  var live = {}, out = [];
+  for (var i=0;i<NI;i++) if (ITEMS[i][3] !== 'Promotion' && analysisItemInDep(i)) live[catOf[i]] = 1;
+  CATS.forEach(function(n,i){ if (live[i]) out.push({id:i,label:n}); });
+  return out.sort(function(a,b){ return a.label < b.label ? -1 : 1; });
+}
+function outletCategoryOptions(){
+  var live = {}, out = [];
+  for (var i=0;i<NI;i++) if (analysisItemInDep(i)) live[catOf[i]] = 1;
+  CATS.forEach(function(n,i){ if (live[i]) out.push({id:i,label:n}); });
+  return out.sort(function(a,b){ return a.label < b.label ? -1 : 1; });
+}
+function promoCategoryOptions(){
+  var live = {}, out = [];
+  for (var i=0;i<NI;i++) if (promoItemOk(i)) live[catOf[i]] = 1;
+  CATS.forEach(function(n,i){ if (live[i]) out.push({id:i,label:n}); });
+  return out.sort(function(a,b){ return a.label < b.label ? -1 : 1; });
+}
+function buildCatFilter(){
+  pruneCategorySet(state.cat, visitCategoryOptions());
+  pruneCategorySet(state.aCat, analysisCategoryOptions());
+  if (msCat) msCat.refresh();
+  if (msACat) msACat.refresh();
 }
 document.getElementById('showRegular').addEventListener('change', function(){ state.showRegular = this.checked; render(); });
 document.getElementById('showPromo').addEventListener('change', function(){ state.showPromo = this.checked; render(); });
@@ -3561,17 +3724,24 @@ document.getElementById('hrow').addEventListener('click', function(e){
   renderHead(); render();
 });
 document.getElementById('reset').addEventListener('click', function(){
-  state.area.clear(); state.cust.clear(); state.site.clear(); state.cat = null; state.q = '';
+  state.area.clear(); state.cust.clear(); state.site.clear(); state.cat.clear(); state.q = '';
   state.m1 = 0; state.m2 = LASTM;
   document.getElementById('m1').value = 0; document.getElementById('m2').value = LASTM;
-  document.getElementById('catSel').value = '';
   state.showRegular = true; document.getElementById('showRegular').checked = true;
   state.showPromo = true; document.getElementById('showPromo').checked = true;
   state.showDecline = false; document.getElementById('showDecline').checked = false;
   state.onlyUnchecked = false; document.getElementById('onlyUn').checked = false;
-  msArea.refresh(); msCust.refresh(); msSite.refresh(); syncPresets(); loadChecks(); render();
+  msArea.refresh(); msCust.refresh(); msSite.refresh(); if (msCat) msCat.refresh(); syncPresets(); loadChecks(); render();
 });
 document.getElementById('refreshBtn').addEventListener('click', function(){
+  if (CHATGPT_PREVIEW){
+    showLoader('Reloading embedded preview…');
+    try {
+      applySnapshot(embeddedSnapshot());
+      afterLoad(true); hideLoader(); setStatus('ok','');
+    } catch(e){ hideLoader(); setStatus('error','Could not reload the embedded preview.'); }
+    return;
+  }
   if (!window.confirm('Reload everything from the Google Sheet? Your ticks are kept.')) return;
   showLoader('Refreshing from the sheet…');
   snapshotClear(function(){
@@ -3584,6 +3754,13 @@ document.getElementById('refreshBtn').addEventListener('click', function(){
     });
   });
 });
+document.getElementById('convertBtn').addEventListener('click', function(){
+  CASE_CONVERT=!CASE_CONVERT;
+  applyCaseConversion();
+  renderHead();
+  renderActiveTab();
+});
+syncConvertButton();
 
 /* ---------- exports ---------- */
 function exportSummaryCsv(){
@@ -3746,7 +3923,7 @@ function exportMonthlyDetailXlsx(){
 
   for (var i=0;i<NI;i++){
     if (!itemVisible(i)) continue;
-    if (state.cat !== null && catOf[i] !== state.cat) continue;
+    if (state.cat.size && !state.cat.has(catOf[i])) continue;
 
     var isPromo = ITEMS[i][3] === 'Promotion';
     if (isPromo && !state.showPromo) continue;
@@ -4301,6 +4478,9 @@ function itemCasesChart(i){
 
 var VISIT_VALUE_VIEW = 'chart';
 var VISIT_CAT_METRIC = 'cases';
+var CATWISE_SALES_TYPE = 'all';      /* all | regular | promo */
+var VISIT_PROMO_FULL_YEAR = false;   /* OFF = 2025 follows selected 2026 period */
+var VISIT_RUNDOWN_FULL_YEAR = false; /* OFF = historical years follow selected period */
 
 function visitViewButtons(active){
   var a=[];
@@ -4327,9 +4507,11 @@ function categoryWiseAlloc(cat){
 function categoryWiseItemAllowed(i){
   if (isOther(i)) return false;
   var promo = ITEMS[i][3] === 'Promotion';
+  if (CATWISE_SALES_TYPE === 'promo' && !promo) return false;
+  if (CATWISE_SALES_TYPE === 'regular' && promo) return false;
   if (promo && !state.showPromo) return false;
   if (!promo && !state.showRegular) return false;
-  if (state.cat !== null && catOf[i] !== state.cat) return false;
+  if (state.cat.size && !state.cat.has(catOf[i])) return false;
   return true;
 }
 function categoryWiseSeries(metric, yearOverride){
@@ -4399,13 +4581,25 @@ function visitCategoryWise(){
   }
   h += '<td class="tot">'+f(yearTotal)+arrowLYCW(prevYearTotal,yearTotal)+'</td><td class="cont">100.00%</td></tr></tbody></table></div>';
 
+  var salesTypeLabel = CATWISE_SALES_TYPE === 'regular' ? 'Regular' :
+                       (CATWISE_SALES_TYPE === 'promo' ? 'Promo' : 'All');
+
   return visitViewButtons('category')+
-    '<div class="ovmetricbar catmetric">'+
-      '<button class="ovmetricbtn '+(metric==='cases'?'on':'')+'" type="button" data-metric="cases">Volume</button>'+
-      '<button class="ovmetricbtn '+(metric==='value'?'on':'')+'" type="button" data-metric="value">Value</button>'+
+    '<div class="ovmetricgroups">'+
+      '<div class="ovmetricbar catmetric">'+
+        '<button class="ovmetricbtn '+(metric==='cases'?'on':'')+'" type="button" data-metric="cases">Volume</button>'+
+        '<button class="ovmetricbtn '+(metric==='value'?'on':'')+'" type="button" data-metric="value">Value</button>'+
+      '</div>'+
+      '<div class="cwsalestypebox">'+
+        '<select id="catSalesType" aria-label="Category Wise Sales Type" title="Sales Type">'+
+          '<option value="all"'+(CATWISE_SALES_TYPE==='all'?' selected':'')+'>All</option>'+
+          '<option value="regular"'+(CATWISE_SALES_TYPE==='regular'?' selected':'')+'>Regular</option>'+
+          '<option value="promo"'+(CATWISE_SALES_TYPE==='promo'?' selected':'')+'>Promo</option>'+
+        '</select>'+
+      '</div>'+
     '</div>'+
     '<div class="cht">Category Wise</div>'+
-    '<div class="chs">'+depLabel()+' · '+scopeNames()+' · '+year+(latest?' YTD':'')+'</div>'+
+    '<div class="chs">'+depLabel()+' · '+scopeNames()+' · '+salesTypeLabel+' · '+year+(latest?' YTD':'')+'</div>'+
     h+
     '<div class="ovcatnote">Cross-category promotion packs are split back into the normal base categories using the uploaded workbook allocation.</div>';
 }
@@ -4420,7 +4614,7 @@ function visitMonthlyValueSeries(){
     for (var m=0;m<12;m++) a[m] = (y === YEARS[NY-1] && m > LASTM) ? null : 0;
     for (var i=0;i<NI;i++){
       if (!itemVisible(i)) continue;
-      if (state.cat !== null && catOf[i] !== state.cat) continue;
+      if (state.cat.size && !state.cat.has(catOf[i])) continue;
       var isPromo = ITEMS[i][3] === 'Promotion';
       if (isPromo && !state.showPromo) continue;
       if (!isPromo && !state.showRegular) continue;
@@ -4534,7 +4728,10 @@ function visitPromoPercentage(){
   var years=[2025,2026].filter(function(y){ return yIdx(y)>=0; });
 
   function isActive(y,m){
-    if (y!==2026) return true;  /* 2025 stays full Jan-Dec */
+    /* 2026 always follows the selected month period.
+       By default 2025 follows the exact same period for like-for-like Promo %.
+       Full Yr expands 2025 only to Jan-Dec. */
+    if (y===2025 && VISIT_PROMO_FULL_YEAR) return true;
     if (m<startM || m>selectedEnd) return false;
     if (y===YEARS[NY-1] && m>LASTM) return false;
     return true;
@@ -4546,7 +4743,7 @@ function visitPromoPercentage(){
 
     for (var i=0;i<NI;i++){
       if (isOther(i)) continue;
-      if (state.cat!==null && catOf[i]!==state.cat) continue;
+      if (state.cat.size && !state.cat.has(catOf[i])) continue;
 
       var target=ITEMS[i][3]==='Promotion' ? promo : regular;
       var base=i*span+yi*12;
@@ -4617,14 +4814,19 @@ function visitPromoPercentage(){
   years.forEach(function(y){ tables+=table(y); });
 
   return visitViewButtons('promo')+
-    '<div class="ovmetricbar catmetric">'+
-      '<button class="ovmetricbtn '+(metric==='cases'?'on':'')+'" type="button" data-metric="cases">Volume</button>'+
-      '<button class="ovmetricbtn '+(metric==='value'?'on':'')+'" type="button" data-metric="value">Value</button>'+
+    '<div class="ovmetricgroups">'+
+      '<div class="ovmetricbar catmetric">'+
+        '<button class="ovmetricbtn '+(metric==='cases'?'on':'')+'" type="button" data-metric="cases">Volume</button>'+
+        '<button class="ovmetricbtn '+(metric==='value'?'on':'')+'" type="button" data-metric="value">Value</button>'+
+      '</div>'+
+      '<div class="ovmetricbar catmetric promo-yearbox">'+
+        '<button class="ovmetricbtn '+(VISIT_PROMO_FULL_YEAR?'on':'')+'" type="button" data-promo-full="1">Full Yr</button>'+
+      '</div>'+
     '</div>'+
     '<div class="cht">Promo %</div>'+
     '<div class="chs">'+depLabel()+' · '+scopeNames()+' · Regular vs Promotion</div>'+
     '<div class="ovpromo-wrap">'+tables+'</div>'+
-    '<div class="ovpromo-note">Promo Intensity = Promotion ÷ (Regular + Promotion). 2025 stays full-year; 2026 follows the selected month period.</div>';
+    '<div class="ovpromo-note">Promo Intensity = Promotion ÷ (Regular + Promotion). By default, 2025 follows the same selected period as 2026. Activate Full Yr to show Jan-Dec 2025; 2026 remains on the selected period.</div>';
 }
 
 
@@ -4641,9 +4843,10 @@ function visitValueRundown(){
   }
 
   function hasDataForYearMonth(y, m){
-    /* 2024 and 2025 always stay fully visible Jan-Dec.
-       The month-selection filter is applied only to 2026 YTD. */
-    if (y !== latestYear) return true;
+    /* By default all years follow the selected month range for a like-for-like view.
+       Full Yr expands historical years (2024/2025) to Jan-Dec while the latest
+       year continues to follow the selected period / YTD availability. */
+    if (y !== latestYear && VISIT_RUNDOWN_FULL_YEAR) return true;
     if (!latestMonthActive(m)) return false;
     if (y === YEARS[NY-1] && m > LASTM) return false;
     return true;
@@ -4685,8 +4888,8 @@ function visitValueRundown(){
   function rowTotal(series, y){
     var vals = series[y] || [], total = 0;
 
-    /* Historical years retain their full Jan-Dec total.
-       2026 total follows only the selected month filter. */
+    /* Totals follow whichever months are currently active in each year's series.
+       Full Yr changes historical series to Jan-Dec; the latest year stays selected-period/YTD. */
     for (var m=0; m<12; m++){
       if (y === latestYear && !latestMonthActive(m)) continue;
       var v = vals[m];
@@ -4798,10 +5001,15 @@ function visitValueRundown(){
     '</div></div></div>';
 
   return visitViewButtons('rundown') +
+    '<div class="ovmetricgroups">'+
+      '<div class="ovmetricbar catmetric promo-yearbox">'+
+        '<button class="ovmetricbtn '+(VISIT_RUNDOWN_FULL_YEAR?'on':'')+'" type="button" data-rundown-full="1">Full Yr</button>'+
+      '</div>'+
+    '</div>'+
     '<div class="cht">Monthly run down</div>' +
     '<div class="chs">' + depLabel() + ' · ' + scopeNames() + ' · 2024–2026 YTD</div>' +
     desktop + mobile +
-    '<div class="ovcatnote">2024 and 2025 remain full-year views. The month filter applies only to 2026, and % Vs 25 compares the selected 2026 months with the same months of 2025.</div>';
+    '<div class="ovcatnote">By default, all years follow the selected month period for like-for-like comparison. Activate Full Yr to show Jan-Dec for 2024 and 2025; 2026 remains on the selected period / YTD. % Vs 25 always compares the selected 2026 months with the same months of 2025.</div>';
 }
 
 
@@ -4818,6 +5026,20 @@ function renderVisitValueChart(){
   if (!box) return;
 
   box.addEventListener('click', function(e){
+    var rf = e.target.closest('[data-rundown-full]');
+    if (rf){
+      VISIT_RUNDOWN_FULL_YEAR = !VISIT_RUNDOWN_FULL_YEAR;
+      renderVisitValueChart();
+      return;
+    }
+
+    var pf = e.target.closest('[data-promo-full]');
+    if (pf){
+      VISIT_PROMO_FULL_YEAR = !VISIT_PROMO_FULL_YEAR;
+      renderVisitValueChart();
+      return;
+    }
+
     var mb = e.target.closest('.ovmetricbtn');
     if (mb){
       VISIT_CAT_METRIC = mb.dataset.metric === 'value' ? 'value' : 'cases';
@@ -4828,6 +5050,15 @@ function renderVisitValueChart(){
     if (!b) return;
     VISIT_VALUE_VIEW = (b.dataset.view === 'rundown' || b.dataset.view === 'category' || b.dataset.view === 'promo') ? b.dataset.view : 'chart';
     renderVisitValueChart();
+  });
+
+  box.addEventListener('change', function(e){
+    if (e.target && e.target.id === 'catSalesType'){
+      var cv = e.target.value;
+      CATWISE_SALES_TYPE = (cv === 'regular' || cv === 'promo') ? cv : 'all';
+      renderVisitValueChart();
+      return;
+    }
   });
 
   box.addEventListener('mousemove', function(e){
@@ -5106,7 +5337,7 @@ function buildAnalysisRows(){
     for (var i=0; i<NI; i++){
       if (ITEMS[i][3] === 'Promotion') continue;          /* promo packs aren't distribution */
       if (!analysisItemInDep(i)) continue;
-      if (state.aCat !== null && catOf[i] !== state.aCat) continue;
+      if (state.aCat.size && !state.aCat.has(catOf[i])) continue;
       if (state.aItems.size && !state.aItems.has(i)) continue;
       var idx = s*NI + i, lp = A2.lastP[idx], la = A2.lastAny[idx];
       var never = la < 0;                                 /* no record of any kind, ever */
@@ -5270,7 +5501,7 @@ function analysisItemOptions(){
   for (var i=0;i<NI;i++){
     if (ITEMS[i][3] === 'Promotion') continue;
     if (!analysisItemInDep(i)) continue;
-    if (state.aCat !== null && catOf[i] !== state.aCat) continue;
+    if (state.aCat.size && !state.aCat.has(catOf[i])) continue;
     out.push({id:i, label:ITEMS[i][1]});
   }
   out.sort(function(a,b){ return a.label < b.label ? -1 : (a.label > b.label ? 1 : 0); });
@@ -5379,28 +5610,21 @@ function initAnalysis(){
     sel: function(){ return state.aCust; },
     changed: function(){ renderAnalysis(); }
   });
-  var sel = document.getElementById('anCat');
-  /* promo-only categories can never yield a row here, so leave them out */
-  var hasReg = {};
-  for (var ci=0; ci<NI; ci++) if (ITEMS[ci][3] !== 'Promotion' && analysisItemInDep(ci)) hasReg[catOf[ci]] = 1;
-  var order = CATS.map(function(n,i){ return {i:i, n:n}; })
-                  .filter(function(o){ return hasReg[o.i]; })
-                  .sort(function(a,b){ return a.n<b.n?-1:1; });
-  sel.innerHTML = '<option value="">All categories</option>' +
-    order.map(function(o){ return '<option value="'+o.i+'">'+esc(o.n)+'</option>'; }).join('');
+  msACat = MultiSelect('msACat', {
+    allLabel:'All categories',
+    options: analysisCategoryOptions,
+    sel: function(){ return state.aCat; },
+    changed: function(){
+      if (state.aItems.size && state.aCat.size){
+        Array.from(state.aItems).forEach(function(i){ if (!state.aCat.has(catOf[i])) state.aItems.delete(i); });
+      }
+      if (msAItem) msAItem.refresh();
+      renderAnalysis();
+    }
+  });
 }
 
 var msAArea = null, msACust = null, msAItem = null;
-document.getElementById('anCat').addEventListener('change', function(){
-  state.aCat = this.value === '' ? null : +this.value;
-  if (state.aItems.size && state.aCat !== null){
-    Array.from(state.aItems).forEach(function(i){
-      if (catOf[i] !== state.aCat) state.aItems.delete(i);
-    });
-  }
-  if (msAItem) msAItem.refresh();
-  renderAnalysis();
-});
 document.getElementById('anGap').addEventListener('change', function(){
   state.aGap = +this.value; renderAnalysis();
 });
@@ -5408,13 +5632,13 @@ document.getElementById('anNever').addEventListener('change', function(){
   state.aNever = this.value; renderAnalysis();
 });
 document.getElementById('anReset').addEventListener('click', function(){
-  state.aArea.clear(); state.aCust.clear(); state.aCat = null; state.aItems.clear();
+  state.aArea.clear(); state.aCust.clear(); state.aCat.clear(); state.aItems.clear();
   state.aGap = 3; state.aNever = 'exclude';
-  document.getElementById('anCat').value = '';
   document.getElementById('anGap').value = '3';
   document.getElementById('anNever').value = 'exclude';
   if (msAArea) msAArea.refresh();
   if (msACust) msACust.refresh();
+  if (msACat) msACat.refresh();
   if (msAItem) msAItem.refresh();
   renderAnalysis();
 });
@@ -5578,23 +5802,19 @@ function promoItemOptions(){
   var out = [];
   for (var i=0;i<NI;i++){
     if (!promoItemOk(i)) continue;
-    if (state.pCat !== null && catOf[i] !== state.pCat) continue;
+    if (state.pCat.size && !state.pCat.has(catOf[i])) continue;
     out.push({id:i, label:ITEMS[i][1]});
   }
   return out.sort(function(a,b){ return a.label < b.label ? -1 : 1; });
 }
 function buildPromoCats(){
-  var sel = document.getElementById('pCat');
-  if (!sel) return;
-  var seen = {};
-  for (var i=0;i<NI;i++) if (promoItemOk(i)) seen[catOf[i]] = 1;
-  var order = CATS.map(function(n,i){ return {i:i,n:n}; })
-                  .filter(function(o){ return seen[o.i]; })
-                  .sort(function(a,b){ return a.n < b.n ? -1 : 1; });
-  if (state.pCat !== null && !seen[state.pCat]) state.pCat = null;
-  sel.innerHTML = '<option value="">All categories</option>' +
-    order.map(function(o){ return '<option value="'+o.i+'">'+esc(o.n)+'</option>'; }).join('');
-  sel.value = state.pCat === null ? '' : String(state.pCat);
+  var opts = promoCategoryOptions();
+  pruneCategorySet(state.pCat, opts);
+  if (state.pItems.size && state.pCat.size){
+    Array.from(state.pItems).forEach(function(i){ if (!state.pCat.has(catOf[i])) state.pItems.delete(i); });
+  }
+  if (msPCat) msPCat.refresh();
+  if (msPItem) msPItem.refresh();
 }
 
 function initPromo(){
@@ -5617,6 +5837,18 @@ function initPromo(){
     options:promoCustomerOptions,
     sel:function(){ return state.pCust; },
     changed:function(){ renderPromo(); }
+  });
+  msPCat = MultiSelect('msPCat', {
+    allLabel:'All categories',
+    options:promoCategoryOptions,
+    sel:function(){ return state.pCat; },
+    changed:function(){
+      if (state.pItems.size && state.pCat.size){
+        Array.from(state.pItems).forEach(function(i){ if (!state.pCat.has(catOf[i])) state.pItems.delete(i); });
+      }
+      if (msPItem) msPItem.refresh();
+      renderPromo();
+    }
   });
   msPItem = MultiSelect('msPItem', {
     allLabel:'All promotion items',
@@ -5649,7 +5881,7 @@ function buildPromoGroups(){
     var cid = SITES[d.s][4], a = areaOf[d.s];
     if (state.pArea.size && !state.pArea.has(a)) return;
     if (state.pCust.size && !state.pCust.has(cid)) return;
-    if (state.pCat !== null && catOf[d.i] !== state.pCat) return;
+    if (state.pCat.size && !state.pCat.has(catOf[d.i])) return;
     if (state.pItems.size && !state.pItems.has(d.i)) return;
 
     var key = d.s + ':' + d.i;
@@ -5738,7 +5970,8 @@ function renderPromo(){
   document.getElementById('pCount').textContent =
     items + ' promotion item' + (items===1?'':'s') + ' · ' + sites + ' site' + (sites===1?'':'s');
   document.getElementById('pScope').textContent =
-    promoAnalysisYear() + ' ' + periodLabel() + ' · ' + state.pRet + '% or more';
+    promoAnalysisYear() + ' ' + periodLabel() + ' · ' + state.pRet + '% or more' +
+    (state.pCat.size ? ' · ' + catSetLabel(state.pCat) : '');
 
   var html = '', printed = 0;
   for (var gi=0; gi<groups.length && printed<PROMO_CAP; gi++){
@@ -5812,25 +6045,17 @@ document.getElementById('ptbl').addEventListener('click', function(e){
   renderPromo();
 });
 
-document.getElementById('pCat').addEventListener('change', function(){
-  state.pCat = this.value === '' ? null : +this.value;
-  if (state.pItems.size && state.pCat !== null){
-    Array.from(state.pItems).forEach(function(i){ if (catOf[i] !== state.pCat) state.pItems.delete(i); });
-  }
-  if (msPItem) msPItem.refresh();
-  renderPromo();
-});
 document.getElementById('pRet').addEventListener('change', function(){
   state.pRet = +this.value;
   renderPromo();
 });
 document.getElementById('pReset').addEventListener('click', function(){
-  state.pArea.clear(); state.pCust.clear(); state.pCat = null; state.pItems.clear(); state.pRet = 10;
-  document.getElementById('pCat').value = '';
+  state.pArea.clear(); state.pCust.clear(); state.pCat.clear(); state.pItems.clear(); state.pRet = 10;
   document.getElementById('pRet').value = '10';
   promoOpen = {};
   if (msPArea) msPArea.refresh();
   if (msPCust) msPCust.refresh();
+  if (msPCat) msPCat.refresh();
   if (msPItem) msPItem.refresh();
   renderPromo();
 });
@@ -5882,7 +6107,7 @@ function exportPromotionAnalysisExcel(){
     var cid = SITES[s][4], a = areaOf[s];
     if (state.pArea.size && !state.pArea.has(a)) return;
     if (state.pCust.size && !state.pCust.has(cid)) return;
-    if (state.pCat !== null && catOf[i] !== state.pCat) return;
+    if (state.pCat.size && !state.pCat.has(catOf[i])) return;
     if (state.pItems.size && !state.pItems.has(i)) return;
 
     pairs.push({
@@ -5904,7 +6129,7 @@ function exportPromotionAnalysisExcel(){
       var cid=SITES[s][4], a=areaOf[s];
       if (state.pArea.size && !state.pArea.has(a)) continue;
       if (state.pCust.size && !state.pCust.has(cid)) continue;
-      if (state.pCat !== null && catOf[i] !== state.pCat) continue;
+      if (state.pCat.size && !state.pCat.has(catOf[i])) continue;
       if (state.pItems.size && !state.pItems.has(i)) continue;
 
       var key=promoPairKey(s,i), arr=valueMap[key];
@@ -6154,14 +6379,18 @@ function setDep(d){
   if (msArea) msArea.refresh();
   if (msCust) msCust.refresh();
   if (msSite) msSite.refresh();
+  if (msCat) msCat.refresh();
   if (msAArea) msAArea.refresh();
   if (msACust) msACust.refresh();
+  if (msACat) msACat.refresh();
   if (msAItem) msAItem.refresh();
   if (msOArea) msOArea.refresh();
   if (msOCust) msOCust.refresh();
+  if (msOCat) msOCat.refresh();
   if (msOItem) msOItem.refresh();
   if (msPArea) msPArea.refresh();
   if (msPCust) msPCust.refresh();
+  if (msPCat) msPCat.refresh();
   if (msPItem) msPItem.refresh();
   buildCatFilter();
   buildOutletCats();
@@ -6186,15 +6415,19 @@ var wideMQ = window.matchMedia ? window.matchMedia('(min-width:761px)') : null;
 function placeControls(){
   var wide = wideMQ ? wideMQ.matches : true;
   var refresh = document.getElementById('refreshBtn');
+  var convert = document.getElementById('convertBtn');
   var hist = document.getElementById('visitHist');
   var monthly = document.getElementById('monthlyViewBtn');
   var slotR = document.getElementById('refreshSlot');
   var slotH = document.getElementById('histSlot');
   var status = document.getElementById('status');
   var audit = document.querySelector('.audit');
-  if (refresh){
+  if (refresh || convert){
     var homeR = wide ? slotR : status;
-    if (homeR && refresh.parentNode !== homeR) homeR.appendChild(refresh);
+    if (homeR){
+      if (refresh && refresh.parentNode !== homeR) homeR.appendChild(refresh);
+      if (convert && convert.parentNode !== homeR) homeR.appendChild(convert);
+    }
   }
   if (audit){
     var homeH = wide ? slotH : audit;
@@ -6747,7 +6980,7 @@ function monthlyViewIds(viewYear){
   var regular=[], promo=[], gallon=[], retail=[];
   for (var i=0;i<NI;i++){
     if (!itemVisible(i)) continue;
-    if (state.cat!==null && catOf[i]!==state.cat) continue;
+    if (state.cat.size && !state.cat.has(catOf[i])) continue;
 
     var isPromo=ITEMS[i][3]==='Promotion';
     if (isPromo && !state.showPromo) continue;
@@ -7052,7 +7285,7 @@ function outletItemInScope(i){
     if (state.oSales === 'promo' && !isPromo) return false;
     if (state.oSales === 'reg' && isPromo) return false;
   }
-  if (state.oCat !== null && catOf[i] !== state.oCat) return false;
+  if (state.oCat.size && !state.oCat.has(catOf[i])) return false;
   if (state.oItems.size && !state.oItems.has(i)) return false;
   return true;
 }
@@ -7243,7 +7476,7 @@ function renderOutlet(){
         ? (function(){ var n=''; state.oArea.forEach(function(a){ n = areaLabel(a); }); return n; })()
         : state.oArea.size + ' cust groups') : '') +
     (state.oSales !== 'all' ? ' · ' + (state.oSales === 'promo' ? 'promo only' : 'regular only') : '') +
-    (state.oCat !== null ? ' · ' + CATS[state.oCat] : '') +
+    (state.oCat.size ? ' · ' + catSetLabel(state.oCat) : '') +
     (state.oItems.size ? ' · ' + state.oItems.size + ' item' + (state.oItems.size>1?'s':'') : '') +
     (state.oStatus !== 'all' ? ' · ' +
       (state.oStatus === 'up' ? 'growth only' : (state.oStatus === 'down' ? 'decline only' : 'no change only')) : '');
@@ -7282,7 +7515,7 @@ function outletItemOptions(){
     if (!analysisItemInDep(i)) continue;
     if (state.oSales === 'promo' && ITEMS[i][3] !== 'Promotion') continue;
     if (state.oSales === 'reg' && ITEMS[i][3] === 'Promotion') continue;
-    if (state.oCat !== null && catOf[i] !== state.oCat) continue;
+    if (state.oCat.size && !state.oCat.has(catOf[i])) continue;
     out.push({id:i, label:ITEMS[i][1]});
   }
   return out.sort(function(a,b){ return a.label < b.label ? -1 : 1; });
@@ -7321,6 +7554,18 @@ function initOutlet(){
     sel: function(){ return state.oCust; },
     changed: function(){ renderOutlet(); }
   });
+  msOCat = MultiSelect('msOCat', {
+    allLabel:'All categories',
+    options: outletCategoryOptions,
+    sel: function(){ return state.oCat; },
+    changed: function(){
+      if (state.oItems.size && state.oCat.size){
+        Array.from(state.oItems).forEach(function(i){ if (!state.oCat.has(catOf[i])) state.oItems.delete(i); });
+      }
+      if (msOItem) msOItem.refresh();
+      renderOutlet();
+    }
+  });
   msOItem = MultiSelect('msOItem', {
     allLabel:'All items',
     options: outletItemOptions,
@@ -7330,26 +7575,14 @@ function initOutlet(){
   buildOutletCats();
 }
 function buildOutletCats(){
-  var sel = document.getElementById('oCat');
-  if (!sel) return;
-  var live = {};
-  for (var i=0;i<NI;i++) if (analysisItemInDep(i)) live[catOf[i]] = 1;
-  if (state.oCat !== null && !live[state.oCat]) state.oCat = null;
-  sel.innerHTML = '<option value="">All categories</option>' +
-    CATS.map(function(n,i){ return {i:i, n:n}; })
-        .filter(function(o){ return live[o.i]; })
-        .sort(function(a,b){ return a.n<b.n?-1:1; })
-        .map(function(o){ return '<option value="'+o.i+'">'+esc(o.n)+'</option>'; }).join('');
-  sel.value = state.oCat === null ? '' : String(state.oCat);
-}
-document.getElementById('oCat').addEventListener('change', function(){
-  state.oCat = this.value === '' ? null : +this.value;
-  if (state.oItems.size && state.oCat !== null){
-    Array.from(state.oItems).forEach(function(i){ if (catOf[i] !== state.oCat) state.oItems.delete(i); });
+  var opts = outletCategoryOptions();
+  pruneCategorySet(state.oCat, opts);
+  if (state.oItems.size && state.oCat.size){
+    Array.from(state.oItems).forEach(function(i){ if (!state.oCat.has(catOf[i])) state.oItems.delete(i); });
   }
+  if (msOCat) msOCat.refresh();
   if (msOItem) msOItem.refresh();
-  renderOutlet();
-});
+}
 document.getElementById('oSales').addEventListener('change', function(){
   state.oSales = this.value;
   if (msOItem) msOItem.refresh();
@@ -7361,13 +7594,13 @@ document.getElementById('oStatus').addEventListener('change', function(){
 });
 document.getElementById('oReset').addEventListener('click', function(){
   state.oArea.clear(); state.oCust.clear(); state.oItems.clear();
-  state.oCat = null; state.oStatus = 'all'; state.oSales = 'all';
+  state.oCat.clear(); state.oStatus = 'all'; state.oSales = 'all';
   outletOpen = {};
-  document.getElementById('oCat').value = '';
   document.getElementById('oStatus').value = 'all';
   document.getElementById('oSales').value = 'all';
   if (msOArea) msOArea.refresh();
   if (msOCust) msOCust.refresh();
+  if (msOCat) msOCat.refresh();
   if (msOItem) msOItem.refresh();
   renderOutlet();
 });
@@ -7461,14 +7694,18 @@ function afterLoad(rebuild){
   if (msArea) msArea.refresh();
   if (msCust) msCust.refresh();
   if (msSite) msSite.refresh();
+  if (msCat) msCat.refresh();
   if (msAArea) msAArea.refresh();
   if (msACust) msACust.refresh();
+  if (msACat) msACat.refresh();
   if (msAItem) msAItem.refresh();
   if (msOArea) msOArea.refresh();
   if (msOCust) msOCust.refresh();
+  if (msOCat) msOCat.refresh();
   if (msOItem) msOItem.refresh();
   if (msPArea) msPArea.refresh();
   if (msPCust) msPCust.refresh();
+  if (msPCat) msPCat.refresh();
   if (msPItem) msPItem.refresh();
   buildOutletCats();
   buildPromoCats();
@@ -7482,6 +7719,16 @@ function afterLoad(rebuild){
 }
 var wired = false;
 function boot(){
+  if (CHATGPT_PREVIEW){
+    showLoader('Opening embedded Qatar dashboard…');
+    try {
+      applySnapshot(embeddedSnapshot());
+      afterLoad(false);
+      hideLoader();
+      setStatus('ok','');
+    } catch(e){ fail('The embedded dashboard data could not be opened: ' + e.message); }
+    return;
+  }
   showLoader('Looking for data on this device…');
   snapshotLoad(function(snap){
     if (snap){
