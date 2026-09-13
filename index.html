@@ -281,7 +281,10 @@ tr.ok td.desc{color:var(--pos)}
 .ovcatmonthly .ly{margin-left:3px;font-size:8px;vertical-align:1px}
 .ovcatmonthly td.off{background:repeating-linear-gradient(135deg,#FAFAF8,#FAFAF8 4px,#F1F1EE 4px,#F1F1EE 8px)!important;color:transparent}
 .ovcatmonthly .tot{font-weight:600;background:#F7F9F8}
-.ovcatmonthly .cont{font-weight:600}
+.ovcatmonthly .cont{font-weight:600;cursor:help}
+.ovcatmonthly .vsly{font-weight:600;cursor:help}
+.ovcatmonthly .vsly.pos{color:var(--pos)}
+.ovcatmonthly .vsly.neg{color:var(--neg)}
 .ovcatmonthly tr.grand th,.ovcatmonthly tr.grand td{font-weight:700;background:#F1F4F2;border-top:1.5px solid var(--ink-3)}
 .ovcatnote{font-size:10px;color:var(--muted);text-align:center;margin-top:8px}
 
@@ -401,6 +404,8 @@ tr.ok td.desc{color:var(--pos)}
   padding:4px 9px;border-radius:var(--r);cursor:pointer;font-size:11px}
 #refreshBtn:hover,#convertBtn:hover{border-color:var(--ink-3)}
 #convertBtn.on{background:var(--accent);border-color:var(--accent);color:#20180A;font-weight:600}
+#currencySel{flex:none;background:#fff;border:1px solid var(--line);color:var(--ink);padding:4px 24px 4px 9px;border-radius:var(--r);cursor:pointer;font-size:11px;font-weight:600}
+#currencySel:hover{border-color:var(--ink-3)}
 .yrsel{display:flex;align-items:center;gap:5px}
 .yrsel select{background:var(--ink-2);border:1px solid #2E5462;color:#EAF2F0;padding:5px 7px;border-radius:var(--r);font-size:12px}
 .yrsel span{color:#5C8189;font-size:11px}
@@ -475,6 +480,64 @@ body.imopen{overflow:hidden}
 .imtip .imtmonth{font-weight:600;margin-bottom:2px}
 .imtip .imtmetric{font-family:'IBM Plex Mono',monospace;font-size:11.5px}
 .imtip .imtmetric + .imtmetric{margin-top:1px}
+
+/* ---------- Tab 1 Customer Wise (Qatar Cust Groups) ---------- */
+.ovcustwrap{
+  overflow:auto;-webkit-overflow-scrolling:touch;padding:0;
+  max-height:455px;border:1px solid var(--line);background:#fff;
+  position:relative;isolation:isolate
+}
+.ovcusttbl{
+  width:100%;min-width:920px;border-collapse:separate;border-spacing:0;table-layout:fixed;
+  font-size:11px;margin:0;background:#fff
+}
+.ovcusttbl .cap th{
+  position:sticky;top:0;z-index:32;height:32px;box-sizing:border-box;
+  background:#FBEDE4;color:var(--ink);font-weight:600;font-size:11px;
+  text-align:center;padding:0 5px;line-height:30px;
+  border:0;border-bottom:1px solid #E4CDBE;letter-spacing:.03em;
+  background-clip:padding-box
+}
+.ovcusttbl thead tr:last-child th{
+  position:sticky;top:32px;z-index:31;height:31px;box-sizing:border-box;
+  background:#fff;border:0;border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);padding:0 5px;line-height:30px;
+  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--muted);text-align:center;white-space:nowrap;
+  background-clip:padding-box
+}
+.ovcusttbl thead tr:last-child th:first-child{border-left:1px solid var(--line)}
+.ovcusttbl thead tr:last-child th:first-child{text-align:left;width:150px;color:var(--ink);border-left:1px solid var(--line)}
+.ovcusttbl tbody th{
+  position:relative;z-index:1;background:#FFF9D6;
+  border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:7px 7px;text-align:left;font-weight:600;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis
+}
+.ovcusttbl tbody td{
+  position:relative;z-index:1;background:#fff;
+  border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:7px 5px;text-align:center;font-family:'IBM Plex Mono',monospace;
+  white-space:nowrap;overflow:hidden
+}
+.ovcusttbl tbody tr > :first-child{border-left:1px solid var(--line)}
+.ovcusttbl .tot{font-weight:600;background:#F7F9F8}
+.ovcusttbl .cont{cursor:help}
+.ovcusttbl .vsly{font-weight:600;width:68px;cursor:help}
+.ovcusttbl .vsly.pos{color:var(--pos)}
+.ovcusttbl .vsly.neg{color:var(--neg)}
+.ovcusttbl .ly{margin-left:3px;font-size:8px;vertical-align:1px}
+.ovcustnote{font-size:10px;color:var(--muted);text-align:center;margin-top:8px}
+@media (max-width:760px){
+  .ovcustwrap{max-height:390px}
+  .ovcusttbl{min-width:850px;font-size:9px}
+  .ovcusttbl .cap th{height:29px;line-height:27px;font-size:9.5px;padding:0 3px}
+  .ovcusttbl thead tr:last-child th{top:29px;height:28px;line-height:27px;padding:0 2px;font-size:7.7px;letter-spacing:.02em}
+  .ovcusttbl thead tr:last-child th:first-child{width:118px}
+  .ovcusttbl tbody th{padding:5px 4px;font-size:8.6px}
+  .ovcusttbl tbody td{padding:5px 3px;font-size:8.3px;letter-spacing:-.2px}
+  .ovcusttbl .ly{font-size:7px;margin-left:2px}
+}
 
 /* ---------- visit overview value chart ---------- */
 .ovchart{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);margin-top:14px;padding:14px 16px 12px}
@@ -643,6 +706,11 @@ body.mdopen #mdWrap{display:block}
 
 #antbl tr.more td{background:#FBF3E1;color:var(--accent-2);font-size:11px;padding:6px 10px;
   border-bottom:1px solid var(--line)}
+#antbl .anmorebtn{
+  width:100%;border:0;background:none;color:var(--accent-2);padding:0;margin:0;
+  font:inherit;text-align:left;cursor:pointer;font-weight:600
+}
+#antbl .anmorebtn:hover{text-decoration:underline;text-underline-offset:2px}
 
 #antbl .gap.ret{background:var(--neg-bg);border-color:#E3B5AA;color:var(--neg)}
 
@@ -860,6 +928,8 @@ body.neopen .necard{transform:translateY(0)}
   padding:5px 11px;border-radius:var(--r);font-size:11px;cursor:pointer}
 .railslot #refreshBtn:hover,.railslot #convertBtn:hover{color:#fff;border-color:#5C8189}
 .railslot #convertBtn.on{background:var(--accent);border-color:var(--accent);color:#20180A;font-weight:600}
+.railslot #currencySel{background:var(--ink-2);border:1px solid #2E5462;color:#EAF2F0;padding:5px 25px 5px 9px;border-radius:var(--r);font-size:11px;cursor:pointer}
+.railslot #currencySel:hover{border-color:#5C8189;color:#fff}
 .headslot{display:inline-flex;align-items:center;gap:5px}
 .headslot #visitHist,.headslot #monthlyViewBtn{padding:5px 11px;font-size:11.5px}
 @media (max-width:760px){
@@ -946,6 +1016,12 @@ body.immonthly #imWrap .imcard{max-width:1500px}
 #otbl .never{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--neg)}
 #otbl tr.ocat td{background:#FBFBF9;color:var(--muted);font-size:11.5px}
 #otbl tr.ocat td.o-cat{padding-left:16px}
+#otbl .omorebtn{
+  width:100%;border:0;background:none;color:var(--accent-2);padding:0;margin:0;
+  font:inherit;text-align:left;cursor:pointer;font-weight:600
+}
+#otbl .omorebtn:hover{text-decoration:underline;text-underline-offset:2px}
+#otbl tr.more td{background:#FBF3E1;color:var(--accent-2);font-size:11px;padding:6px 10px}
 .ostat{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.06em;
   text-transform:uppercase;padding:2px 7px;border-radius:20px;border:1px solid var(--line)}
 .ostat.up{color:var(--pos);border-color:#A7CDB5;background:var(--pos-bg)}
@@ -975,6 +1051,17 @@ body.immonthly #imWrap .imcard{max-width:1500px}
 #ptbl tr.pitem td{background:#FBFBF9;color:var(--muted)}
 #ptbl tr.pitem td.p-item{padding-left:18px;color:var(--ink)}
 #ptbl tr.pitem td.p-cat{font-size:10.5px}
+#ptbl .pitemlink{
+  display:block;width:100%;border:0;background:none;padding:0;margin:0;
+  color:var(--ink);font:inherit;text-align:left;cursor:pointer;
+  white-space:normal;line-height:1.2
+}
+#ptbl .pitemlink:hover{color:var(--accent-2);text-decoration:underline;text-underline-offset:2px}
+#ptbl .pmorebtn{
+  width:100%;border:0;background:none;color:var(--accent-2);padding:0;margin:0;
+  font:inherit;text-align:left;cursor:pointer;font-weight:600
+}
+#ptbl .pmorebtn:hover{text-decoration:underline;text-underline-offset:2px}
 #ptbl .prate{display:inline-block;min-width:52px;text-align:right;font-weight:600}
 #ptbl .prate.high{color:var(--neg)}
 #ptbl .empty{padding:28px;text-align:center;color:var(--muted);font-size:12px}
@@ -1052,6 +1139,109 @@ body.immonthly #imWrap .imcard{max-width:1500px}
 .imtbl.sitelist td.c-name,.imtbl.sitelist td.c-site,.imtbl.sitelist td.c-area{
   white-space:normal;overflow-wrap:anywhere;word-break:break-word;line-height:1.25;text-align:left
 }
+.imtbl.sitelist col.w-last{width:10%}
+.imtbl.sitelist td.c-open,.imtbl.sitelist td.c-last{white-space:nowrap;text-align:left;overflow:hidden;text-overflow:ellipsis}
+.sitetools{display:flex;gap:8px;align-items:center;justify-content:flex-end;margin:0 0 10px}
+.site-month-filter{display:inline-flex;align-items:center;gap:6px;margin-right:auto;min-width:0}
+.site-month-filter span{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.site-month-filter select{padding:5px 24px 5px 7px;border:1px solid var(--line);border-radius:var(--r);background:#fff;font-size:11.5px;min-width:110px}
+.sitetools .btn{white-space:nowrap}
+@media (max-width:760px){
+  .sitetools{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:6px;align-items:center}
+  .site-month-filter{margin-right:0;width:100%}
+  .site-month-filter span{display:none}
+  .site-month-filter select{width:100%;min-width:0;font-size:11px;padding:6px 20px 6px 6px}
+  .sitetools .btn{padding:6px 8px;font-size:10px}
+}
+
+
+/* ---------- Customer Wise drill-down: Oman-format popup ---------- */
+.cwlink{
+  display:block;width:100%;border:0;background:none;padding:0;margin:0;
+  color:var(--ink);font:inherit;font-weight:600;text-align:left;cursor:pointer;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.cwlink:hover{color:var(--accent-2);text-decoration:underline;text-underline-offset:2px}
+.cwdetailsec{margin-top:18px}
+.cwdetailsec:first-of-type{margin-top:0}
+.cwdetailhead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.cwdetailtitle{font-size:12px;font-weight:600;color:var(--ink);margin:0 0 5px;text-align:left}
+.cwdetailsub{font-size:10px;color:var(--muted);margin:0 0 8px}
+.cwdetailhead .ovmetricbar{position:static;top:auto;left:auto;right:auto;z-index:auto;margin:0}
+.cwdetailhead .ovmetricbtn{min-width:58px;height:28px;font-size:10px;line-height:28px}
+.cwdetailsec .imtbl{margin-bottom:12px}
+.cwdetailsec .imtbl + .imtbl{margin-top:16px}
+.cwdetailsec .cont{cursor:help}
+.cwdetailsec .vsly{cursor:help;font-weight:600}
+.cwdetailsec .vsly.pos{color:var(--pos)}
+.cwdetailsec .vsly.neg{color:var(--neg)}
+.cwcatlink{
+  display:block;width:100%;border:0;background:none;padding:0;margin:0;
+  color:var(--ink);font:inherit;font-weight:600;text-align:left;cursor:pointer
+}
+.cwcatlink:hover{color:var(--accent-2);text-decoration:underline;text-underline-offset:2px}
+.cwitemtools{display:flex;justify-content:flex-end;gap:8px;margin:0 0 9px}
+.cwitemtools .btn{padding:6px 11px;font-size:11px}
+.cwitemwrap{overflow:auto;-webkit-overflow-scrolling:touch;max-height:62vh;border:1px solid var(--line)}
+.cwitemtbl{width:100%;min-width:780px;border-collapse:collapse;table-layout:fixed;font-size:11px}
+.cwitemtbl th,.cwitemtbl td{border:1px solid var(--line);padding:7px 7px}
+.cwitemtbl thead th{
+  background:#fff;font-family:'IBM Plex Mono',monospace;font-size:9px;
+  letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-align:left
+}
+.cwitemtbl thead th.n,.cwitemtbl td.n{text-align:right}
+.cwitemtbl tbody td{background:#fff}
+.cwitemtbl td.desc{white-space:normal;overflow-wrap:anywhere;line-height:1.2}
+.cwitemtbl td.type{white-space:nowrap}
+.cwitemtbl tfoot th,.cwitemtbl tfoot td{
+  position:sticky;bottom:0;z-index:8;
+  background:#F4F7F6!important;color:var(--ink)!important;font-weight:700;
+  border-top:1px solid var(--ink-3)
+}
+.cwitemtbl tfoot th{text-align:right;padding-right:10px}
+.cwitemtbl tfoot td.n{color:var(--ink)!important}
+.cwitemtbl .chg{cursor:help;font-weight:600}
+.cwitemtbl .chg.pos{color:var(--pos)}
+.cwitemtbl .chg.neg{color:var(--neg)}
+.cwitemtbl col.code{width:11%}
+.cwitemtbl col.desc{width:33%}
+.cwitemtbl col.type{width:11%}
+.cwitemtbl col.val{width:10%}
+.cwitemtbl col.chg{width:9%}
+.cwitemtbl col.cases{width:8%}
+.cwsitewrap{
+  overflow:auto;-webkit-overflow-scrolling:touch;max-height:340px;
+  border:1px solid var(--line);border-radius:4px;background:#fff;
+  position:relative;isolation:isolate
+}
+.cwsitewrap .ovcusttbl{margin:0;border:0;min-width:980px}
+.cwsitewrap .ovcusttbl thead tr:last-child th:first-child{width:220px}
+.cwsitewrap .ovcusttbl tbody th{white-space:normal;overflow:visible;text-overflow:clip;vertical-align:top}
+.cwsitewrap .cwsitelink{
+  display:block;width:100%;font-size:10.5px;line-height:1.22;
+  white-space:normal!important;overflow:visible!important;text-overflow:clip!important;
+  overflow-wrap:anywhere;word-break:normal
+}
+.cwsiteflag{
+  display:inline-block;margin:3px 4px 0 0;padding:1px 5px;border-radius:2px;
+  font-family:'IBM Plex Mono',monospace;font-size:7.5px;letter-spacing:.06em;font-weight:700
+}
+.cwsiteflag.new{background:#EAF6F1;color:var(--pos);border:1px solid #B9DED0}
+.cwsiteflag.lost{background:#FCEBE7;color:var(--neg);border:1px solid #E6BBB1}
+@media (max-width:760px){
+  .cwlink{font-size:8.6px}
+  .cwsitewrap{max-height:300px}
+  .cwsitewrap .ovcusttbl{min-width:920px}
+  .cwsitewrap .ovcusttbl thead tr:last-child th:first-child{width:170px}
+  .cwsitewrap .cwsitelink{font-size:8.5px;line-height:1.18}
+  .cwdetailhead{align-items:flex-start}
+  .cwdetailhead .ovmetricbtn{min-width:52px;height:26px;font-size:9px;line-height:26px}
+  .cwitemwrap{max-height:66vh}
+  .cwitemtbl{min-width:720px;font-size:9px}
+  .cwitemtbl th,.cwitemtbl td{padding:5px 4px}
+  .cwitemtbl thead th{font-size:7.7px}
+}
+
 </style>
 </head>
 <body>
@@ -1154,7 +1344,7 @@ body.immonthly #imWrap .imcard{max-width:1500px}
     </div>
   </div>
 
-  <div class="status loading" id="status"><span class="dot"></span><span class="msg" id="statusMsg">Connecting…</span><button id="refreshBtn" type="button" title="Reload everything from the Google Sheet">Refresh</button><button id="convertBtn" class="on" type="button" aria-pressed="true" title="Case conversion is active">Convert</button></div>
+  <div class="status loading" id="status"><span class="dot"></span><span class="msg" id="statusMsg">Connecting…</span><button id="refreshBtn" type="button" title="Reload everything from the Google Sheet">Refresh</button><button id="convertBtn" class="on" type="button" aria-pressed="true" title="Case conversion is active">Convert</button><select id="currencySel" aria-label="Dashboard currency" title="Currency"><option value="QAR" selected>QAR</option><option value="OMR">OMR</option></select></div>
 
   <div class="ovchart" id="visitValueChart"></div>
 
@@ -1592,7 +1782,8 @@ body.immonthly #imWrap .imcard{max-width:1500px}
 <script>
 (function(){
 'use strict';
-/* Live Qatar dashboard: load the latest data from the linked Google Sheet. */
+/* ChatGPT preview mode: use an embedded Qatar snapshot so the dashboard does not
+   depend on cross-origin Google Sheets access inside the ChatGPT file viewer. */
 var CHATGPT_PREVIEW = false;
 function embeddedSnapshot(){
   var el=document.getElementById('embeddedQatarSnapshot');
@@ -1729,6 +1920,33 @@ var YEARS = [], NY = 0, LASTM = 11;
 var F = null;            /* facts; q points to raw pieces or converted cases */
 var loadedAt = null;
 var CASE_CONVERT = true;  /* Volume (N) and Stock (O) ÷ Units Per Case (G); active by default */
+var CURRENCY = 'QAR';       /* QAR default; OMR uses the fixed rate below */
+var QAR_TO_OMR = 0.1059;    /* OMR = QAR × 0.1059 */
+var F_VALUE_QAR = null, F_VALUE_OMR = null;
+function currencyLabel(){ return CURRENCY; }
+function syncCurrencyControl(){
+  var s=document.getElementById('currencySel');
+  if (s && s.value!==CURRENCY) s.value=CURRENCY;
+}
+function applyCurrencyConversion(){
+  if (F){
+    if (!F_VALUE_QAR || F_VALUE_QAR.length!==F.v.length){
+      F_VALUE_QAR=F.v;
+      F_VALUE_OMR=null;
+    }
+    if (CURRENCY==='OMR'){
+      if (!F_VALUE_OMR || F_VALUE_OMR.length!==F_VALUE_QAR.length){
+        F_VALUE_OMR=new Float64Array(F_VALUE_QAR.length);
+        for (var cv=0;cv<F_VALUE_QAR.length;cv++) F_VALUE_OMR[cv]=(F_VALUE_QAR[cv]||0)*QAR_TO_OMR;
+      }
+      F.v=F_VALUE_OMR;
+    } else {
+      F.v=F_VALUE_QAR;
+    }
+  }
+  A=null; LIVE=null; AN=null; PRSCAN=null; AREASCAN=null;
+  syncCurrencyControl();
+}
 var DATA_VERSION = 24;
 
 /* ---------- gviz over JSONP (no CORS, works from a static page) ---------- */
@@ -1829,11 +2047,14 @@ function applyCaseConversion(){
 function applySnapshot(snap){
   if (snap && snap.f && !snap.f.d) snap.f.d = new Uint8Array(snap.f.s.length);
   SITES = snap.sites; YEARS = snap.years.slice(); NY = YEARS.length;
-  F = snap.f; loadedAt = snap.at;
+  F = Object.assign({}, snap.f); loadedAt = snap.at;
   if (F){
     if (!F.qRaw) F.qRaw=F.q;
     if (!F.qConv) F.qConv=F.qRaw;
     F.q=CASE_CONVERT ? F.qConv : F.qRaw;
+    F_VALUE_QAR=F.v;
+    F_VALUE_OMR=null;
+    applyCurrencyConversion();
   }
   STOCK_RAW = (snap.stockRaw && snap.stockRaw.length === NI) ? snap.stockRaw
             : ((snap.stock && snap.stock.length === NI) ? snap.stock : null);
@@ -2475,11 +2696,14 @@ function ensureA(){
    column does follow the period. */
 var siteBilledA = null, siteBilledB = null, siteValA = null, siteValB = null;
 var siteFirstB = null;      /* first month of the current year the outlet was billed */
+var siteLastA = null;       /* last month of the base year the outlet was billed */
 function aggregate(){
   ensureA();
   buildMask();
   if (!siteFirstB || siteFirstB.length !== SITES.length) siteFirstB = new Int32Array(SITES.length);
   siteFirstB.fill(-1);
+  if (!siteLastA || siteLastA.length !== SITES.length) siteLastA = new Int32Array(SITES.length);
+  siteLastA.fill(-1);
   if (!siteBilledA || siteBilledA.length !== SITES.length){
     siteBilledA = new Uint8Array(SITES.length);
     siteBilledB = new Uint8Array(SITES.length);
@@ -2500,8 +2724,11 @@ function aggregate(){
     A.mv[g] += fv[k]; A.mq[g] += fq[k];
     /* whole-year presence decides who is new and who is lost */
     var billedHere = (fq[k] > 0 || fv[k] > 0);
-    if (yi === ia && billedHere) siteBilledA[fs[k]] = 1;
-    else if (yi === ib && billedHere){
+    if (yi === ia && billedHere){
+      siteBilledA[fs[k]] = 1;
+      var mmA = fp[k] % 12;
+      if (siteLastA[fs[k]] < 0 || mmA > siteLastA[fs[k]]) siteLastA[fs[k]] = mmA;
+    } else if (yi === ib && billedHere){
       siteBilledB[fs[k]] = 1;
       var mm2 = fp[k] % 12;
       if (siteFirstB[fs[k]] < 0 || mm2 < siteFirstB[fs[k]]) siteFirstB[fs[k]] = mm2;
@@ -2860,7 +3087,7 @@ function setStatus(kind, msg){
   var stamp = when ? when.toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}) : '';
   var base = kind === 'ok'
     ? (CHATGPT_PREVIEW
-       ? 'Preview data loaded inside ChatGPT — filtering and case conversion run locally' + (stamp ? ' · snapshot ' + stamp : '')
+       ? 'Preview data loaded inside ChatGPT — filtering, case conversion and currency conversion run locally' + (stamp ? ' · snapshot ' + stamp : '')
        : 'All data loaded — filtering runs on this device' + (stamp ? ' · from the sheet ' + stamp : '') +
          (stockFrom ? ' · stock from ' + stockFrom : ''))
     : (msg || '');
@@ -2878,10 +3105,10 @@ function COLS(){
     {k:'qA',    t:yy(state.yrA) + ' QTY', r:1},
     {k:'qB',    t:yy(state.yrB) + ' QTY', r:1},
     {k:'avgq',  t:'Avg QTY/Mo', r:1},
-    {k:'vA',    t:yy(state.yrA) + ' Value', r:1},
-    {k:'vB',    t:yy(state.yrB) + ' Value', r:1},
+    {k:'vA',    t:yy(state.yrA) + ' Value ('+currencyLabel()+')', r:1},
+    {k:'vB',    t:yy(state.yrB) + ' Value ('+currencyLabel()+')', r:1},
     {k:'dv',    t:'Change', r:1},
-    {k:'delta', t:'Vs ' + yy(state.yrA), r:1},
+    {k:'delta', t:'Vs ' + yy(state.yrA) + ' ('+currencyLabel()+')', r:1},
     {k:'stock', t:'Stock', r:1},
     {k:'last',  t:'Last Supp'}
   ];
@@ -3032,9 +3259,9 @@ function render(){
                    : (T.vB ? 'no '+state.yrA+' base here' : 'no sales in this period');
   var dqTxt = T.qA ? ((dq>0?'+':'')+nf1.format(dq*100)+'% vs '+state.yrA) : 'no '+state.yrA+' base here';
   document.getElementById('kpis').innerHTML =
-    kpi(state.yrB + ' Value · ' + periodLabel(), nf0.format(Math.round(T.vB)),
+    kpi(state.yrB + ' Value ('+currencyLabel()+') · ' + periodLabel(), nf0.format(Math.round(T.vB)),
         dvTxt, T.vA ? cls : 'flat') +
-    kpi('Value vs ' + state.yrA, (T.vB-T.vA>=0?'+':'−')+nf0.format(Math.abs(Math.round(T.vB-T.vA))),
+    kpi('Value vs ' + state.yrA + ' ('+currencyLabel()+')', (T.vB-T.vA>=0?'+':'−')+nf0.format(Math.abs(Math.round(T.vB-T.vA))),
         state.yrA+' base '+nf0.format(Math.round(T.vA)), cls) +
     kpi(state.yrB + ' QTY (cases)', nf0.format(Math.round(T.qB)),
         dqTxt, T.qA ? (dq>0?'up':(dq<0?'down':'flat')) : 'flat') +
@@ -3097,10 +3324,10 @@ function render(){
       '<td class="num d-q25" data-l="'+state.yrA+' QTY">'+fmt(r.qA)+'</td>'+
       '<td class="num d-q26" data-l="'+String(state.yrB).slice(2)+' QTY">'+fmt(r.qB)+'</td>'+
       '<td class="num d-avgq" data-l="Avg QTY">'+fmtAvg(r.avgq)+'</td>'+
-      '<td class="num d-v25" data-l="'+state.yrA+' value">'+fmt(r.vA)+'</td>'+
-      '<td class="num d-v26" data-l="'+String(state.yrB).slice(2)+' Value">'+fmt(r.vB)+arrowLY(r.vA, r.vB)+'</td>'+
+      '<td class="num d-v25" data-l="'+state.yrA+' value ('+currencyLabel()+')">'+fmt(r.vA)+'</td>'+
+      '<td class="num d-v26" data-l="'+String(state.yrB).slice(2)+' Value ('+currencyLabel()+')">'+fmt(r.vB)+arrowLY(r.vA, r.vB)+'</td>'+
       '<td class="num d-dv" data-l="Value change">'+pctCell(r.vB,r.vA)+'</td>'+
-      '<td class="num d-delta" data-l="Vs '+state.yrA+'"><span class="'+(r.delta>0?'up':(r.delta<0?'down':'flat'))+'">'+(r.delta>=0?'+':'−')+nf0.format(Math.abs(Math.round(r.delta)))+'</span></td>'+
+      '<td class="num d-delta" data-l="Vs '+state.yrA+' ('+currencyLabel()+')"><span class="'+(r.delta>0?'up':(r.delta<0?'down':'flat'))+'">'+(r.delta>=0?'+':'−')+nf0.format(Math.abs(Math.round(r.delta)))+'</span></td>'+
       '<td class="num d-stock" data-l="Stock">'+stockCell(r.stock)+'</td>'+
       '<td class="d-last" data-l="Last supp">'+lastLabel(r.last)+'</td></tr>');
   }
@@ -3161,8 +3388,8 @@ function render(){
   var lv = lost.reduce(function(s,r){ return s+r.v; }, 0);
   document.getElementById('lostNote').textContent = lost.length ? nf0.format(Math.round(lv))+' of '+state.yrA+' value at risk' : '';
 
-  document.getElementById('anYrA').textContent = state.yrA + (aIsVolume() ? ' QTY' : ' Value');
-  document.getElementById('anYrB').textContent = state.yrB + (aIsVolume() ? ' QTY' : ' Value');
+  document.getElementById('anYrA').textContent = state.yrA + (aIsVolume() ? ' QTY' : ' Value ('+currencyLabel()+')');
+  document.getElementById('anYrB').textContent = state.yrB + (aIsVolume() ? ' QTY' : ' Value ('+currencyLabel()+')');
   if (TAB === 'analysis') renderAnalysis();
 }
 
@@ -3760,15 +3987,22 @@ document.getElementById('convertBtn').addEventListener('click', function(){
   renderHead();
   renderActiveTab();
 });
+document.getElementById('currencySel').addEventListener('change', function(){
+  CURRENCY=this.value==='OMR' ? 'OMR' : 'QAR';
+  applyCurrencyConversion();
+  renderHead();
+  renderActiveTab();
+});
 syncConvertButton();
+syncCurrencyControl();
 
 /* ---------- exports ---------- */
 function exportSummaryCsv(){
   aggregate();
   var rows = sortRows(buildRows());
   var head = ['Sales Type','Category','Item Code','Store Check','Item Description',
-              state.yrA+' QTY',state.yrB+' QTY','Avg QTY/Mo',state.yrA+' Value',state.yrB+' Value',
-              'Value Change %','Value vs '+state.yrA,'Warehouse Stock','Last Supplied'];
+              state.yrA+' QTY',state.yrB+' QTY','Avg QTY/Mo',state.yrA+' Value ('+currencyLabel()+')',state.yrB+' Value ('+currencyLabel()+')',
+              'Value Change %','Value vs '+state.yrA+' ('+currencyLabel()+')','Warehouse Stock','Last Supplied'];
   var lines = [head.join(',')];
   rows.forEach(function(r){
     var pv = r.vA ? (r.vB/r.vA-1)*100 : '';
@@ -4469,7 +4703,7 @@ function itemCasesChart(i){
       '<span class="lg"><span class="sw prev"></span>' + YEARS[prev] + '</span>' +
       '<span class="lg"><span class="sw curr"></span>' + YEARS[latest] + '</span>' +
     '</div>' +
-    '<div class="chnote">Hover around any monthly dot to see the month, cases and exact QAR sales value. ' +
+    '<div class="chnote">Hover around any monthly dot to see the month, cases and exact '+currencyLabel()+' sales value. ' +
       YEARS[latest] + ' continues through ' + MONTHS[LASTM] + '; later months stay blank until data is available.</div>' +
     '<div class="imtip" id="imTip"></div>' +
   '</div>';
@@ -4478,17 +4712,157 @@ function itemCasesChart(i){
 
 var VISIT_VALUE_VIEW = 'chart';
 var VISIT_CAT_METRIC = 'cases';
+var CUSTWISE_SALES_TYPE = 'all';     /* all | regular | promo */
+var CUSTWISE_DETAIL_GRAPH_SALES_TYPE = 'all'; /* popup graph only */
+var CUSTWISE_CATEGORY_SALES_TYPE = 'all';     /* popup category table */
+var CUSTWISE_NAV = null;
+var CUSTWISE_BACK_STACK = [];
+var CUSTWISE_CAT_EXPORT = null;
+var CUSTWISE_PROMO_FULL_YEAR = false;
+var CUSTWISE_RUNDOWN_FULL_YEAR = false;
 var CATWISE_SALES_TYPE = 'all';      /* all | regular | promo */
+var GRAPH_SALES_TYPE = 'all';        /* all | regular | promo */
 var VISIT_PROMO_FULL_YEAR = false;   /* OFF = 2025 follows selected 2026 period */
 var VISIT_RUNDOWN_FULL_YEAR = false; /* OFF = historical years follow selected period */
 
 function visitViewButtons(active){
   var a=[];
   if (active !== 'chart') a.push('<button class="ovviewbtn" type="button" data-view="chart">Graph view</button>');
+  if (active !== 'customer') a.push('<button class="ovviewbtn" type="button" data-view="customer">Customer Wise</button>');
   if (active !== 'rundown') a.push('<button class="ovviewbtn" type="button" data-view="rundown">Monthly run down</button>');
   if (active !== 'category') a.push('<button class="ovviewbtn" type="button" data-view="category">Category Wise</button>');
   if (active !== 'promo') a.push('<button class="ovviewbtn" type="button" data-view="promo">Promo %</button>');
   return '<div class="ovtools">'+a.join('')+'</div>';
+}
+
+/* Qatar Customer Wise uses the complete Cust Group master from column H.
+   Unlike the Oman shortcut list, no Qatar Cust Group is dropped or merged into an
+   artificial "Others" row. The main Cust Group picker can still narrow the view. */
+function customerWiseData(metric){
+  aggregate();
+  var arrValue = metric === 'value';
+  var currYi = yIdx(state.yrB), prevYi = yIdx(state.yrA);
+  var startM = state.m1;
+  var endM = (state.yrB === YEARS[NY-1]) ? Math.min(state.m2, LASTM) : state.m2;
+  var ids=[];
+
+  if (state.area.size){
+    state.area.forEach(function(a){ if (a>=0 && a<AREAS.length) ids.push(a); });
+  } else {
+    for (var a=0;a<AREAS.length;a++) ids.push(a);
+  }
+
+  var rows={};
+  ids.forEach(function(a){
+    rows[a]={
+      id:a,key:areaLabel(a),curr:new Array(12).fill(0),prev:new Array(12).fill(0),
+      total:0,prevTotal:0,cont:0,prevCont:0
+    };
+  });
+
+  if (F && currYi>=0 && prevYi>=0){
+    var fs=F.s,fi=F.i,fp=F.p,fv=F.v,fq=F.q,fd=F.d,N=fs.length;
+    for (var k=0;k<N;k++){
+      var s=fs[k],i=fi[k];
+      if (!mask[s]) continue;
+      if (!factCounted(fd[k],i)) continue;
+      if (!catSetAllows(state.cat,i)) continue;
+      if (!itemVisible(i)) continue;
+
+      var promo=ITEMS[i] && ITEMS[i][3]==='Promotion';
+      if (CUSTWISE_SALES_TYPE==='promo' && !promo) continue;
+      if (CUSTWISE_SALES_TYPE==='regular' && promo) continue;
+      if (promo && !state.showPromo) continue;
+      if (!promo && !state.showRegular) continue;
+
+      var p=fp[k], yi=(p/12)|0, m=p%12;
+      if (yi!==currYi && yi!==prevYi) continue;
+
+      var ai=areaOf[s], r=rows[ai];
+      if (!r) continue;
+      var v=arrValue ? fv[k] : fq[k];
+      if (yi===currYi){
+        if (state.yrB===YEARS[NY-1] && m>LASTM) continue;
+        r.curr[m]+=v;
+      } else r.prev[m]+=v;
+    }
+  }
+
+  var list=ids.map(function(a){ return rows[a]; });
+  var grand=0,prevGrand=0;
+  list.forEach(function(r){
+    for (var m=startM;m<=endM;m++){
+      r.total += r.curr[m]||0;
+      r.prevTotal += r.prev[m]||0;
+    }
+    grand += r.total;
+    prevGrand += r.prevTotal;
+  });
+  list.forEach(function(r){
+    r.cont = grand ? r.total/grand*100 : 0;
+    r.prevCont = prevGrand ? r.prevTotal/prevGrand*100 : 0;
+  });
+
+  /* Oman presentation order: highest current-period sales first, but retain every
+     Cust Group in the active master/list even when its selected-period sales are 0. */
+  list.sort(function(a,b){ return (b.total-a.total) || String(a.key).localeCompare(String(b.key)); });
+  return {rows:list,startM:startM,endM:endM,grand:grand,prevGrand:prevGrand};
+}
+
+function visitCustomerWise(){
+  var metric=VISIT_CAT_METRIC, isValue=metric==='value';
+  var d=customerWiseData(metric), months=[];
+  for (var m=d.startM;m<=d.endM;m++) months.push(m);
+
+  function f(v){
+    if (Math.abs(v)<0.0000001) return '0';
+    return isValue ? nf0.format(Math.round(v)) : nf2.format(v);
+  }
+
+  var title=isValue?'Sales in Value ('+currencyLabel()+')':'Sales in Cases';
+  var h='<div class="ovcustwrap"><table class="ovcusttbl"><thead>'+ 
+        '<tr class="cap"><th colspan="'+(months.length+4)+'">'+title+' ('+state.yrB+
+        (state.yrB===YEARS[NY-1]?' YTD':'')+')</th></tr>'+ 
+        '<tr><th>Cust Group</th>';
+  months.forEach(function(m){ h+='<th>'+MONTHS[m]+'</th>'; });
+  h+='<th>Total</th><th>Cont</th><th>Vs LY</th></tr></thead><tbody>';
+
+  d.rows.forEach(function(r){
+    var pct=categoryWisePct(r.prevTotal,r.total);
+    h+='<tr><th><button class="cwlink" type="button" data-cw-area="'+r.id+'" title="Open Cust Group details">'+esc(r.key)+'</button></th>';
+    months.forEach(function(m){
+      var v=r.curr[m]||0,pv=r.prev[m]||0;
+      h+='<td>'+f(v)+arrowLYCW(pv,v)+'</td>';
+    });
+    h+='<td class="tot">'+f(r.total)+arrowLYCW(r.prevTotal,r.total)+'</td>'+ 
+       '<td class="cont" title="LY Cont: '+nf2.format(r.prevCont||0)+'%">'+
+         nf2.format(r.cont||0)+'%'+arrowLYCW(r.prevCont||0,r.cont||0)+'</td>'+ 
+       '<td class="vsly '+pct.cls+'" title="'+esc(categoryWiseDeltaTitle(r.prevTotal,r.total,isValue))+'">'+pct.text+'</td></tr>';
+  });
+  h+='</tbody></table></div>';
+
+  var salesTypeLabel=CUSTWISE_SALES_TYPE==='regular'?'Regular':(CUSTWISE_SALES_TYPE==='promo'?'Promo':'All');
+  var shown=d.rows.length;
+  return visitViewButtons('customer')+
+    '<div class="ovmetricgroups">'+
+      '<div class="ovmetricbar catmetric">'+
+        '<button class="ovmetricbtn '+(metric==='cases'?'on':'')+'" type="button" data-metric="cases">Volume</button>'+ 
+        '<button class="ovmetricbtn '+(metric==='value'?'on':'')+'" type="button" data-metric="value">Value</button>'+ 
+      '</div>'+ 
+      '<div class="cwsalestypebox">'+
+        '<select id="cwSalesType" aria-label="Customer Wise Sales Type" title="Sales Type">'+
+          '<option value="all"'+(CUSTWISE_SALES_TYPE==='all'?' selected':'')+'>All</option>'+ 
+          '<option value="regular"'+(CUSTWISE_SALES_TYPE==='regular'?' selected':'')+'>Regular</option>'+ 
+          '<option value="promo"'+(CUSTWISE_SALES_TYPE==='promo'?' selected':'')+'>Promo</option>'+ 
+        '</select>'+ 
+      '</div>'+ 
+    '</div>'+ 
+    '<div class="cht">Customer Wise</div>'+ 
+    '<div class="chs">'+depLabel()+' · '+salesTypeLabel+' · '+state.yrB+
+      (state.yrB===YEARS[NY-1]?' YTD':'')+' vs '+state.yrA+' same period</div>'+ 
+    h+
+    '<div class="ovcustnote">Full Qatar Cust Group list ('+shown+' shown) · rows are sorted from highest to lowest '+
+      (isValue?'sales value':'sales cases')+' for the selected period. Hover Cont to see LY contribution and Vs LY to see the absolute growth / decline.</div>';
 }
 
 /* Category conversion follows the uploaded workbook:
@@ -4537,10 +4911,29 @@ function categoryWiseSeries(metric, yearOverride){
   });
   return {year:year, rows:out, totals:totalMonths};
 }
+function categoryWisePct(base,cur){
+  if (Math.abs(base)<0.0000001){
+    if (Math.abs(cur)<0.0000001) return {text:'0.0%',cls:''};
+    return {text:'—',cls:''};
+  }
+  var p=(cur-base)/Math.abs(base)*100;
+  return {
+    text:(p>0?'+':'')+nf1.format(p)+'%',
+    cls:p>0.0001?'pos':(p<-0.0001?'neg':'')
+  };
+}
+function categoryWiseDeltaTitle(base,cur,isValue){
+  var d=(cur||0)-(base||0);
+  var label=d>0.0001 ? 'Growth' : (d<-0.0001 ? 'Decline' : 'No change');
+  var amount=Math.abs(d);
+  if (isValue) return label+': '+currencyLabel()+' '+nf0.format(Math.round(amount));
+  return label+': '+nf2.format(amount)+' cases';
+}
+
 function visitCategoryWise(){
   var metric=VISIT_CAT_METRIC, isValue=metric==='value', d=categoryWiseSeries(metric);
   var prev=categoryWiseSeries(metric, state.yrA);
-  var year=d.year, latest=(year===YEARS[NY-1]), title=isValue?'Sales in Value':'Sales in Cases';
+  var year=d.year, latest=(year===YEARS[NY-1]), title=isValue?'Sales in Value ('+currencyLabel()+')':'Sales in Cases';
   var startM = state.m1, endM = latest ? Math.min(state.m2, LASTM) : state.m2;
   var yearTotal=0, prevYearTotal=0;
 
@@ -4556,10 +4949,10 @@ function visitCategoryWise(){
   }
 
   var h='<div class="ovcatwrap"><table class="ovcatmonthly"><thead>'+
-        '<tr class="cap"><th colspan="15">'+title+' ('+year+(latest?' YTD':'')+')</th></tr>'+
+        '<tr class="cap"><th colspan="16">'+title+' ('+year+(latest?' YTD':'')+')</th></tr>'+
         '<tr><th>Category</th>';
   for (var m=0;m<12;m++) h += '<th>'+MONTHS[m]+'</th>';
-  h += '<th>Total</th><th>Cont</th></tr></thead><tbody>';
+  h += '<th>Total</th><th>Cont</th><th>Vs LY</th></tr></thead><tbody>';
 
   CATWISE_BASE.forEach(function(c){
     var vals=d.rows[c], prevVals=prev.rows[c], tot=0, prevTot=0;
@@ -4571,7 +4964,12 @@ function visitCategoryWise(){
     }
     var cont=yearTotal ? tot/yearTotal*100 : 0;
     var prevCont=prevYearTotal ? prevTot/prevYearTotal*100 : 0;
-    h += '<td class="tot">'+f(tot)+arrowLYCW(prevTot,tot)+'</td><td class="cont">'+nf2.format(cont)+'%'+arrowLYCW(prevCont,cont)+'</td></tr>';
+    var yoy=categoryWisePct(prevTot,tot);
+    h += '<td class="tot">'+f(tot)+arrowLYCW(prevTot,tot)+'</td>'+
+         '<td class="cont" title="LY Cont: '+nf2.format(prevCont)+'%">'+
+           nf2.format(cont)+'%'+arrowLYCW(prevCont,cont)+'</td>'+
+         '<td class="vsly '+yoy.cls+'" title="'+esc(categoryWiseDeltaTitle(prevTot,tot,isValue))+'">'+
+           yoy.text+'</td></tr>';
   });
 
   h += '<tr class="grand"><th>Total</th>';
@@ -4579,7 +4977,11 @@ function visitCategoryWise(){
     if (m < startM || m > endM){ h += '<td class="off"></td>'; continue; }
     h += '<td>'+f(d.totals[m])+arrowLYCW(prev.totals[m]||0,d.totals[m]||0)+'</td>';
   }
-  h += '<td class="tot">'+f(yearTotal)+arrowLYCW(prevYearTotal,yearTotal)+'</td><td class="cont">100.00%</td></tr></tbody></table></div>';
+  var totalYoy=categoryWisePct(prevYearTotal,yearTotal);
+  h += '<td class="tot">'+f(yearTotal)+arrowLYCW(prevYearTotal,yearTotal)+'</td>'+
+       '<td class="cont" title="LY Cont: 100.00%">100.00%</td>'+
+       '<td class="vsly '+totalYoy.cls+'" title="'+esc(categoryWiseDeltaTitle(prevYearTotal,yearTotal,isValue))+'">'+
+         totalYoy.text+'</td></tr></tbody></table></div>';
 
   var salesTypeLabel = CATWISE_SALES_TYPE === 'regular' ? 'Regular' :
                        (CATWISE_SALES_TYPE === 'promo' ? 'Promo' : 'All');
@@ -4616,8 +5018,8 @@ function visitMonthlyValueSeries(){
       if (!itemVisible(i)) continue;
       if (state.cat.size && !state.cat.has(catOf[i])) continue;
       var isPromo = ITEMS[i][3] === 'Promotion';
-      if (isPromo && !state.showPromo) continue;
-      if (!isPromo && !state.showRegular) continue;
+      if (GRAPH_SALES_TYPE === 'promo' && !isPromo) continue;
+      if (GRAPH_SALES_TYPE === 'regular' && isPromo) continue;
       var base = i * span + yi * 12;
       for (var m2=0;m2<12;m2++){
         if (a[m2] === null) continue;
@@ -4704,10 +5106,22 @@ function visitValueChart(){
     points(valsCurr, currYear, '#A10716') +
     '</svg>';
 
+  var salesTypeLabel = GRAPH_SALES_TYPE === 'regular' ? 'Regular' :
+                       (GRAPH_SALES_TYPE === 'promo' ? 'Promo' : 'All');
+
   return visitViewButtons('chart') +
-    '<div class="cht">Monthly value trend, QAR (Jan–Dec)</div>' +
+    '<div class="ovmetricgroups">'+
+      '<div class="cwsalestypebox">'+
+        '<select id="graphSalesType" aria-label="Graph View Sales Type" title="Sales Type">'+
+          '<option value="all"'+(GRAPH_SALES_TYPE==='all'?' selected':'')+'>All</option>'+
+          '<option value="regular"'+(GRAPH_SALES_TYPE==='regular'?' selected':'')+'>Regular</option>'+
+          '<option value="promo"'+(GRAPH_SALES_TYPE==='promo'?' selected':'')+'>Promo</option>'+
+        '</select>'+
+      '</div>'+
+    '</div>'+
+    '<div class="cht">Monthly value trend, '+currencyLabel()+' (Jan–Dec)</div>' +
     '<div class="chs">' + depLabel() + ' · ' + scopeNames() +
-      ' · ' + (state.cat === null ? 'All categories' : CATS[state.cat]) +
+      ' · ' + salesTypeLabel +
       ' · ' + prevYear + ' vs ' + currYear + ' YTD</div>' +
     svg +
     '<div class="chlegend">' +
@@ -5013,12 +5427,244 @@ function visitValueRundown(){
 }
 
 
+
+
+/* ================= Qatar Customer Wise drill-down =================
+   Layout and interaction intentionally mirror the Oman Customer Wise package.
+   Qatar has no customer-site code, so the unique Customer Site Name is the site identity. */
+function custWisePct(base,cur){
+  if (Math.abs(base)<0.0000001){
+    if (Math.abs(cur)<0.0000001) return {text:'0.0%',cls:''};
+    return {text:'—',cls:''};
+  }
+  var p=(cur-base)/Math.abs(base)*100;
+  return {text:(p>0?'+':'')+nf1.format(p)+'%',cls:p>0.0001?'pos':(p<-0.0001?'neg':'')};
+}
+function custWiseDeltaTitle(base,cur,isValue){
+  var d=(cur||0)-(base||0);
+  var label=d>0.0001?'Growth':(d<-0.0001?'Decline':'No change');
+  var amount=Math.abs(d);
+  return isValue ? label+': '+currencyLabel()+' '+nf0.format(Math.round(amount)) : label+': '+nf2.format(amount)+' cases';
+}
+function custWiseValueCasesDeltaTitle(baseV,curV,baseQ,curQ){
+  var dv=(curV||0)-(baseV||0), dq=(curQ||0)-(baseQ||0);
+  var vLabel=dv>0.0001?'Value Growth':(dv<-0.0001?'Value Decline':'Value No change');
+  var qLabel=dq>0.0001?'Cases Growth':(dq<-0.0001?'Cases Decline':'Cases No change');
+  return vLabel+': '+currencyLabel()+' '+nf0.format(Math.round(Math.abs(dv)))+' | '+qLabel+': '+nf2.format(Math.abs(dq));
+}
+function custWisePushCurrent(){
+  if (!CUSTWISE_NAV) return;
+  CUSTWISE_BACK_STACK.push({
+    state:{type:CUSTWISE_NAV.type,key:CUSTWISE_NAV.key,siteKey:CUSTWISE_NAV.siteKey||null,category:CUSTWISE_NAV.category||null},
+    scroll:(document.getElementById('imWrap')||{scrollTop:0}).scrollTop||0
+  });
+}
+function custWiseRenderState(st,scrollTop){
+  if (!st) return;
+  if (st.type==='category') openCustomerWiseCategoryItems(st.key,st.siteKey,st.category);
+  else openCustomerWiseDetail(st.key,st.type==='site'?st.siteKey:null);
+  if (scrollTop){
+    setTimeout(function(){ var w=document.getElementById('imWrap'); if (w) w.scrollTop=scrollTop; },0);
+  }
+}
+function custWiseBack(){
+  if (!CUSTWISE_NAV || !CUSTWISE_BACK_STACK.length) return false;
+  var prev=CUSTWISE_BACK_STACK.pop();
+  custWiseRenderState(prev.state,prev.scroll);
+  return true;
+}
+function custWiseNorm(s){ return String(s==null?'':s).toUpperCase().replace(/\s+/g,' ').trim(); }
+function custWiseGroupForSite(s){ return areaOf[s]; }
+function custWiseSiteCodeKey(s){ return SITES[s] ? custWiseNorm(SITES[s][1]||SITES[s][2]) : ''; }
+function customerWiseSiteLatestInfo(key,siteKey){
+  var members=[],memberSet={},latestP=-1,latestS=-1;
+  for (var s=0;s<SITES.length;s++){
+    if (!mask[s]) continue;
+    if (custWiseGroupForSite(s)!==key) continue;
+    if (custWiseSiteCodeKey(s)!==siteKey) continue;
+    members.push(s);memberSet[s]=1;
+  }
+  if (F && members.length){
+    var fs=F.s,fp=F.p,N=fs.length;
+    for (var k=0;k<N;k++){
+      var si=fs[k]; if (!memberSet[si]) continue;
+      var p=fp[k]; if (p>latestP || (p===latestP && si>latestS)){latestP=p;latestS=si;}
+    }
+  }
+  if (latestS<0 && members.length) latestS=members[members.length-1];
+  return {siteKey:siteKey,members:members,rep:latestS,latestP:latestP};
+}
+function customerWiseScopeMatch(s,key,siteKey){
+  return (siteKey===null || siteKey===undefined)
+    ? custWiseGroupForSite(s)===key
+    : (custWiseGroupForSite(s)===key && custWiseSiteCodeKey(s)===siteKey);
+}
+function customerWiseGraphSeries(key,siteKey){
+  aggregate();
+  var y2024=2024,yPrev=2025,yCurr=2026;
+  var i24=yIdx(y2024),ip=yIdx(yPrev),ic=yIdx(yCurr);
+  if (ip<0) yPrev=state.yrA,ip=yIdx(yPrev);
+  if (ic<0) yCurr=state.yrB,ic=yIdx(yCurr);
+  var v24=new Array(12).fill(0),q24=new Array(12).fill(0);
+  var prevValue=new Array(12).fill(0),currValue=new Array(12);
+  var prevCases=new Array(12).fill(0),currCases=new Array(12);
+  var prevReg=new Array(12).fill(0),prevPromo=new Array(12).fill(0);
+  var currReg=new Array(12),currPromo=new Array(12);
+  var prevRegCases=new Array(12).fill(0),prevPromoCases=new Array(12).fill(0);
+  var currRegCases=new Array(12),currPromoCases=new Array(12);
+  for (var m=0;m<12;m++){
+    var future=(yCurr===YEARS[NY-1] && m>LASTM);
+    currValue[m]=future?null:0;currCases[m]=future?null:0;
+    currReg[m]=future?null:0;currPromo[m]=future?null:0;
+    currRegCases[m]=future?null:0;currPromoCases[m]=future?null:0;
+  }
+  if (F && ip>=0 && ic>=0){
+    var fs=F.s,fi=F.i,fp=F.p,fv=F.v,fq=F.q,fd=F.d,N=fs.length;
+    for (var k=0;k<N;k++){
+      var s=fs[k],i=fi[k];
+      if (!mask[s]) continue;
+      if (!factCounted(fd[k],i)) continue;
+      if (state.cat.size && !state.cat.has(catOf[i])) continue;
+      if (!customerWiseScopeMatch(s,key,siteKey)) continue;
+      var p=fp[k],yi=(p/12)|0,m=p%12;
+      var isPromo=(!isOther(i) && ITEMS[i][3]==='Promotion');
+      if (i24>=0 && yi===i24){v24[m]+=fv[k];q24[m]+=fq[k];}
+      else if (yi===ip){
+        prevValue[m]+=fv[k];prevCases[m]+=fq[k];
+        if (isPromo){prevPromo[m]+=fv[k];prevPromoCases[m]+=fq[k];}
+        else {prevReg[m]+=fv[k];prevRegCases[m]+=fq[k];}
+      } else if (yi===ic && currValue[m]!==null){
+        currValue[m]+=fv[k];currCases[m]+=fq[k];
+        if (isPromo){currPromo[m]+=fv[k];currPromoCases[m]+=fq[k];}
+        else {currReg[m]+=fv[k];currRegCases[m]+=fq[k];}
+      }
+    }
+  }
+  return {
+    year2024:y2024,has2024:i24>=0,prevYear:yPrev,currYear:yCurr,
+    prev:prevValue,curr:currValue,value2024:v24,cases2024:q24,
+    prevValue:prevValue,currValue:currValue,prevCases:prevCases,currCases:currCases,
+    prevReg:prevReg,prevPromo:prevPromo,currReg:currReg,currPromo:currPromo,
+    prevRegCases:prevRegCases,prevPromoCases:prevPromoCases,currRegCases:currRegCases,currPromoCases:currPromoCases
+  };
+}
+function customerWiseGraphSvg(g){
+  var prevValue=CUSTWISE_DETAIL_GRAPH_SALES_TYPE==='promo'?g.prevPromo:(CUSTWISE_DETAIL_GRAPH_SALES_TYPE==='regular'?g.prevReg:g.prevValue);
+  var currValue=CUSTWISE_DETAIL_GRAPH_SALES_TYPE==='promo'?g.currPromo:(CUSTWISE_DETAIL_GRAPH_SALES_TYPE==='regular'?g.currReg:g.currValue);
+  var prevCases=CUSTWISE_DETAIL_GRAPH_SALES_TYPE==='promo'?g.prevPromoCases:(CUSTWISE_DETAIL_GRAPH_SALES_TYPE==='regular'?g.prevRegCases:g.prevCases);
+  var currCases=CUSTWISE_DETAIL_GRAPH_SALES_TYPE==='promo'?g.currPromoCases:(CUSTWISE_DETAIL_GRAPH_SALES_TYPE==='regular'?g.currRegCases:g.currCases);
+  var maxV=0,minV=0;
+  [prevValue,currValue].forEach(function(vals){vals.forEach(function(v){if(v===null||v===undefined)return;if(v>maxV)maxV=v;if(v<minV)minV=v;});});
+  var rawRange=maxV-minV,step=niceStep(rawRange||Math.max(Math.abs(maxV),Math.abs(minV),1),5);
+  var top=Math.ceil(Math.max(0,maxV)/step)*step,bottom=Math.floor(Math.min(0,minV)/step)*step;
+  if(top===bottom){top+=step;bottom-=step;}if(top===0&&bottom<0)top=step;
+  var W=980,H=300,L=65,R=15,T=18,B=42,PW=W-L-R,PH=H-T-B;
+  var xAt=function(i){return L+PW*i/11;},yAt=function(v){return T+((top-v)/(top-bottom))*PH;};
+  var grid='',yl='',xl='',ticks=Math.max(1,Math.round((top-bottom)/step));
+  for(var q=0;q<=ticks;q++){var gv=bottom+q*step,y=yAt(gv);grid+='<line x1="'+L+'" y1="'+y.toFixed(1)+'" x2="'+(W-R)+'" y2="'+y.toFixed(1)+'" stroke="'+(Math.abs(gv)<step/1000?'#8FA0A6':'#E3E7E5')+'" stroke-width="1"></line>';yl+='<text x="'+(L-9)+'" y="'+(y+4).toFixed(1)+'" text-anchor="end" fill="#6A7D84" font-size="10" font-family="Archivo, sans-serif">'+nf0.format(Math.round(gv))+'</text>';}
+  for(var m=0;m<12;m++)xl+='<text x="'+xAt(m).toFixed(1)+'" y="'+(H-14)+'" text-anchor="middle" fill="#6A7D84" font-size="10" font-family="Archivo, sans-serif">'+MONTHS[m]+'</text>';
+  function points(vals,casesArr,valueArr,year,fill){var s='';for(var m=0;m<12;m++){if(vals[m]===null||vals[m]===undefined)continue;var cx=xAt(m).toFixed(1),cy=yAt(vals[m]).toFixed(1);s+='<g class="impoint"><circle class="imdot" cx="'+cx+'" cy="'+cy+'" r="4" fill="'+fill+'"></circle><circle class="imhit" cx="'+cx+'" cy="'+cy+'" r="14" data-year="'+year+'" data-month="'+m+'" data-cases="'+(casesArr[m]||0)+'" data-value="'+(valueArr[m]||0)+'"></circle></g>';}return s;}
+  return '<svg class="chsvg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Cust Group monthly sales value comparison"><rect width="'+W+'" height="'+H+'" fill="#fff"></rect>'+grid+'<line x1="'+L+'" y1="'+T+'" x2="'+L+'" y2="'+(H-B)+'" stroke="#8FA0A6"></line><line x1="'+L+'" y1="'+(H-B)+'" x2="'+(W-R)+'" y2="'+(H-B)+'" stroke="#8FA0A6"></line>'+yl+xl+'<path d="'+svgLinePath(prevValue,xAt,yAt)+'" fill="none" stroke="#C6B2B0" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="'+svgLinePath(currValue,xAt,yAt)+'" fill="none" stroke="#A10716" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>'+points(prevValue,prevCases,prevValue,g.prevYear,'#C6B2B0')+points(currValue,currCases,currValue,g.currYear,'#A10716')+'</svg>';
+}
+function customerWiseRunDownValue(g){
+  function num(v){if(v===null||v===undefined)return'';if(Math.abs(v)<0.0000001)return'0';return nf0.format(Math.round(v));}
+  var startM=state.m1,selectedEnd=(g.currYear===YEARS[NY-1])?Math.min(state.m2,LASTM):state.m2;
+  function currentActive(m){if(m<startM||m>selectedEnd)return false;if(g.currYear===YEARS[NY-1]&&m>LASTM)return false;return true;}
+  function historicalActive(m){return CUSTWISE_RUNDOWN_FULL_YEAR||currentActive(m);}
+  function displayVal(arr,m,isHistorical){if(isHistorical){if(!historicalActive(m))return null;}else if(!currentActive(m))return null;var v=arr[m];return(v===null||v===undefined)?null:v;}
+  function totalFor(arr,isHistorical){var t=0;for(var m=0;m<12;m++){var v=displayVal(arr,m,isHistorical);if(v!==null)t+=v||0;}return t;}
+  var total24=g.has2024?totalFor(g.value2024,true):0,prevTotal=totalFor(g.prevValue,true),currTotal=totalFor(g.currValue,false);
+  var prevSame=0,currSame=0;for(var m=startM;m<=selectedEnd;m++){if(!currentActive(m))continue;var cv=g.currValue[m],pv=g.prevValue[m];if(cv!==null&&cv!==undefined)currSame+=cv||0;if(pv!==null&&pv!==undefined)prevSame+=pv||0;}
+  var d='<div class="d-only"><table class="imtbl"><thead><tr class="cap"><th colspan="14">MONTHLY RUN DOWN — SALES IN VALUE</th></tr><tr><th></th>';
+  for(var m=0;m<12;m++)d+='<th>'+MONTHS[m]+'</th>';d+='<th class="tot">Total</th></tr></thead><tbody>';
+  if(g.has2024){d+='<tr><th>'+g.year2024+'</th>';for(var m=0;m<12;m++){var v24=displayVal(g.value2024,m,true);d+=(v24===null)?'<td class="off"></td>':'<td>'+num(v24)+'</td>';}d+='<td class="tot">'+num(total24)+'</td></tr>';}
+  d+='<tr><th>'+g.prevYear+'</th>';for(var m=0;m<12;m++){var pv=displayVal(g.prevValue,m,true);d+=(pv===null)?'<td class="off"></td>':'<td>'+num(pv)+'</td>';}d+='<td class="tot">'+num(prevTotal)+'</td></tr>';
+  d+='<tr><th>'+g.currYear+' YTD</th>';for(var m=0;m<12;m++){var cv=displayVal(g.currValue,m,false);d+=(cv===null)?'<td class="off"></td>':'<td>'+num(cv)+'</td>';}d+='<td class="tot">'+num(currTotal)+'</td></tr>';
+  d+='<tr class="imvs"><th>% Vs '+String(g.prevYear).slice(-2)+'</th>';for(var m=0;m<12;m++){if(!currentActive(m)||g.currValue[m]===null||g.currValue[m]===undefined)d+='<td class="off"></td>';else{var mp=custWisePct(g.prevValue[m]||0,g.currValue[m]||0);d+='<td class="vsly '+mp.cls+'" title="'+esc(custWiseDeltaTitle(g.prevValue[m]||0,g.currValue[m]||0,true))+'">'+mp.text+'</td>';}}var tp=custWisePct(prevSame,currSame);d+='<td class="tot vsly '+tp.cls+'" title="'+esc(custWiseDeltaTitle(prevSame,currSame,true))+'">'+tp.text+'</td></tr></tbody></table></div>';
+  var mob='<div class="m-only"><table class="imtbl imtblv"><thead><tr class="cap"><th colspan="'+(g.has2024?5:4)+'">MONTHLY RUN DOWN — SALES IN VALUE</th></tr><tr><th>Month</th>'+(g.has2024?'<th>'+g.year2024+'</th>':'')+'<th>'+g.prevYear+'</th><th>'+g.currYear+' YTD</th><th>% Vs '+String(g.prevYear).slice(-2)+'</th></tr></thead><tbody>';
+  for(var m=0;m<12;m++){var mv24=g.has2024?displayVal(g.value2024,m,true):null,mprev=displayVal(g.prevValue,m,true),mcurr=displayVal(g.currValue,m,false);mob+='<tr><th>'+MONTHS[m]+'</th>'+(g.has2024?(mv24===null?'<td class="off"></td>':'<td class="n">'+num(mv24)+'</td>'):'')+(mprev===null?'<td class="off"></td>':'<td class="n">'+num(mprev)+'</td>');if(mcurr===null)mob+='<td class="off"></td><td class="off"></td>';else{var mpc=custWisePct(g.prevValue[m]||0,g.currValue[m]||0);mob+='<td class="n">'+num(mcurr)+'</td><td class="n vsly '+mpc.cls+'" title="'+esc(custWiseDeltaTitle(g.prevValue[m]||0,g.currValue[m]||0,true))+'">'+mpc.text+'</td>';}mob+='</tr>';}
+  var mtp=custWisePct(prevSame,currSame);mob+='<tr class="imvs"><th>Total</th>'+(g.has2024?'<td class="n">'+num(total24)+'</td>':'')+'<td class="n">'+num(prevTotal)+'</td><td class="n">'+num(currTotal)+'</td><td class="n vsly '+mtp.cls+'" title="'+esc(custWiseDeltaTitle(prevSame,currSame,true))+'">'+mtp.text+'</td></tr></tbody></table></div>';
+  return d+mob;
+}
+function customerWisePromoValue(g){
+  function num(v){if(v===null||v===undefined)return'';if(Math.abs(v)<0.0000001)return'0';return nf0.format(Math.round(v));}
+  function intensity(reg,prom){if(reg===null||prom===null)return'';var den=(reg||0)+(prom||0);if(Math.abs(den)<0.0000001)return'0.00%';return nf2.format((prom||0)/den*100)+'%';}
+  var startM=state.m1,selectedEnd=(state.yrB===YEARS[NY-1])?Math.min(state.m2,LASTM):state.m2;
+  function isActive(year,m){if(year===g.currYear){if(m<startM||m>selectedEnd)return false;if(year===YEARS[NY-1]&&m>LASTM)return false;return true;}if(year===g.prevYear){if(CUSTWISE_PROMO_FULL_YEAR)return true;return m>=startM&&m<=selectedEnd;}return true;}
+  function desktopYear(year,reg,promo,isCurrent){var regTot=0,proTot=0,grand=0;var h='<table class="imtbl"><thead><tr class="cap"><th colspan="14">PROMO SPLIT — SALES IN VALUE — '+year+(isCurrent?' YTD':'')+'</th></tr><tr><th></th>';for(var m=0;m<12;m++)h+='<th>'+MONTHS[m]+'</th>';h+='<th class="tot">Total</th></tr></thead><tbody>';
+    h+='<tr><th>Total</th>';for(var m=0;m<12;m++){if(!isActive(year,m)||reg[m]===null||promo[m]===null){h+='<td class="off"></td>';continue;}var tv=(reg[m]||0)+(promo[m]||0);grand+=tv;h+='<td>'+num(tv)+'</td>';}h+='<td class="tot">'+num(grand)+'</td></tr>';
+    h+='<tr><th>Regular</th>';for(var m=0;m<12;m++){if(!isActive(year,m)||reg[m]===null){h+='<td class="off"></td>';continue;}regTot+=reg[m]||0;h+='<td>'+num(reg[m]||0)+'</td>';}h+='<td class="tot">'+num(regTot)+'</td></tr>';
+    h+='<tr><th>Promotion</th>';for(var m=0;m<12;m++){if(!isActive(year,m)||promo[m]===null){h+='<td class="off"></td>';continue;}proTot+=promo[m]||0;h+='<td>'+num(promo[m]||0)+'</td>';}h+='<td class="tot">'+num(proTot)+'</td></tr>';
+    h+='<tr class="imvs"><th>Promo %</th>';for(var m=0;m<12;m++){if(!isActive(year,m)||reg[m]===null||promo[m]===null){h+='<td class="off"></td>';continue;}h+='<td>'+intensity(reg[m]||0,promo[m]||0)+'</td>';}h+='<td class="tot">'+intensity(regTot,proTot)+'</td></tr></tbody></table>';return h;}
+  function mobileYear(year,reg,promo,isCurrent){var regTot=0,proTot=0,grand=0;var h='<table class="imtbl imtblv"><thead><tr class="cap"><th colspan="5">PROMO SPLIT — VALUE — '+year+(isCurrent?' YTD':'')+'</th></tr><tr><th>Month</th><th>Total</th><th>Regular</th><th>Promo</th><th>Promo %</th></tr></thead><tbody>';for(var m=0;m<12;m++){h+='<tr><th>'+MONTHS[m]+'</th>';if(!isActive(year,m)||reg[m]===null||promo[m]===null){h+='<td class="off"></td><td class="off"></td><td class="off"></td><td class="off"></td></tr>';continue;}var rv=reg[m]||0,pv=promo[m]||0,tv=rv+pv;regTot+=rv;proTot+=pv;grand+=tv;h+='<td class="n">'+num(tv)+'</td><td class="n">'+num(rv)+'</td><td class="n">'+num(pv)+'</td><td class="n">'+intensity(rv,pv)+'</td></tr>';}h+='<tr class="imvs"><th>Total</th><td class="n">'+num(grand)+'</td><td class="n">'+num(regTot)+'</td><td class="n">'+num(proTot)+'</td><td class="n">'+intensity(regTot,proTot)+'</td></tr></tbody></table>';return h;}
+  return '<div class="d-only">'+desktopYear(g.prevYear,g.prevReg,g.prevPromo,false)+desktopYear(g.currYear,g.currReg,g.currPromo,true)+'</div><div class="m-only">'+mobileYear(g.prevYear,g.prevReg,g.prevPromo,false)+mobileYear(g.currYear,g.currReg,g.currPromo,true)+'</div>';
+}
+function customerWiseCategoryValue(key,g,siteKey){
+  var prevRows={},currRows={},prevTotals=new Array(12).fill(0),currTotals=new Array(12);
+  CATWISE_BASE.forEach(function(c){prevRows[c]=new Array(12).fill(0);currRows[c]=new Array(12);for(var m=0;m<12;m++)currRows[c][m]=(g.currValue[m]===null)?null:0;});
+  for(var m=0;m<12;m++)currTotals[m]=(g.currValue[m]===null)?null:0;
+  var ip=yIdx(g.prevYear),ic=yIdx(g.currYear);
+  if(F&&ip>=0&&ic>=0){var fs=F.s,fi=F.i,fp=F.p,fv=F.v,fd=F.d,N=fs.length;for(var k=0;k<N;k++){var s=fs[k],i=fi[k];if(!mask[s])continue;if(!factCounted(fd[k],i))continue;if(state.cat.size&&!state.cat.has(catOf[i]))continue;if(!customerWiseScopeMatch(s,key,siteKey))continue;if(isOther(i))continue;var isPromoItem=(ITEMS[i][3]==='Promotion');if(CUSTWISE_CATEGORY_SALES_TYPE==='promo'&&!isPromoItem)continue;if(CUSTWISE_CATEGORY_SALES_TYPE==='regular'&&isPromoItem)continue;var alloc=categoryWiseAlloc(ITEMS[i][2]);if(!alloc.length)continue;var p=fp[k],yi=(p/12)|0,m=p%12,val=fv[k]||0;if(yi===ip){for(var a=0;a<alloc.length;a++)prevRows[alloc[a][0]][m]+=val*alloc[a][1];}else if(yi===ic&&currTotals[m]!==null){for(var a=0;a<alloc.length;a++)currRows[alloc[a][0]][m]+=val*alloc[a][1];}}}
+  CATWISE_BASE.forEach(function(c){for(var m=0;m<12;m++){prevTotals[m]+=prevRows[c][m]||0;if(currTotals[m]!==null)currTotals[m]+=(currRows[c][m]||0);}});
+  function num(v){if(v===null||v===undefined)return'';if(Math.abs(v)<0.0000001)return'0';return nf0.format(Math.round(v));}
+  var activeMonths=[];for(var m=0;m<12;m++)if(currTotals[m]!==null)activeMonths.push(m);
+  var currGrand=0,prevSameGrand=0;activeMonths.forEach(function(m){currGrand+=currTotals[m]||0;prevSameGrand+=prevTotals[m]||0;});
+  var h='<div class="ovcatwrap"><table class="imtbl"><thead><tr class="cap"><th colspan="'+(activeMonths.length+4)+'">CATEGORY WISE — SALES IN VALUE — '+g.currYear+' YTD</th></tr><tr><th>Category</th>';activeMonths.forEach(function(m){h+='<th>'+MONTHS[m]+'</th>';});h+='<th class="tot">Total</th><th>Cont</th><th>Vs LY</th></tr></thead><tbody>';
+  CATWISE_BASE.forEach(function(c){var ct=0,pt=0;h+='<tr><th><button class="cwcatlink" type="button" data-cwcat="'+encodeURIComponent(c)+'" data-cwkey="'+key+'" data-cwsitekey="'+encodeURIComponent(siteKey||'')+'" title="View items sold in '+g.prevYear+' vs '+g.currYear+'">'+esc(c)+'</button></th>';activeMonths.forEach(function(m){var cv=currRows[c][m]||0,pv=prevRows[c][m]||0;ct+=cv;pt+=pv;h+='<td>'+num(cv)+arrowLYCW(pv,cv)+'</td>';});var cont=currGrand?ct/currGrand*100:0,prevCont=prevSameGrand?pt/prevSameGrand*100:0,cp=custWisePct(pt,ct);h+='<td class="tot">'+num(ct)+arrowLYCW(pt,ct)+'</td><td class="cont" title="LY Cont: '+nf2.format(prevCont)+'%">'+nf2.format(cont)+'%'+arrowLYCW(prevCont,cont)+'</td><td class="vsly '+cp.cls+'" title="'+esc(custWiseDeltaTitle(pt,ct,true))+'">'+cp.text+'</td></tr>';});
+  h+='<tr class="imvs"><th>Total</th>';activeMonths.forEach(function(m){h+='<td>'+num(currTotals[m])+arrowLYCW(prevTotals[m]||0,currTotals[m]||0)+'</td>';});var tcp=custWisePct(prevSameGrand,currGrand);h+='<td class="tot">'+num(currGrand)+arrowLYCW(prevSameGrand,currGrand)+'</td><td class="cont" title="LY Cont: 100.00%">100.00%</td><td class="vsly '+tcp.cls+'" title="'+esc(custWiseDeltaTitle(prevSameGrand,currGrand,true))+'">'+tcp.text+'</td></tr></tbody></table></div>';return h;
+}
+function customerWiseCategoryItemRows(key,siteKey,category){
+  aggregate();var y25=2025,y26=2026,i25=yIdx(y25),i26=yIdx(y26);if(i25<0)y25=state.yrA,i25=yIdx(y25);if(i26<0)y26=state.yrB,i26=yIdx(y26);var endM=(y26===YEARS[NY-1])?LASTM:11,byItem={};
+  if(F&&i25>=0&&i26>=0){var fs=F.s,fi=F.i,fp=F.p,fv=F.v,fq=F.q,fd=F.d,N=fs.length;for(var k=0;k<N;k++){var s=fs[k],i=fi[k];if(!mask[s])continue;if(!factCounted(fd[k],i))continue;if(state.cat.size&&!state.cat.has(catOf[i]))continue;if(!customerWiseScopeMatch(s,key,siteKey))continue;if(isOther(i))continue;var isPromoItem=(ITEMS[i][3]==='Promotion');if(CUSTWISE_CATEGORY_SALES_TYPE==='promo'&&!isPromoItem)continue;if(CUSTWISE_CATEGORY_SALES_TYPE==='regular'&&isPromoItem)continue;var alloc=categoryWiseAlloc(ITEMS[i][2]),weight=0;for(var a=0;a<alloc.length;a++){if(alloc[a][0]===category){weight=alloc[a][1];break;}}if(!weight)continue;var p=fp[k],yi=(p/12)|0,m=p%12;if(m>endM||(yi!==i25&&yi!==i26))continue;var r=byItem[i];if(!r){var it=ITEMS[i];r=byItem[i]={i:i,code:it[0],desc:it[1],type:it[3]==='Promotion'?'Promo':'Regular',v25:0,v26:0,q25:0,q26:0};}if(yi===i25){r.v25+=(fv[k]||0)*weight;r.q25+=(fq[k]||0)*weight;}else{r.v26+=(fv[k]||0)*weight;r.q26+=(fq[k]||0)*weight;}}}
+  var rows=Object.keys(byItem).map(function(k){return byItem[k];});rows.sort(function(a,b){return b.v26-a.v26||b.v25-a.v25||String(a.desc).localeCompare(String(b.desc));});return {rows:rows,year25:y25,year26:y26,endM:endM};
+}
+function customerWiseCategoryItemsCsv(){
+  if(!CUSTWISE_CAT_EXPORT||!CUSTWISE_CAT_EXPORT.rows.length)return;var d=CUSTWISE_CAT_EXPORT,y25=String(d.year25).slice(-2)+"'",y26=String(d.year26).slice(-2)+"'";var head=['Item Code','Item Desc','Sales Type',y26+' Value ('+currencyLabel()+')',y25+' Value ('+currencyLabel()+')','Value Change %',y26+' Cases',y25+' Cases'],lines=[head.join(',')];d.rows.forEach(function(r){var chg=(Math.abs(r.v25)<0.0000001)?(Math.abs(r.v26)<0.0000001?0:''):((r.v26-r.v25)/Math.abs(r.v25)*100);lines.push([r.code,'"'+String(r.desc).replace(/"/g,'""')+'"',r.type,r.v26.toFixed(2),r.v25.toFixed(2),chg===''?'':chg.toFixed(1),r.q26.toFixed(2),r.q25.toFixed(2)].join(','));});var blob=new Blob([lines.join('\n')],{type:'text/csv;charset=utf-8;'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=('Delicio Qatar '+areaLabel(d.key)+' '+(d.siteName?d.siteName+' ':'')+d.category+' items '+d.year25+' vs '+d.year26+'.csv').replace(/[\\/:*?"<>|]/g,'-');a.click();URL.revokeObjectURL(a.href);
+}
+function openCustomerWiseCategoryItems(key,siteKey,category){
+  var d=customerWiseCategoryItemRows(key,siteKey,category),isSite=!!siteKey,siteName='';if(isSite){var info=customerWiseSiteLatestInfo(key,siteKey);if(info.rep>=0&&SITES[info.rep])siteName=SITES[info.rep][1];}
+  CUSTWISE_NAV={type:'category',key:key,siteKey:siteKey||null,category:category};CUSTWISE_CAT_EXPORT={rows:d.rows,year25:d.year25,year26:d.year26,key:key,siteKey:siteKey||null,siteName:siteName,category:category};
+  document.getElementById('imTitle').innerHTML=esc(category)+' <span class="code">Items</span>';document.getElementById('imSub').textContent=(isSite?siteName+' · '+areaLabel(key):areaLabel(key))+' · '+depLabel()+' · Jan–'+MONTHS[d.endM]+' '+d.year25+' vs '+d.year26;
+  var t25=String(d.year25).slice(-2)+"'",t26=String(d.year26).slice(-2)+"'",tv25=0,tv26=0,tq25=0,tq26=0;
+  var h='<div class="cwitemtools"><button class="btn ghost" id="cwCatCsv" type="button">Export CSV</button></div><div class="cwitemwrap"><table class="cwitemtbl"><colgroup><col class="code"><col class="desc"><col class="type"><col class="val"><col class="val"><col class="chg"><col class="cases"><col class="cases"></colgroup><thead><tr><th>Item Code</th><th>Item Desc</th><th>Sales Type</th><th class="n">'+t26+' Value</th><th class="n">'+t25+' Value</th><th class="n">Change %</th><th class="n">'+t26+' Cases</th><th class="n">'+t25+' Cases</th></tr></thead><tbody>';
+  if(!d.rows.length)h+='<tr><td colspan="8">No item sales found for this category and Cust Group selection.</td></tr>';else d.rows.forEach(function(r){tv25+=r.v25;tv26+=r.v26;tq25+=r.q25;tq26+=r.q26;var cp=custWisePct(r.v25,r.v26);h+='<tr><td>'+esc(String(r.code))+'</td><td class="desc">'+esc(r.desc)+'</td><td class="type">'+esc(r.type)+'</td><td class="n">'+nf0.format(Math.round(r.v26))+'</td><td class="n">'+nf0.format(Math.round(r.v25))+'</td><td class="n chg '+cp.cls+'" title="'+esc(custWiseValueCasesDeltaTitle(r.v25,r.v26,r.q25,r.q26))+'">'+cp.text+'</td><td class="n">'+nf2.format(r.q26)+'</td><td class="n">'+nf2.format(r.q25)+'</td></tr>';});
+  var tcp=custWisePct(tv25,tv26);h+='</tbody><tfoot><tr><th colspan="3">Total</th><td class="n">'+nf0.format(Math.round(tv26))+'</td><td class="n">'+nf0.format(Math.round(tv25))+'</td><td class="n chg '+tcp.cls+'" title="'+esc(custWiseValueCasesDeltaTitle(tv25,tv26,tq25,tq26))+'">'+tcp.text+'</td><td class="n">'+nf2.format(tq26)+'</td><td class="n">'+nf2.format(tq25)+'</td></tr></tfoot></table></div><div class="imnote">Items are grouped by item code and sorted by '+d.year26+' sales value. Cross-category promotional packs use the same allocation as the Category Wise table, so the totals reconcile to the clicked category.</div>';
+  document.getElementById('imBody').innerHTML=h;document.body.classList.add('imopen');document.getElementById('imWrap').scrollTop=0;
+}
+function customerWiseSiteData(key){
+  aggregate();var currYi=yIdx(state.yrB),prevYi=yIdx(state.yrA),startM=state.m1,endM=(state.yrB===YEARS[NY-1])?Math.min(state.m2,LASTM):state.m2,byCode={};
+  if(F&&currYi>=0){var fs=F.s,fi=F.i,fp=F.p,fv=F.v,fq=F.q,fd=F.d,N=fs.length;for(var k=0;k<N;k++){var s=fs[k],i=fi[k];if(!mask[s])continue;if(custWiseGroupForSite(s)!==key)continue;if(!factCounted(fd[k],i))continue;if(state.cat.size&&!state.cat.has(catOf[i]))continue;var siteKey=custWiseSiteCodeKey(s);if(!siteKey)siteKey='__SITE_'+s;var r=byCode[siteKey];if(!r)r=byCode[siteKey]={siteKey:siteKey,rep:s,latestP:-1,curr:new Array(12).fill(0),prev:new Array(12).fill(0),total:0,prevTotal:0,currentYearActive:false,priorYearActive:false,cont:0,isNew:false,isLost:false};if(fp[k]>r.latestP||(fp[k]===r.latestP&&s>=r.rep)){r.latestP=fp[k];r.rep=s;}var p=fp[k],yi=(p/12)|0,m=p%12,billed=(fq[k]>0||fv[k]>0);if(yi===currYi){if(billed)r.currentYearActive=true;if(state.yrB===YEARS[NY-1]&&m>LASTM)continue;r.curr[m]+=fv[k];}else if(yi===prevYi){if(billed)r.priorYearActive=true;r.prev[m]+=fv[k];}}}
+  var rows=Object.keys(byCode).map(function(k){return byCode[k];}).filter(function(r){return r.currentYearActive;});rows.forEach(function(r){for(var m=startM;m<=endM;m++){r.total+=r.curr[m]||0;r.prevTotal+=r.prev[m]||0;}r.isNew=(r.currentYearActive&&!r.priorYearActive);r.isLost=(r.currentYearActive&&r.prevTotal>0&&r.total<=0);});rows.sort(function(a,b){var an=(SITES[a.rep]&&SITES[a.rep][1])||'',bn=(SITES[b.rep]&&SITES[b.rep][1])||'';return b.total-a.total||b.prevTotal-a.prevTotal||an.localeCompare(bn);});var grandTotal=rows.reduce(function(a,r){return a+(r.total||0);},0),prevGrandTotal=rows.reduce(function(a,r){return a+(r.prevTotal||0);},0);rows.forEach(function(r){r.cont=grandTotal?(r.total/grandTotal*100):0;r.prevCont=prevGrandTotal?(r.prevTotal/prevGrandTotal*100):0;});return{rows:rows,startM:startM,endM:endM,grandTotal:grandTotal,prevGrandTotal:prevGrandTotal};
+}
+function customerWiseSiteList(key){
+  var d=customerWiseSiteData(key),months=[];for(var m=d.startM;m<=d.endM;m++)months.push(m);function num(v){if(Math.abs(v)<0.0000001)return'0';return nf0.format(Math.round(v));}
+  var h='<div class="cwsitewrap"><table class="ovcusttbl"><thead><tr class="cap"><th colspan="'+(months.length+4)+'">CUSTOMER SITES — SALES IN VALUE ('+state.yrB+(state.yrB===YEARS[NY-1]?' YTD':'')+')</th></tr><tr><th>Customer Site</th>';months.forEach(function(m){h+='<th>'+MONTHS[m]+'</th>';});h+='<th>Total</th><th>Cont</th><th>Vs LY</th></tr></thead><tbody>';
+  if(!d.rows.length)h+='<tr><th colspan="'+(months.length+4)+'">No active customer sites in '+state.yrB+' for the current selection.</th></tr>';else d.rows.forEach(function(r){var pct=custWisePct(r.prevTotal,r.total),site=SITES[r.rep]||[],siteName=site[1]||'Unnamed customer site',flags='';if(r.isNew)flags+='<span class="cwsiteflag new">NEW</span>';if(r.isLost)flags+='<span class="cwsiteflag lost">LOST</span>';h+='<tr><th><button class="cwlink cwsitelink" type="button" data-cwsitekey="'+encodeURIComponent(r.siteKey)+'" data-cwkey="'+key+'" title="Open customer-site details">'+esc(siteName)+'</button>'+flags+'</th>';months.forEach(function(m){var cv=r.curr[m]||0,pv=r.prev[m]||0;h+='<td>'+num(cv)+arrowLYCW(pv,cv)+'</td>';});h+='<td class="tot">'+num(r.total)+arrowLYCW(r.prevTotal,r.total)+'</td><td class="cont" title="LY Cont: '+nf2.format(r.prevCont||0)+'%">'+nf2.format(r.cont||0)+'%'+arrowLYCW(r.prevCont||0,r.cont||0)+'</td><td class="vsly '+pct.cls+'" title="'+esc(custWiseDeltaTitle(r.prevTotal,r.total,true))+'">'+pct.text+'</td></tr>';});
+  h+='</tbody></table></div><div class="ovcustnote">Only customer sites with active positive selling in '+state.yrB+' are shown. NEW indicates a site active this year with no LY activity; LOST flags an active-year site that has dropped to zero in the selected period versus LY. Qatar has no Customer Site Code, so each unique Customer Site Name is treated as the site identity.</div>';return h;
+}
+function openCustomerWiseDetail(key,siteKey){
+  var isSite=(siteKey!==null&&siteKey!==undefined);CUSTWISE_NAV={type:isSite?'site':'customer',key:key,siteKey:isSite?siteKey:null,category:null};CUSTWISE_CAT_EXPORT=null;var g=customerWiseGraphSeries(key,isSite?siteKey:null);var groupName=areaLabel(key)||'Cust Group';var titleText,refText,subScope;var detailGraphSalesTypeLabel=CUSTWISE_DETAIL_GRAPH_SALES_TYPE==='regular'?'Regular':(CUSTWISE_DETAIL_GRAPH_SALES_TYPE==='promo'?'Promo':'All');
+  if(isSite){var info=customerWiseSiteLatestInfo(key,siteKey),site=(info.rep>=0?SITES[info.rep]:null);titleText=site?site[1]:'Customer Site';refText=site?site[0]:groupName;subScope='Cust Group: '+groupName+(site&&site[3]?' · '+site[3]:'');document.getElementById('imTitle').textContent=titleText;document.getElementById('imSub').textContent=refText+' · '+subScope+' · '+depLabel();}
+  else {document.getElementById('imTitle').innerHTML=esc(groupName)+' <span class="code">Customer Wise</span>';document.getElementById('imSub').textContent='Cust Group: '+groupName+' · '+depLabel()+' · '+scopeNames();}
+  document.getElementById('imBody').innerHTML=
+    '<div class="imchart"><div class="ovmetricgroups"><div class="cwsalestypebox"><select id="cwDetailGraphSalesType" aria-label="Customer Detail Graph Sales Type" title="Sales Type"><option value="all"'+(CUSTWISE_DETAIL_GRAPH_SALES_TYPE==='all'?' selected':'')+'>All</option><option value="promo"'+(CUSTWISE_DETAIL_GRAPH_SALES_TYPE==='promo'?' selected':'')+'>Promo</option><option value="regular"'+(CUSTWISE_DETAIL_GRAPH_SALES_TYPE==='regular'?' selected':'')+'>Regular</option></select></div></div><div class="cht">Sales Value ('+currencyLabel()+') · '+g.prevYear+' full year vs '+g.currYear+' YTD</div><div class="chs">'+(isSite?'Customer Site: ':'Cust Group: ')+esc(isSite?titleText:groupName)+' · '+detailGraphSalesTypeLabel+'</div>'+customerWiseGraphSvg(g)+'<div class="chlegend"><span class="lg"><span class="sw prev"></span>'+g.prevYear+'</span><span class="lg"><span class="sw curr"></span>'+g.currYear+' YTD</span></div><div class="chnote">The graph is always based on sales value. Hover around any monthly dot to see both Cases and exact '+currencyLabel()+' sales value. '+(isSite?'This view is restricted to the selected Customer Site Name.':'The graph follows the current Cust Group, Customer, Customer Site and Category scope.')+'</div><div class="imtip" id="imTip"></div></div>'+ 
+    '<div class="cwdetailsec"><div class="cwdetailhead"><div class="cwdetailtitle">Monthly run down</div><div class="ovmetricbar catmetric promo-yearbox"><button class="ovmetricbtn '+(CUSTWISE_RUNDOWN_FULL_YEAR?'on':'')+'" type="button" data-cw-rundown-full="1">Full Yr</button></div></div><div class="cwdetailsub">Sales value only · By default all years follow the selected period. Full Yr expands '+(g.has2024?g.year2024+' and ':'')+g.prevYear+' to Jan–Dec; '+g.currYear+' remains on the selected period / YTD.</div>'+customerWiseRunDownValue(g)+'</div>'+ 
+    '<div class="cwdetailsec"><div class="cwdetailhead"><div class="cwdetailtitle">Promo split</div><div class="ovmetricbar catmetric promo-yearbox"><button class="ovmetricbtn '+(CUSTWISE_PROMO_FULL_YEAR?'on':'')+'" type="button" data-cw-promo-full="1">Full Yr</button></div></div><div class="cwdetailsub">Value only · Regular vs Promotion. By default, '+g.prevYear+' follows the selected '+g.currYear+' period. Full Yr expands '+g.prevYear+' to Jan–Dec.</div>'+customerWisePromoValue(g)+'</div>'+ 
+    '<div class="cwdetailsec"><div class="cwdetailhead"><div class="cwdetailtitle">Category Wise</div><div class="cwsalestypebox"><select id="cwCategorySalesType" aria-label="Customer Wise Category Sales Type" title="Sales Type"><option value="all"'+(CUSTWISE_CATEGORY_SALES_TYPE==='all'?' selected':'')+'>All</option><option value="promo"'+(CUSTWISE_CATEGORY_SALES_TYPE==='promo'?' selected':'')+'>Promo</option><option value="regular"'+(CUSTWISE_CATEGORY_SALES_TYPE==='regular'?' selected':'')+'>Regular</option></select></div></div><div class="cwdetailsub">Sales value only · '+(CUSTWISE_CATEGORY_SALES_TYPE==='regular'?'Regular':(CUSTWISE_CATEGORY_SALES_TYPE==='promo'?'Promo':'All'))+' · '+g.currYear+' YTD with same-period comparison vs '+g.prevYear+'</div>'+customerWiseCategoryValue(key,g,isSite?siteKey:null)+'</div>'+ 
+    (!isSite?'<div class="cwdetailsec"><div class="cwdetailtitle">Customer Sites</div><div class="cwdetailsub">Sales value · selected period · click a site for site-level details</div>'+customerWiseSiteList(key)+'</div>':'');
+  document.body.classList.add('imopen');document.getElementById('imWrap').scrollTop=0;
+}
+function openCustomerWiseGraph(key){CUSTWISE_BACK_STACK=[];CUSTWISE_NAV=null;CUSTWISE_PROMO_FULL_YEAR=false;CUSTWISE_RUNDOWN_FULL_YEAR=false;openCustomerWiseDetail(key,null);}
+function openCustomerSiteGraph(key,siteKey){custWisePushCurrent();openCustomerWiseDetail(key,siteKey);}
+
+
 function renderVisitValueChart(){
   var box = document.getElementById('visitValueChart');
   if (!box) return;
   box.innerHTML = VISIT_VALUE_VIEW === 'rundown' ? visitValueRundown() :
                   (VISIT_VALUE_VIEW === 'category' ? visitCategoryWise() :
-                  (VISIT_VALUE_VIEW === 'promo' ? visitPromoPercentage() : visitValueChart()));
+                  (VISIT_VALUE_VIEW === 'customer' ? visitCustomerWise() :
+                  (VISIT_VALUE_VIEW === 'promo' ? visitPromoPercentage() : visitValueChart())));
 }
 
 (function wireVisitValueChart(){
@@ -5040,6 +5686,12 @@ function renderVisitValueChart(){
       return;
     }
 
+    var cw = e.target.closest('[data-cw-area]');
+    if (cw){
+      openCustomerWiseGraph(+cw.dataset.cwArea);
+      return;
+    }
+
     var mb = e.target.closest('.ovmetricbtn');
     if (mb){
       VISIT_CAT_METRIC = mb.dataset.metric === 'value' ? 'value' : 'cases';
@@ -5048,14 +5700,26 @@ function renderVisitValueChart(){
     }
     var b = e.target.closest('.ovviewbtn');
     if (!b) return;
-    VISIT_VALUE_VIEW = (b.dataset.view === 'rundown' || b.dataset.view === 'category' || b.dataset.view === 'promo') ? b.dataset.view : 'chart';
+    VISIT_VALUE_VIEW = (b.dataset.view === 'rundown' || b.dataset.view === 'category' || b.dataset.view === 'customer' || b.dataset.view === 'promo') ? b.dataset.view : 'chart';
     renderVisitValueChart();
   });
 
   box.addEventListener('change', function(e){
+    if (e.target && e.target.id === 'cwSalesType'){
+      var wv = e.target.value;
+      CUSTWISE_SALES_TYPE = (wv === 'regular' || wv === 'promo') ? wv : 'all';
+      renderVisitValueChart();
+      return;
+    }
     if (e.target && e.target.id === 'catSalesType'){
       var cv = e.target.value;
       CATWISE_SALES_TYPE = (cv === 'regular' || cv === 'promo') ? cv : 'all';
+      renderVisitValueChart();
+      return;
+    }
+    if (e.target && e.target.id === 'graphSalesType'){
+      var gv = e.target.value;
+      GRAPH_SALES_TYPE = (gv === 'regular' || gv === 'promo') ? gv : 'all';
       renderVisitValueChart();
       return;
     }
@@ -5070,7 +5734,7 @@ function renderVisitValueChart(){
       return;
     }
     tip.innerHTML = MONTHS[+p.dataset.month] + ' ' + p.dataset.year +
-      '<b>QAR ' + nf0.format(+p.dataset.value) + '</b>';
+      '<b>'+currencyLabel()+' ' + nf0.format(+p.dataset.value) + '</b>';
     var r = box.getBoundingClientRect();
     var left = e.clientX - r.left + 12;
     var top = e.clientY - r.top - 48;
@@ -5098,11 +5762,11 @@ function openItem(i){
     itemCasesChart(i) +
     '<div class="d-only">' +
       yearTable(i, A.mq, 'Sales in Volume (cases)', false) +
-      yearTable(i, A.mv, 'Sales in Value', true) +
+      yearTable(i, A.mv, 'Sales in Value ('+currencyLabel()+')', true) +
     '</div>' +
     '<div class="m-only">' +
       yearTableV(i, A.mq, 'Sales in Volume (cases)', false) +
-      yearTableV(i, A.mv, 'Sales in Value', true) +
+      yearTableV(i, A.mv, 'Sales in Value ('+currencyLabel()+')', true) +
     '</div>' +
     '<div class="imnote">' + YEARS[NY-1] + ' runs to ' + MONTHS[LASTM] +
     ', so its total is year-to-date and the % row compares the same months of ' +
@@ -5132,7 +5796,7 @@ function monthSiteRows(i, yi, m, metric){
 function openMonthSites(i, yi, m, metric){
   var rows = monthSiteRows(i, yi, m, metric);
   var it = ITEMS[i], isValue = metric === 'value';
-  var metricTitle = isValue ? 'Sales in Value' : 'Sales in Volume (cases)';
+  var metricTitle = isValue ? 'Sales in Value ('+currencyLabel()+')' : 'Sales in Volume (cases)';
   var metricHead = isValue ? 'Value' : 'Cases';
   var total = rows.reduce(function(a,r){ return a + r.x; }, 0);
 
@@ -5174,6 +5838,16 @@ function openMonthCell(cell){
 
 function closeItem(){
   document.body.classList.remove('mdopen');
+  /* Inside Customer Wise, X / Escape behaves like Back until the root Cust Group
+     detail is reached, matching the Oman navigation logic. */
+  if (CUSTWISE_NAV){
+    if (custWiseBack()) return;
+    CUSTWISE_NAV=null;
+    CUSTWISE_BACK_STACK=[];
+    CUSTWISE_CAT_EXPORT=null;
+    CUSTWISE_PROMO_FULL_YEAR=false;
+    CUSTWISE_RUNDOWN_FULL_YEAR=false;
+  }
   document.body.classList.remove('imopen');
   document.body.classList.remove('immonthly');
 }
@@ -5194,6 +5868,61 @@ document.getElementById('imBody').addEventListener('keydown', function(e){
   if (!cell || (e.key !== 'Enter' && e.key !== ' ')) return;
   e.preventDefault();
   openMonthCell(cell);
+});
+
+
+/* Customer Wise popup interactions — mirrors Oman. */
+document.getElementById('imBody').addEventListener('click', function(e){
+  var rfull=e.target.closest('[data-cw-rundown-full]');
+  if(rfull){
+    CUSTWISE_RUNDOWN_FULL_YEAR=!CUSTWISE_RUNDOWN_FULL_YEAR;
+    if(CUSTWISE_NAV&&(CUSTWISE_NAV.type==='customer'||CUSTWISE_NAV.type==='site')){
+      var rst=(document.getElementById('imWrap')||{scrollTop:0}).scrollTop||0;
+      openCustomerWiseDetail(CUSTWISE_NAV.key,CUSTWISE_NAV.type==='site'?CUSTWISE_NAV.siteKey:null);
+      setTimeout(function(){var rw=document.getElementById('imWrap');if(rw)rw.scrollTop=rst;},0);
+    }
+    return;
+  }
+  var pfull=e.target.closest('[data-cw-promo-full]');
+  if(pfull){
+    CUSTWISE_PROMO_FULL_YEAR=!CUSTWISE_PROMO_FULL_YEAR;
+    if(CUSTWISE_NAV&&(CUSTWISE_NAV.type==='customer'||CUSTWISE_NAV.type==='site')){
+      var st=(document.getElementById('imWrap')||{scrollTop:0}).scrollTop||0;
+      openCustomerWiseDetail(CUSTWISE_NAV.key,CUSTWISE_NAV.type==='site'?CUSTWISE_NAV.siteKey:null);
+      setTimeout(function(){var w=document.getElementById('imWrap');if(w)w.scrollTop=st;},0);
+    }
+    return;
+  }
+  var csv=e.target.closest('#cwCatCsv');
+  if(csv){customerWiseCategoryItemsCsv();return;}
+  var cat=e.target.closest('.cwcatlink');
+  if(cat){
+    var ckey=+cat.dataset.cwkey,csite=decodeURIComponent(cat.dataset.cwsitekey||''),cname=decodeURIComponent(cat.dataset.cwcat||'');
+    if(!isNaN(ckey)&&cname){custWisePushCurrent();openCustomerWiseCategoryItems(ckey,csite||null,cname);}return;
+  }
+  var b=e.target.closest('.cwsitelink');
+  if(!b)return;
+  var siteKey=decodeURIComponent(b.dataset.cwsitekey||''),key=+b.dataset.cwkey;
+  if(siteKey&&!isNaN(key))openCustomerSiteGraph(key,siteKey);
+});
+document.getElementById('imBody').addEventListener('change', function(e){
+  if(e.target&&e.target.id==='cwDetailGraphSalesType'){
+    var v=e.target.value;CUSTWISE_DETAIL_GRAPH_SALES_TYPE=(v==='regular'||v==='promo')?v:'all';
+    if(CUSTWISE_NAV&&(CUSTWISE_NAV.type==='customer'||CUSTWISE_NAV.type==='site')){
+      var st=(document.getElementById('imWrap')||{scrollTop:0}).scrollTop||0;
+      openCustomerWiseDetail(CUSTWISE_NAV.key,CUSTWISE_NAV.type==='site'?CUSTWISE_NAV.siteKey:null);
+      setTimeout(function(){var w=document.getElementById('imWrap');if(w)w.scrollTop=st;},0);
+    }
+    return;
+  }
+  if(e.target&&e.target.id==='cwCategorySalesType'){
+    var cv=e.target.value;CUSTWISE_CATEGORY_SALES_TYPE=(cv==='regular'||cv==='promo')?cv:'all';
+    if(CUSTWISE_NAV&&(CUSTWISE_NAV.type==='customer'||CUSTWISE_NAV.type==='site')){
+      var st2=(document.getElementById('imWrap')||{scrollTop:0}).scrollTop||0;
+      openCustomerWiseDetail(CUSTWISE_NAV.key,CUSTWISE_NAV.type==='site'?CUSTWISE_NAV.siteKey:null);
+      setTimeout(function(){var w=document.getElementById('imWrap');if(w)w.scrollTop=st2;},0);
+    }
+  }
 });
 
 /* Item chart hover: use a larger invisible hit circle around every dot. */
@@ -5217,7 +5946,7 @@ document.getElementById('imBody').addEventListener('pointermove', function(e){
   tip.innerHTML =
     '<div class="imtmonth">' + month + ' ' + year + '</div>' +
     '<div class="imtmetric">Cases: ' + nf2.format(cases) + '</div>' +
-    '<div class="imtmetric">QAR: ' + nf0.format(Math.round(value)) + '</div>';
+    '<div class="imtmetric">'+currencyLabel()+': ' + nf0.format(Math.round(value)) + '</div>';
 
   var r = chart.getBoundingClientRect();
   var left = e.clientX - r.left + 12;
@@ -5367,13 +6096,14 @@ function buildAnalysisRows(){
 }
 
 var AN_CAP = 600, AN_PER_CUST = 12;
+var anCustOpen = {}; /* customer/group-level: show all suppressed gaps */
 function renderAnalysis(){
   if (!F) return;
   var A2 = analysisScan();
   anRows = buildAnalysisRows();
   /* the two value columns follow the Value / Volume switch */
-  document.getElementById('anYrA').textContent = state.yrA + (aIsVolume() ? ' QTY' : ' Value');
-  document.getElementById('anYrB').textContent = state.yrB + (aIsVolume() ? ' QTY' : ' Value');
+  document.getElementById('anYrA').textContent = state.yrA + (aIsVolume() ? ' QTY' : ' Value ('+currencyLabel()+')');
+  document.getElementById('anYrB').textContent = state.yrB + (aIsVolume() ? ' QTY' : ' Value ('+currencyLabel()+')');
 
   var lostVal = 0, custSet = {}, siteSet = {}, neverN = 0;
   for (var r=0;r<anRows.length;r++){
@@ -5415,12 +6145,13 @@ function renderAnalysis(){
   }
   /* the biggest customer can have hundreds of gaps — show its worst dozen, then
      move on, so the page covers many customers instead of one */
-  var html = '', lastCust = -1, inCust = 0, printed = 0;
+  var html = '', lastCust = -1, inCust = 0, printed = 0, showAllGaps = false;
   for (var j=0;j<anRows.length && printed < AN_CAP;j++){
     var d = anRows[j];
     if (d.cid !== lastCust){
       if (lastCust !== -1) html += '</tbody>';
       lastCust = d.cid; inCust = 0;
+      showAllGaps = !!anCustOpen[d.cid];
       var cnt = perCust[d.cid], cl = lossCust[d.cid];
       var gA = custTotA[d.cid] || 0, gB = custTotB[d.cid] || 0;
       var cDiff = gB - gA;
@@ -5435,10 +6166,12 @@ function renderAnalysis(){
               '<td></td><td></td></tr>';
     }
     inCust++;
-    if (inCust > AN_PER_CUST){
+    if (!showAllGaps && inCust > AN_PER_CUST){
       if (inCust === AN_PER_CUST + 1){
-        html += '<tr class="more"><td colspan="10">' + (perCust[d.cid] - AN_PER_CUST) +
-                ' more gaps for ' + esc(CUSTOMERS[d.cid]) + ' — filter to this customer, or export the CSV, to see them all</td></tr>';
+        var hidden = Math.max(0, perCust[d.cid] - AN_PER_CUST);
+        html += '<tr class="more"><td colspan="10"><button class="anmorebtn" type="button" data-acust="'+d.cid+'">' +
+                '▾ Show ' + hidden + ' more gap' + (hidden===1?'':'s') + ' for ' + esc(CUSTOMERS[d.cid]) +
+                '</button></td></tr>';
       }
       continue;
     }
@@ -5457,6 +6190,12 @@ function renderAnalysis(){
         (rA || rB ? (diff>=0?'+':'−') + nf0.format(Math.abs(Math.round(diff))) : '–') + '</span></td>' +
       '<td class="num a-stock">' + (STOCK ? (stockOf(d.i) > 0 ? nf0.format(Math.round(stockOf(d.i))) : '<span class="nostock">0</span>') : '<span class="dash">–</span>') + '</td>' +
       '<td class="a-last">' + gapLabel(d.lp, d.la, A2.ref) + '</td></tr>';
+
+    if (showAllGaps && perCust[d.cid] > AN_PER_CUST &&
+        (j === anRows.length - 1 || anRows[j+1].cid !== d.cid)){
+      html += '<tr class="more"><td colspan="10"><button class="anmorebtn" type="button" data-acust="'+d.cid+'">' +
+              '▴ Show fewer gaps for ' + esc(CUSTOMERS[d.cid]) + '</button></td></tr>';
+    }
   }
   if (html) html += '</tbody>';
   var tbl = document.getElementById('antbl');
@@ -5466,7 +6205,7 @@ function renderAnalysis(){
     '<tbody id="anBody"><tr><td colspan="10" class="empty">No gaps match these filters — every item is being supplied.</td></tr></tbody>');
   document.getElementById('anCount').textContent =
     nf0.format(anRows.length) + ' opportunities · ' + Object.keys(perCust).length + ' customers' +
-    (anRows.length > printed ? ' · showing the worst ' + AN_PER_CUST + ' per customer' : '');
+    (anRows.length > printed ? ' · some gaps are collapsed' : '');
   syncAnHeadHeight();
   anStuck = null;
   measureGroups();
@@ -5480,6 +6219,35 @@ function renderAnalysis(){
         ' sales this year excluded' : '') +
     (state.aNever === 'only' ? ' · never supplied only' : (state.aNever === 'include' ? ' · never supplied included' : ''));
 }
+
+/* Keep the user's place when expanding/collapsing grouped rows. Re-rendering a
+   table body can otherwise reset the internal scroll container (and on some
+   browsers the page itself) back to the top. */
+function keepExpandedView(scrollId, renderFn){
+  var sc=document.getElementById(scrollId);
+  var top=sc ? sc.scrollTop : 0;
+  var left=sc ? sc.scrollLeft : 0;
+  var pageX=window.pageXOffset || document.documentElement.scrollLeft || 0;
+  var pageY=window.pageYOffset || document.documentElement.scrollTop || 0;
+
+  renderFn();
+
+  function restore(){
+    if (sc){ sc.scrollTop=top; sc.scrollLeft=left; }
+    window.scrollTo(pageX,pageY);
+  }
+  restore();
+  if (window.requestAnimationFrame) requestAnimationFrame(restore);
+}
+
+/* Expand/collapse the suppressed gaps for one customer/group without changing filters. */
+document.getElementById('antbl').addEventListener('click', function(e){
+  var btn=e.target.closest('.anmorebtn');
+  if (!btn) return;
+  var cid=+btn.dataset.acust;
+  anCustOpen[cid]=!anCustOpen[cid];
+  keepExpandedView('anScroll', renderAnalysis);
+});
 
 /* items offered for selection follow the category above — pick Dressings and the
    list holds dressings only */
@@ -5646,7 +6414,7 @@ document.getElementById('anCsv').addEventListener('click', function(){
   var A2 = analysisScan();
   var head = ['Customer','Cust Group','Customer Site','Category','Item Code','Item Description',
               state.yrA+' QTY', state.yrB+' QTY','QTY Difference',
-              state.yrA+' Value', state.yrB+' Value','Difference',
+              state.yrA+' Value ('+currencyLabel()+')', state.yrB+' Value ('+currencyLabel()+')','Difference ('+currencyLabel()+')',
               'Warehouse Stock','Last Supplied','Months Since'];
   var lines = [head.join(',')];
   anRows.forEach(function(d){
@@ -5682,6 +6450,7 @@ document.getElementById('anCsv').addEventListener('click', function(){
 var PRSCAN = null;
 var msPArea = null, msPCust = null, msPItem = null;
 var promoOpen = {};
+var promoCustOpen = {}; /* group-level: show all suppressed promotion/outlet rows */
 var PROMO_CAP = 700, PROMO_PER_CUST = 18;
 
 function promoItemOk(i){
@@ -5945,6 +6714,196 @@ function buildPromoGroups(){
   return groups;
 }
 
+
+function promoReturnItemSeries(siteId,itemId){
+  var q={},v={};
+  YEARS.forEach(function(y,yi){
+    q[y]=new Array(12);
+    v[y]=new Array(12);
+    for (var m=0;m<12;m++){
+      var future=(yi===NY-1 && m>LASTM);
+      q[y][m]=future?null:0;
+      v[y][m]=future?null:0;
+    }
+  });
+
+  if (F){
+    var fs=F.s,fi=F.i,fp=F.p,fq=F.q,fv=F.v,fd=F.d,N=fs.length;
+    for (var k=0;k<N;k++){
+      if (fs[k]!==siteId || fi[k]!==itemId) continue;
+      if (!factCounted(fd[k],itemId)) continue;
+      var p=fp[k],yi=(p/12)|0,m=p%12,y=YEARS[yi];
+      if (!q[y] || q[y][m]===null) continue;
+      q[y][m]+=fq[k];
+      v[y][m]+=fv[k];
+    }
+  }
+  return {q:q,v:v};
+}
+
+function promoReturnItemChart(itemId,d){
+  var latest=YEARS[NY-1], prev=YEARS[Math.max(0,NY-2)];
+  var a=d.q[prev]||new Array(12).fill(0), b=d.q[latest]||new Array(12).fill(0);
+  var av=d.v[prev]||new Array(12).fill(0), bv=d.v[latest]||new Array(12).fill(0);
+  var maxV=0,minV=0;
+
+  [a,b].forEach(function(vals){
+    vals.forEach(function(x){
+      if (x===null || x===undefined) return;
+      if (x>maxV) maxV=x;
+      if (x<minV) minV=x;
+    });
+  });
+
+  var step=niceStep((maxV-minV)||Math.max(Math.abs(maxV),Math.abs(minV),1),5);
+  var top=Math.ceil(Math.max(0,maxV)/step)*step;
+  var bottom=Math.floor(Math.min(0,minV)/step)*step;
+  if (top===bottom){ top+=step; bottom-=step; }
+  if (top===0 && bottom<0) top=step;
+
+  var W=760,H=270,L=58,R=12,T=16,B=38,PW=W-L-R,PH=H-T-B;
+  var xAt=function(i){ return L+PW*i/11; };
+  var yAt=function(x){ return T+((top-x)/(top-bottom))*PH; };
+  var grid='',yl='',xl='';
+  var ticks=Math.max(1,Math.round((top-bottom)/step));
+
+  for (var t=0;t<=ticks;t++){
+    var gv=bottom+t*step,y=yAt(gv),zero=Math.abs(gv)<step/1000;
+    grid+='<line x1="'+L+'" y1="'+y.toFixed(1)+'" x2="'+(W-R)+'" y2="'+y.toFixed(1)+
+          '" stroke="'+(zero?'#8FA0A6':'#E3E7E5')+'" stroke-width="'+(zero?'1.5':'1')+'"></line>';
+    yl+='<text x="'+(L-8)+'" y="'+(y+4).toFixed(1)+'" text-anchor="end" fill="#6A7D84" font-size="11" font-family="Archivo, sans-serif">'+
+        nf0.format(Math.round(gv))+'</text>';
+  }
+  for (var m=0;m<12;m++){
+    xl+='<text x="'+xAt(m).toFixed(1)+'" y="'+(H-12)+'" text-anchor="middle" fill="#6A7D84" font-size="11" font-family="Archivo, sans-serif">'+MONTHS[m]+'</text>';
+  }
+
+  function hoverPoints(casesArr,valueArr,year,fill){
+    var out='';
+    for (var m=0;m<12;m++){
+      var q=casesArr[m];
+      if (q===null || q===undefined || isNaN(q)) continue;
+      var val=valueArr[m] == null ? 0 : valueArr[m];
+      var cx=xAt(m).toFixed(1),cy=yAt(q).toFixed(1);
+      out+='<g class="impoint">'+
+           '<circle class="imdot" cx="'+cx+'" cy="'+cy+'" r="4" fill="'+fill+'"></circle>'+
+           '<circle class="imhit" cx="'+cx+'" cy="'+cy+'" r="14" data-year="'+year+
+             '" data-month="'+m+'" data-cases="'+q+'" data-value="'+val+'"></circle>'+
+         '</g>';
+    }
+    return out;
+  }
+
+  var svg='<svg class="chsvg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Monthly cases trend for '+esc(ITEMS[itemId][1])+'">'+
+    '<rect width="'+W+'" height="'+H+'" fill="#fff"></rect>'+grid+
+    '<line x1="'+L+'" y1="'+T+'" x2="'+L+'" y2="'+(H-B)+'" stroke="#8FA0A6" stroke-width="1.2"></line>'+
+    '<line x1="'+L+'" y1="'+(H-B)+'" x2="'+(W-R)+'" y2="'+(H-B)+'" stroke="#8FA0A6" stroke-width="1.2"></line>'+
+    yl+xl+
+    '<path d="'+svgLinePath(a,xAt,yAt)+'" fill="none" stroke="#C6B2B0" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>'+
+    '<path d="'+svgLinePath(b,xAt,yAt)+'" fill="none" stroke="#A10716" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>'+
+    hoverPoints(a,av,prev,'#C6B2B0')+hoverPoints(b,bv,latest,'#A10716')+
+    '</svg>';
+
+  return '<div class="imchart">'+
+    '<div class="cht">Monthly cases trend, Jan–Dec</div>'+
+    '<div class="chs">Last two years · '+prev+' vs '+latest+'</div>'+svg+
+    '<div class="chlegend"><span class="lg"><span class="sw prev"></span>'+prev+'</span>'+
+      '<span class="lg"><span class="sw curr"></span>'+latest+'</span></div>'+
+    '<div class="chnote">Hover around any monthly dot to see the month, cases and exact '+currencyLabel()+' sales value. '+latest+
+      ' continues through '+MONTHS[LASTM]+'; later months stay blank until data is available.</div>'+
+    '<div class="imtip" id="imTip"></div></div>';
+}
+
+function promoReturnItemTable(d,metric,title,isValue,mobile){
+  var latest=YEARS[NY-1], prev=YEARS[Math.max(0,NY-2)];
+  function f(x){
+    if (x===null || x===undefined) return '';
+    if (Math.abs(x)<0.0000001) return '–';
+    return isValue ? nf0.format(Math.round(x)) : nf2.format(x);
+  }
+  function pct(base,cur){
+    if (cur===null || cur===undefined) return '';
+    if (Math.abs(base)<0.0000001) return Math.abs(cur)<0.0000001 ? '–' : '<span class="up">NEW</span>';
+    var p=(cur-base)/Math.abs(base)*100;
+    var cls=p>0.05?'up':(p<-0.05?'down':'flat');
+    return '<span class="'+cls+'">'+(p>0?'+':'')+nf1.format(p)+'%</span>';
+  }
+
+  if (!mobile){
+    var h='<table class="imtbl"><thead><tr class="cap"><th colspan="14">'+title+'</th></tr><tr><th></th>';
+    for (var m=0;m<12;m++) h+='<th>'+MONTHS[m]+'</th>';
+    h+='<th class="tot">Total</th></tr></thead><tbody>';
+
+    YEARS.forEach(function(y,yi){
+      var total=0;
+      h+='<tr><th>'+y+(yi===NY-1?' <i>YTD</i>':'')+'</th>';
+      for (var m=0;m<12;m++){
+        var x=d[y][m];
+        if (x===null){ h+='<td class="off"></td>'; continue; }
+        total+=x||0;
+        h+='<td>'+f(x)+'</td>';
+      }
+      h+='<td class="tot">'+f(total)+'</td></tr>';
+    });
+
+    if (d[prev] && d[latest]){
+      var curTot=0,prevTot=0;
+      h+='<tr class="imvs"><th>% Vs '+String(prev).slice(-2)+'</th>';
+      for (var m=0;m<12;m++){
+        if (d[latest][m]===null){ h+='<td class="off"></td>'; continue; }
+        curTot+=d[latest][m]||0; prevTot+=d[prev][m]||0;
+        h+='<td>'+pct(d[prev][m]||0,d[latest][m]||0)+'</td>';
+      }
+      h+='<td class="tot">'+pct(prevTot,curTot)+'</td></tr>';
+    }
+    return h+'</tbody></table>';
+  }
+
+  var mh='<table class="imtbl imtblv"><thead><tr class="cap"><th colspan="'+(YEARS.length+2)+'">'+title+'</th></tr><tr><th>Month</th>';
+  YEARS.forEach(function(y,yi){ mh+='<th class="n">'+y+(yi===NY-1?' <i>YTD</i>':'')+'</th>'; });
+  mh+='<th>% Vs '+String(prev).slice(-2)+'</th></tr></thead><tbody>';
+  for (var m=0;m<12;m++){
+    mh+='<tr><th>'+MONTHS[m]+'</th>';
+    YEARS.forEach(function(y){
+      var x=d[y][m];
+      mh+=x===null?'<td class="off"></td>':'<td class="n">'+f(x)+'</td>';
+    });
+    mh+=d[latest][m]===null?'<td class="off"></td>':'<td class="n">'+pct(d[prev][m]||0,d[latest][m]||0)+'</td>';
+    mh+='</tr>';
+  }
+  return mh+'</tbody></table>';
+}
+
+function openPromotionReturnItemDetail(siteId,itemId){
+  var it=ITEMS[itemId],site=SITES[siteId];
+  if (!it || !site) return;
+
+  CUSTWISE_NAV=null;
+  CUSTWISE_BACK_STACK=[];
+  CUSTWISE_CAT_EXPORT=null;
+
+  var d=promoReturnItemSeries(siteId,itemId);
+  document.getElementById('imTitle').innerHTML=esc(it[1])+' <span class="code">'+it[0]+'</span>';
+  document.getElementById('imSub').textContent=
+    it[2]+' · '+(it[3]==='Promotion'?'Promo pack':'Regular')+' · '+site[0]+' — '+site[1];
+
+  document.getElementById('imBody').innerHTML=
+    promoReturnItemChart(itemId,d)+
+    '<div class="d-only">'+
+      promoReturnItemTable(d.q,'cases','Sales in Volume (cases)',false,false)+
+      promoReturnItemTable(d.v,'value','Sales in Value ('+currencyLabel()+')',true,false)+
+    '</div>'+
+    '<div class="m-only">'+
+      promoReturnItemTable(d.q,'cases','Sales in Volume (cases)',false,true)+
+      promoReturnItemTable(d.v,'value','Sales in Value ('+currencyLabel()+')',true,true)+
+    '</div>'+
+    '<div class="imnote">'+YEARS[NY-1]+' runs through '+MONTHS[LASTM]+'. Historical years are shown Jan–Dec. '+
+      'Figures are restricted to this customer site and promotion item and follow the active department selection.</div>';
+
+  document.body.classList.add('imopen');
+  document.getElementById('imWrap').scrollTop=0;
+}
+
 function renderPromo(){
   if (!F) return;
   var groups = buildPromoGroups();
@@ -5966,7 +6925,7 @@ function renderPromo(){
     kpi('Returned Cases', nf2.format(ret), 'cases returned in qualifying events', ret?'down':'flat') +
     kpi('Return %', supply ? nf1.format(ret/supply*100)+'%' : '—', 'returned ÷ positive supply for selected period', ret?'down':'flat');
 
-  document.getElementById('pSalesHead').textContent = promoAnalysisYear() + ' ' + periodLabel() + ' Sales';
+  document.getElementById('pSalesHead').textContent = promoAnalysisYear() + ' ' + periodLabel() + ' Sales ('+currencyLabel()+')';
   document.getElementById('pCount').textContent =
     items + ' promotion item' + (items===1?'':'s') + ' · ' + sites + ' site' + (sites===1?'':'s');
   document.getElementById('pScope').textContent =
@@ -5988,14 +6947,10 @@ function renderPromo(){
       '<td class="num p-rate">' + promoRate(g.rate) + '</td>' +
       '<td class="p-last">' + promoLast(g.last) + '</td></tr>';
 
-    for (var si=0; si<g.sites.length && printed<PROMO_CAP; si++){
-      if (si >= PROMO_PER_CUST){
-        html += '<tr class="more"><td colspan="9">' + (g.sites.length-PROMO_PER_CUST) +
-                ' more outlets for ' + esc(CUSTOMERS[g.cid]) +
-                ' — use the Customer filter to focus on this customer.</td></tr>';
-        break;
-      }
+    var showAllPromotions=!!promoCustOpen[g.cid];
+    var siteLimit=showAllPromotions ? g.sites.length : Math.min(PROMO_PER_CUST,g.sites.length);
 
+    for (var si=0; si<siteLimit && printed<PROMO_CAP; si++){
       var st = g.sites[si], key = g.cid + ':' + st.s, open = !!promoOpen[key];
       printed++;
       html += '<tr class="psite' + (open?' open':'') + '" data-key="' + esc(key) + '">' +
@@ -6014,8 +6969,8 @@ function renderPromo(){
         st.items.forEach(function(it){
           html += '<tr class="pitem">' +
             '<td class="p-site"></td>' +
-            '<td class="p-item">' + esc(ITEMS[it.i][1]) +
-              ' <span class="mono" style="display:block;font-size:9px;color:var(--muted)">' + ITEMS[it.i][0] + '</span></td>' +
+            '<td class="p-item"><button class="pitemlink" type="button" data-pitem="'+it.i+'" data-psite="'+st.s+'" ' +
+              'title="Open monthly item detail">' + esc(ITEMS[it.i][1]) + '</button></td>' +
             '<td class="p-cat">' + esc(ITEMS[it.i][2]) + '</td>' +
             '<td class="num p-sales">' + fmtS(it.sales) + '</td>' +
             '<td class="num p-events">' + nf0.format(it.events) + '</td>' +
@@ -6025,6 +6980,14 @@ function renderPromo(){
             '<td class="p-last">' + promoLast(it.last) + '</td></tr>';
         });
       }
+    }
+
+    if (g.sites.length>PROMO_PER_CUST){
+      var hidden=Math.max(0,g.sites.length-PROMO_PER_CUST);
+      html += '<tr class="more"><td colspan="9"><button class="pmorebtn" type="button" data-pcust="'+g.cid+'">' +
+              (showAllPromotions ? '▴ Show fewer promotions for '+esc(CUSTOMERS[g.cid]) :
+               '▾ Show '+hidden+' more promotion'+(hidden===1?'':'s')+' for '+esc(CUSTOMERS[g.cid])) +
+              '</button></td></tr>';
     }
     html += '</tbody>';
   }
@@ -6038,6 +7001,20 @@ function renderPromo(){
 }
 
 document.getElementById('ptbl').addEventListener('click', function(e){
+  var itemBtn=e.target.closest('.pitemlink');
+  if (itemBtn){
+    openPromotionReturnItemDetail(+itemBtn.dataset.psite,+itemBtn.dataset.pitem);
+    return;
+  }
+
+  var moreBtn=e.target.closest('.pmorebtn');
+  if (moreBtn){
+    var cid=+moreBtn.dataset.pcust;
+    promoCustOpen[cid]=!promoCustOpen[cid];
+    keepExpandedView('pScroll', renderPromo);
+    return;
+  }
+
   var row = e.target.closest('tr.psite');
   if (!row) return;
   var key = row.dataset.key;
@@ -6053,6 +7030,7 @@ document.getElementById('pReset').addEventListener('click', function(){
   state.pArea.clear(); state.pCust.clear(); state.pCat.clear(); state.pItems.clear(); state.pRet = 10;
   document.getElementById('pRet').value = '10';
   promoOpen = {};
+  promoCustOpen = {};
   if (msPArea) msPArea.refresh();
   if (msPCust) msPCust.refresh();
   if (msPCat) msPCat.refresh();
@@ -6416,17 +7394,19 @@ function placeControls(){
   var wide = wideMQ ? wideMQ.matches : true;
   var refresh = document.getElementById('refreshBtn');
   var convert = document.getElementById('convertBtn');
+  var currency = document.getElementById('currencySel');
   var hist = document.getElementById('visitHist');
   var monthly = document.getElementById('monthlyViewBtn');
   var slotR = document.getElementById('refreshSlot');
   var slotH = document.getElementById('histSlot');
   var status = document.getElementById('status');
   var audit = document.querySelector('.audit');
-  if (refresh || convert){
+  if (refresh || convert || currency){
     var homeR = wide ? slotR : status;
     if (homeR){
       if (refresh && refresh.parentNode !== homeR) homeR.appendChild(refresh);
       if (convert && convert.parentNode !== homeR) homeR.appendChild(convert);
+      if (currency && currency.parentNode !== homeR) homeR.appendChild(currency);
     }
   }
   if (audit){
@@ -6499,152 +7479,236 @@ document.getElementById('tabs').addEventListener('click', function(e){
 });
 
 /* ================= new and lost outlets =================
-   The two cards open the outlets behind them. A new site shows what it has
-   bought so far this year; a lost one shows what it was worth over the whole of
-   the base year, which is what walking away actually cost. */
-function openSiteList(kind){
-  aggregate();
-  var isNew = kind === 'new', out = [];
-  for (var s=0;s<SITES.length;s++){
-    if (!mask[s]) continue;
-    if (isNew ? !(siteBilledB[s] && !siteBilledA[s]) : !(siteBilledA[s] && !siteBilledB[s])) continue;
-    out.push({s:s, v: isNew ? siteValB[s] : siteValA[s]});
+   Mirrors the Oman popup logic: New customer sites are grouped by their first
+   billed month in the comparison year; Lost customer sites are grouped by their
+   last billed month in the base year. The Month filter narrows the popup only. */
+var siteListData = null;
+
+function siteListMonthValue(s, isNew){
+  return isNew ? (siteFirstB ? siteFirstB[s] : -1)
+               : (siteLastA ? siteLastA[s] : -1);
+}
+function siteListMonthLabel(m, year){
+  return m < 0 ? '—' : MONTHS[m] + " '" + String(year).slice(2);
+}
+function openMonth(s){
+  return siteListMonthLabel(siteFirstB ? siteFirstB[s] : -1, state.yrB);
+}
+function lastBilledMonth(s){
+  return siteListMonthLabel(siteLastA ? siteLastA[s] : -1, state.yrA);
+}
+function siteListFilteredRows(){
+  if (!siteListData) return [];
+  var fm = siteListData.month;
+  return siteListData.allRows.filter(function(r){
+    return fm < 0 || r.month === fm;
+  });
+}
+function siteListMonthOptions(){
+  if (!siteListData) return '<option value="-1">All months</option>';
+  var seen={}, opts=['<option value="-1">All months</option>'];
+  siteListData.allRows.forEach(function(r){ if (r.month >= 0) seen[r.month]=1; });
+  for (var m=0;m<12;m++){
+    if (!seen[m]) continue;
+    opts.push('<option value="'+m+'"'+(siteListData.month===m?' selected':'')+'>'+MONTHS[m]+'</option>');
   }
-  out.sort(function(a,b){ return b.v - a.v; });
+  return opts.join('');
+}
+function renderSiteListBody(){
+  if (!siteListData) return;
+  var isNew=siteListData.isNew;
+  var rows=siteListFilteredRows();
+  var total=rows.reduce(function(a,r){ return a+r.v; },0);
+  siteListData.rows=rows;
+  siteListData.total=total;
 
-  var total = out.reduce(function(a,r){ return a + r.v; }, 0);
-  var valHead = (isNew ? state.yrB : state.yrA) + ' ' + periodLabel();
   document.getElementById('imTitle').textContent =
-    (isNew ? 'New customer sites' : 'Lost customer sites') + ' — ' + out.length;
-  document.getElementById('imSub').textContent =
-    (isNew ? 'Billed in ' + state.yrB + ', nothing in ' + state.yrA
-           : 'Billed in ' + state.yrA + ', nothing in ' + state.yrB) +
-    ' · ' + depLabel() + ' · ' + siteScopeLabel();
+    (isNew ? 'New customer sites' : 'Lost customer sites') + ' — ' + rows.length;
 
-  siteListData = {kind:kind, isNew:isNew, rows:out, total:total, valHead:valHead};
+  var body=document.getElementById('imBody');
+  if (!siteListData.allRows.length){
+    body.innerHTML='<div class="imnote">Nothing to show for this selection.</div>';
+    return;
+  }
 
-  document.getElementById('imBody').innerHTML = out.length
-    ? '<div class="sitetools">' +
-        '<button class="btn ghost" id="slCsv" type="button">Export CSV</button>' +
-        '<button class="btn" id="slPdf" type="button">Download PDF</button>' +
-      '</div>' +
-      '<table class="imtbl vhist sitelist">' +
-      (isNew
-        ? '<colgroup><col class="w-name"><col class="w-area"><col class="w-site"><col class="w-open"><col class="w-val"></colgroup>'
-        : '<colgroup><col class="w-name"><col class="w-area"><col class="w-site"><col class="w-val"></colgroup>') +
+  var monthTitle=isNew ? 'Open Month' : 'Last Billed';
+  var colClass=isNew ? 'w-open' : 'w-last';
+  var cellClass=isNew ? 'c-open' : 'c-last';
+
+  var html =
+    '<div class="sitetools">' +
+      '<label class="site-month-filter"><span>Month</span><select id="slMonth" aria-label="'+monthTitle+' filter">'+
+        siteListMonthOptions()+
+      '</select></label>'+
+      '<button class="btn ghost" id="slCsv" type="button">Export CSV</button>' +
+      '<button class="btn" id="slPdf" type="button">Download PDF</button>' +
+    '</div>';
+
+  if (!rows.length){
+    html += '<div class="imnote">No customer sites match the selected month.</div>';
+    body.innerHTML=html;
+    return;
+  }
+
+  html +=
+    '<table class="imtbl vhist sitelist">' +
+      '<colgroup><col class="w-name"><col class="w-area"><col class="w-site"><col class="'+colClass+'"><col class="w-val"></colgroup>' +
       '<thead>' +
-        '<tr class="cap"><th colspan="' + (isNew ? 5 : 4) + '">' + (isNew ? 'Gained' : 'Lost') + ' this year</th></tr>' +
+        '<tr class="cap"><th colspan="5">' + (isNew ? 'Gained' : 'Lost') + ' this year</th></tr>' +
         '<tr><th class="c-name">Customer</th><th class="c-area">Cust Group</th><th class="c-site">Customer Site</th>' +
-        (isNew ? '<th class="c-open">Open Month</th>' : '') +
-        '<th class="n c-val">' + esc(valHead) + '</th></tr>' +
+        '<th class="'+cellClass+'">'+monthTitle+'</th>' +
+        '<th class="n c-val">' + esc(siteListData.valHead) + '</th></tr>' +
       '</thead><tbody>' +
-      out.map(function(r){
+      rows.map(function(r){
+        var monthText=isNew ? openMonth(r.s) : lastBilledMonth(r.s);
         return '<tr><td class="c-name">' + esc(SITES[r.s][0]) + '</td>' +
                '<td class="c-area">' + esc(areaLabel(areaOf[r.s])) + '</td>' +
                '<td class="c-site">' + esc(SITES[r.s][1]) + '</td>' +
-               (isNew ? '<td class="c-open">' + esc(openMonth(r.s)) + '</td>' : '') +
+               '<td class="'+cellClass+'">' + esc(monthText) + '</td>' +
                '<td class="n c-val">' + (r.v ? nf0.format(Math.round(r.v)) : '<span class="z">–</span>') + '</td></tr>';
       }).join('') +
-      '</tbody><tfoot><tr><th colspan="' + (isNew ? 4 : 3) + '">Total</th>' +
+      '</tbody><tfoot><tr><th colspan="4">Total</th>' +
       '<th class="n">' + nf0.format(Math.round(total)) + '</th></tr></tfoot></table>' +
       '<div class="imnote">' + (isNew
-        ? 'Outlets that bought in ' + state.yrB + ' and never in ' + state.yrA + '.'
+        ? 'Outlets that bought in ' + state.yrB + ' and never in ' + state.yrA +
+          '. The popup Month filter uses the first billed month in ' + state.yrB + '.'
         : 'Outlets that bought in ' + state.yrA + ' and have not ordered at all in ' + state.yrB +
-          ' — the business at stake.') +
-      ' Who is on this list is judged on the whole of each year, so the period picker never ' +
-      'changes the names; the value column shows ' + periodLabel() +
-      '. Follows the Cust Group, customer and site pickers above.</div>'
-    : '<div class="imnote">Nothing to show for this selection.</div>';
+          ' — the business at stake. The popup Month filter uses the last billed month in ' + state.yrA + '.') +
+      ' Membership is still judged on the whole of each year; the value column shows ' + periodLabel() +
+      '. Follows the Cust Group, customer and site pickers above.</div>';
 
-  document.body.classList.add('imopen');
-  document.getElementById('imWrap').scrollTop = 0;
+  body.innerHTML=html;
 }
+
+function openSiteList(kind){
+  aggregate();
+  var isNew=kind==='new', out=[];
+  for (var s=0;s<SITES.length;s++){
+    if (!mask[s]) continue;
+    if (isNew ? !(siteBilledB[s] && !siteBilledA[s]) : !(siteBilledA[s] && !siteBilledB[s])) continue;
+    out.push({
+      s:s,
+      v:isNew ? siteValB[s] : siteValA[s],
+      month:siteListMonthValue(s,isNew)
+    });
+  }
+  out.sort(function(a,b){ return b.v-a.v; });
+
+  var valHead=(isNew ? state.yrB : state.yrA)+' '+periodLabel();
+  document.getElementById('imSub').textContent =
+    (isNew ? 'Billed in '+state.yrB+', nothing in '+state.yrA
+           : 'Billed in '+state.yrA+', nothing in '+state.yrB) +
+    ' · '+depLabel()+' · '+siteScopeLabel();
+
+  siteListData={
+    kind:kind,
+    isNew:isNew,
+    allRows:out,
+    rows:out.slice(),
+    month:-1,
+    total:out.reduce(function(a,r){ return a+r.v; },0),
+    valHead:valHead
+  };
+
+  renderSiteListBody();
+  document.body.classList.add('imopen');
+  document.getElementById('imWrap').scrollTop=0;
+}
+
 document.getElementById('kpis').addEventListener('click', function(e){
-  var card = e.target.closest('.kpi.clickable');
+  var card=e.target.closest('.kpi.clickable');
   if (!card) return;
   openSiteList(card.dataset.open);
 });
 
-/* ---------- taking the list away with you ---------- */
-var siteListData = null;
-/* the month the outlet first billed this year */
-function openMonth(s){
-  var m = siteFirstB ? siteFirstB[s] : -1;
-  return m < 0 ? '' : MONTHS[m] + " '" + String(state.yrB).slice(2);
-}
+/* ---------- taking the filtered list away with you ---------- */
 function siteListName(ext){
-  if (!siteListData) return 'sites.' + ext;
-  return 'Delicio ' + (siteListData.isNew ? 'new' : 'lost') + ' customer sites - ' +
-         depLabel().replace(/[\\/:*?"<>|]/g,'-') + ' - ' +
-         (siteListData.isNew ? state.yrB : state.yrA) + ' ' + periodLabel() + '.' + ext;
+  if (!siteListData) return 'sites.'+ext;
+  var monthPart=siteListData.month>=0 ? ' - '+MONTHS[siteListData.month] : '';
+  return 'Delicio '+(siteListData.isNew ? 'new' : 'lost')+' customer sites - '+
+         depLabel().replace(/[\\/:*?"<>|]/g,'-')+' - '+
+         (siteListData.isNew ? state.yrB : state.yrA)+' '+periodLabel()+monthPart+'.'+ext;
 }
 function siteListCsv(){
   if (!siteListData || !siteListData.rows.length) return;
-  var head = ['Customer','Cust Group','Customer Site','Channel', siteListData.valHead];
-  var lines = [head.join(',')];
+  var monthHead=siteListData.isNew ? 'Open Month' : 'Last Billed';
+  var head=['Customer','Cust Group','Customer Site',monthHead,'Channel',siteListData.valHead];
+  var lines=[head.join(',')];
   siteListData.rows.forEach(function(r){
-    var s = SITES[r.s];
+    var s=SITES[r.s];
+    var monthText=siteListData.isNew ? openMonth(r.s) : lastBilledMonth(r.s);
     lines.push([
-      '"' + String(s[0]).replace(/"/g,'""') + '"',
-      '"' + String(areaLabel(areaOf[r.s])).replace(/"/g,'""') + '"',
-      '"' + String(s[1]).replace(/"/g,'""') + '"',
+      '"'+String(s[0]).replace(/"/g,'""')+'"',
+      '"'+String(areaLabel(areaOf[r.s])).replace(/"/g,'""')+'"',
+      '"'+String(s[1]).replace(/"/g,'""')+'"',
+      '"'+monthText.replace(/"/g,'""')+'"',
       s[3],
       r.v.toFixed(2)
     ].join(','));
   });
-  lines.push(['Total','','','', siteListData.total.toFixed(2)].join(','));
-  var blob = new Blob([lines.join('\n')], {type:'text/csv;charset=utf-8;'});
-  var a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = siteListName('csv');
+  lines.push(['Total','','','','',siteListData.total.toFixed(2)].join(','));
+  var blob=new Blob([lines.join('\n')],{type:'text/csv;charset=utf-8;'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=siteListName('csv');
   a.click();
   URL.revokeObjectURL(a.href);
 }
 function siteListPdf(){
   if (!siteListData || !siteListData.rows.length) return;
-  var d = new Date();
-  var stamp = d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
-  var rows = siteListData.rows.map(function(r){
-    var s = SITES[r.s];
-    return [s[0], areaLabel(areaOf[r.s]), s[1],
+  var d=new Date();
+  var stamp=d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+  var monthHead=siteListData.isNew ? 'OPEN MONTH' : 'LAST BILLED';
+  var rows=siteListData.rows.map(function(r){
+    var s=SITES[r.s];
+    var monthText=siteListData.isNew ? openMonth(r.s) : lastBilledMonth(r.s);
+    return [s[0],areaLabel(areaOf[r.s]),s[1],monthText,
             r.v ? nf0.format(Math.round(r.v)) : '-'];
   });
-  rows.push(['TOTAL', '', '', nf0.format(Math.round(siteListData.total))]);
-  var bytes = reportPdf({
-    title: siteListData.isNew ? 'New customer sites' : 'Lost customer sites',
-    period: yearsLabel(),
-    yrA: state.yrA, yrB: state.yrB,
-    cols: [
-      {t:'CUSTOMER',      w:145},
-      {t:'CUST GROUP',    w:105},
-      {t:'CUSTOMER SITE', w:175},
-      {t:siteListData.valHead.toUpperCase(), w:90, a:'r'}
+  rows.push(['TOTAL','','','',nf0.format(Math.round(siteListData.total))]);
+  var bytes=reportPdf({
+    title:siteListData.isNew ? 'New customer sites' : 'Lost customer sites',
+    period:yearsLabel(),
+    yrA:state.yrA,yrB:state.yrB,
+    cols:[
+      {t:'CUSTOMER',w:125},
+      {t:'CUST GROUP',w:85},
+      {t:'CUSTOMER SITE',w:135},
+      {t:monthHead,w:62},
+      {t:siteListData.valHead.toUpperCase(),w:82,a:'r'}
     ],
-    note: (siteListData.isNew
-      ? 'Outlets that bought in ' + state.yrB + ' and never in ' + state.yrA + '.'
-      : 'Outlets that bought in ' + state.yrA + ' and have not ordered at all in ' + state.yrB +
-        ' - the business at stake.') +
-      ' Membership is judged on the whole of each year; the value column covers ' + periodLabel() + '.',
-    meta: [
-      ['Report', siteListData.isNew ? 'New customer sites' : 'Lost customer sites'],
-      ['Run on', stamp],
-      ['Department', depLabel()],
-      ['Selection', scopeNames()],
-      ['Compared', state.yrB + ' vs ' + state.yrA + ' \u00b7 ' + periodLabel()],
-      ['Outlets', String(siteListData.rows.length)],
-      ['Value', nf0.format(Math.round(siteListData.total))]
+    note:(siteListData.isNew
+      ? 'Outlets that bought in '+state.yrB+' and never in '+state.yrA+'.'
+      : 'Outlets that bought in '+state.yrA+' and have not ordered at all in '+state.yrB+
+        ' - the business at stake.')+
+      ' The popup month filter is based on '+(siteListData.isNew ? 'first billed month.' : 'last billed month.')+
+      ' Membership is judged on the whole of each year; the value column covers '+periodLabel()+'.',
+    meta:[
+      ['Report',siteListData.isNew ? 'New customer sites' : 'Lost customer sites'],
+      ['Run on',stamp],
+      ['Department',depLabel()],
+      ['Selection',scopeNames()],
+      ['Month',siteListData.month<0 ? 'All months' : MONTHS[siteListData.month]],
+      ['Compared',state.yrB+' vs '+state.yrA+' · '+periodLabel()],
+      ['Outlets',String(siteListData.rows.length)],
+      ['Value',nf0.format(Math.round(siteListData.total))]
     ]
-  }, rows);
-  var blob = new Blob([bytes], {type:'application/pdf'});
-  var url = URL.createObjectURL(blob);
-  var a = document.createElement('a');
-  a.href = url; a.download = siteListName('pdf');
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+  },rows);
+  var blob=new Blob([bytes],{type:'application/pdf'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;a.download=siteListName('pdf');
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(url);},4000);
 }
 document.getElementById('imBody').addEventListener('click', function(e){
   if (e.target.closest('#slCsv')) siteListCsv();
   else if (e.target.closest('#slPdf')) siteListPdf();
+});
+document.getElementById('imBody').addEventListener('change', function(e){
+  if (!e.target || e.target.id!=='slMonth' || !siteListData) return;
+  siteListData.month=+e.target.value;
+  renderSiteListBody();
 });
 
 /* ================= performance by area =================
@@ -6729,7 +7793,7 @@ function openArea(a){
 
   var latest = NY - 1;
   var h = '<table class="imtbl"><thead>' +
-          '<tr class="cap"><th colspan="14">Sales in Value</th></tr>' +
+          '<tr class="cap"><th colspan="14">Sales in Value ('+currencyLabel()+')</th></tr>' +
           '<tr><th></th>';
   for (var m=0;m<12;m++) h += '<th>' + MONTHS[m] + '</th>';
   h += '<th class="tot">Total</th></tr></thead><tbody>';
@@ -7272,6 +8336,7 @@ document.getElementById('visitHist').addEventListener('click', openHistory);
 
 var msOArea = null, msOCust = null, msOItem = null;
 var outletRowsCache = [], outletOpen = {};
+var outletCustOpen = {}; /* customer-level: show all suppressed outlets */
 
 /* which items count towards an outlet's figures, given this tab's filters */
 function outletItemOk(i){
@@ -7419,13 +8484,10 @@ function renderOutlet(){
             '<td class="num">' + pctCell(gp.b, gp.a) + '</td>' +
             '<td></td></tr>';
 
-    for (var si=0; si<g.sites.length && printed < OUT_CAP; si++){
-      if (si >= OUT_PER_CUST){
-        html += '<tr class="more"><td colspan="7">' + (g.sites.length - OUT_PER_CUST) +
-                ' more outlets for ' + esc(CUSTOMERS[g.cid]) +
-                ' — filter to this customer, or export the CSV, to see them all</td></tr>';
-        break;
-      }
+    var showAllOutlets=!!outletCustOpen[g.cid];
+    var siteLimit=showAllOutlets ? g.sites.length : Math.min(OUT_PER_CUST,g.sites.length);
+
+    for (var si=0; si<siteLimit && printed < OUT_CAP; si++){
       var st = g.sites[si];
       var sp = pick(st), sd = sp.b - sp.a;
       var key = g.cid + ':' + st.s;
@@ -7456,6 +8518,14 @@ function renderOutlet(){
         });
       }
     }
+
+    if (g.sites.length>OUT_PER_CUST){
+      var hidden=Math.max(0,g.sites.length-OUT_PER_CUST);
+      html += '<tr class="more"><td colspan="7"><button class="omorebtn" type="button" data-ocust="'+g.cid+'">' +
+              (showAllOutlets ? '▴ Show fewer outlets for '+esc(CUSTOMERS[g.cid]) :
+               '▾ Show '+hidden+' more outlet'+(hidden===1?'':'s')+' for '+esc(CUSTOMERS[g.cid])) +
+              '</button></td></tr>';
+    }
     html += '</tbody>';
   }
 
@@ -7465,8 +8535,8 @@ function renderOutlet(){
   tbl.insertAdjacentHTML('beforeend', html ||
     '<tbody><tr><td colspan="7" class="empty">No outlets match these filters.</td></tr></tbody>');
 
-  document.getElementById('oYrA').textContent = state.yrA + (oIsVolume() ? ' QTY' : ' Value');
-  document.getElementById('oYrB').textContent = state.yrB + (oIsVolume() ? ' QTY' : ' Value');
+  document.getElementById('oYrA').textContent = state.yrA + (oIsVolume() ? ' QTY' : ' Value ('+currencyLabel()+')');
+  document.getElementById('oYrB').textContent = state.yrB + (oIsVolume() ? ' QTY' : ' Value ('+currencyLabel()+')');
   document.getElementById('oCount').textContent =
     nf0.format(siteCount) + ' outlets · ' + built.groups.length + ' customers' +
     (printed < siteCount ? ' · showing the largest ' + OUT_PER_CUST + ' per customer' : '');
@@ -7482,8 +8552,16 @@ function renderOutlet(){
       (state.oStatus === 'up' ? 'growth only' : (state.oStatus === 'down' ? 'decline only' : 'no change only')) : '');
 }
 
-/* expand a site to its categories */
+/* expand/collapse suppressed outlets within each customer group, and expand a site to its categories */
 document.getElementById('otbl').addEventListener('click', function(e){
+  var moreBtn=e.target.closest('.omorebtn');
+  if (moreBtn){
+    var cid=+moreBtn.dataset.ocust;
+    outletCustOpen[cid]=!outletCustOpen[cid];
+    keepExpandedView('oScroll', renderOutlet);
+    return;
+  }
+
   var row = e.target.closest('tr.osite');
   if (!row) return;
   var key = row.dataset.key;
@@ -7596,6 +8674,7 @@ document.getElementById('oReset').addEventListener('click', function(){
   state.oArea.clear(); state.oCust.clear(); state.oItems.clear();
   state.oCat.clear(); state.oStatus = 'all'; state.oSales = 'all';
   outletOpen = {};
+  outletCustOpen = {};
   document.getElementById('oStatus').value = 'all';
   document.getElementById('oSales').value = 'all';
   if (msOArea) msOArea.refresh();
@@ -7611,7 +8690,7 @@ document.getElementById('oCsv').addEventListener('click', function(){
   var head = ['Customer','Cust Group','Customer Site','Channel',
               'Category','Item Code','Item Description',
               state.yrA+' QTY', state.yrB+' QTY','QTY Difference',
-              state.yrA+' Value', state.yrB+' Value','Difference','% Change',
+              state.yrA+' Value ('+currencyLabel()+')', state.yrB+' Value ('+currencyLabel()+')','Difference ('+currencyLabel()+')','% Change',
               'Outlet Status','Warehouse Stock','Last Supplied'];
   var lines = [head.join(',')];
   var q = function(t){ return '"' + String(t == null ? '' : t).replace(/"/g,'""') + '"'; };
