@@ -1947,7 +1947,7 @@ function applyCurrencyConversion(){
   A=null; LIVE=null; AN=null; PRSCAN=null; AREASCAN=null;
   syncCurrencyControl();
 }
-var DATA_VERSION = 25;
+var DATA_VERSION = 26;
 
 /* ---------- gviz over JSONP (no CORS, works from a static page) ---------- */
 var gvSeq = 0;
@@ -2194,9 +2194,9 @@ function cint(t){
 function itemKey(t){
   return String(t == null ? '' : t).replace(/\s+/g,' ').trim();
 }
-/* ABDUL HAMEED LIQUIDATION SALES is value-only for reporting: its sales value
-   remains in every value calculation, but its Volume Cases is excluded from all
-   dashboard quantity totals, drilldowns and promotion-volume calculations. */
+/* Keep the same customer-exclusion scope for both Volume and Value.
+   This customer was already excluded from Volume; Value now follows that exact
+   same row-inclusion metric so the two measures reconcile to the same source scope. */
 function qtyExcludedCustomer(t){
   return itemKey(t).toUpperCase() === 'ABDUL HAMEED LIQUIDATION SALES';
 }
@@ -2316,8 +2316,9 @@ function loadAll(progress, ok, fail){
     if (ii === undefined){ badItems++; ii = OTHER; }    /* counted, never listed */
     if (abs < 0) return;
     var m = mm, y = yy;
-    var v = cnum(f[C_SALES]);
-    var qRaw = qtyExcludedCustomer(f[C_CUST]) ? 0 : cnum(f[C_CASES]);
+    var metricExcluded = qtyExcludedCustomer(f[C_CUST]);
+    var v = metricExcluded ? 0 : cnum(f[C_SALES]);
+    var qRaw = metricExcluded ? 0 : cnum(f[C_CASES]);
     var qConv = Math.abs(rowConv) > 0.0000000001 ? (qRaw / rowConv) : qRaw;
     /* last active salesman = whoever serviced the outlet on its most recent
        shipping month; returns alone do not count as activity. Conversion does not
@@ -2571,7 +2572,7 @@ function loadViaGviz(progress, ok, fail){
           var ii = imap[itemKey(item)];
           if (ii === undefined) continue;               /* not on the master item list */
           var val = num(cell(rows[r],2)), qtyRaw = num(cell(rows[r],3)), div = num(cell(rows[r],4));
-          if (qtyExcludedCustomer(sites[si][0])) qtyRaw = 0;
+          if (qtyExcludedCustomer(sites[si][0])){ val = 0; qtyRaw = 0; }
           var qtyConv = Math.abs(div) > 0.0000000001 ? (qtyRaw / div) : qtyRaw;
           if (!val && !qtyRaw) continue;
           buf.push(si, ii, p, val, qtyRaw, qtyConv);
