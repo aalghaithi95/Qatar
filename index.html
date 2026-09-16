@@ -1947,7 +1947,7 @@ function applyCurrencyConversion(){
   A=null; LIVE=null; AN=null; PRSCAN=null; AREASCAN=null;
   syncCurrencyControl();
 }
-var DATA_VERSION = 24;
+var DATA_VERSION = 25;
 
 /* ---------- gviz over JSONP (no CORS, works from a static page) ---------- */
 var gvSeq = 0;
@@ -8808,16 +8808,25 @@ function boot(){
     } catch(e){ fail('The embedded dashboard data could not be opened: ' + e.message); }
     return;
   }
-  showLoader('Looking for data on this device…');
-  snapshotLoad(function(snap){
-    if (snap){
-      applySnapshot(snap);
-      afterLoad(false);
-      hideLoader();
-      return;
-    }
-    showLoader('Reading the sheet…');
-    loadAll(setProgress, function(){ afterLoad(false); hideLoader(); }, fail);
+
+  /* Live Qatar dashboard: always read the Google Sheet first.
+     The device snapshot is now fallback-only, so opening the dashboard cannot
+     silently reuse stale Sales QAR values after the source data changes. */
+  showLoader('Reading the latest Google Sheet data…');
+  loadAll(setProgress, function(){
+    afterLoad(false);
+    hideLoader();
+  }, function(msg){
+    snapshotLoad(function(snap){
+      if (snap){
+        applySnapshot(snap);
+        afterLoad(false);
+        hideLoader();
+        setStatus('error', msg + ' Showing the last saved copy from this device.');
+      } else {
+        fail(msg);
+      }
+    });
   });
 }
 if (window.requestAnimationFrame) requestAnimationFrame(function(){ setTimeout(boot, 20); });
