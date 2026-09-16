@@ -682,17 +682,18 @@ body.mdopen #mdWrap{display:block}
 .tab:hover{color:var(--ink)}
 .tab.on{color:var(--ink);border-bottom-color:var(--accent)}
 /* ---------- analysis table ---------- */
-#antbl{width:100%;min-width:1120px;border-collapse:collapse;table-layout:fixed}
+#antbl{width:100%;min-width:1260px;border-collapse:collapse;table-layout:fixed}
 @media (min-width:761px){
-  #antbl th.a-cust,#antbl td.a-cust{width:12%}
-  #antbl th.a-site,#antbl td.a-site{width:25%}
-  #antbl th.a-cat,#antbl td.a-cat{width:8%}
-  #antbl th.a-code,#antbl td.a-code{width:7%}
-  #antbl th:nth-child(5),#antbl td:nth-child(5){width:19%}
-  #antbl th.a-va,#antbl td.a-va,#antbl th.a-vb,#antbl td.a-vb{width:5.5%}
+  #antbl th.a-cust,#antbl td.a-cust{width:11%}
+  #antbl th.a-site,#antbl td.a-site{width:20%}
+  #antbl th.a-cat,#antbl td.a-cat{width:7%}
+  #antbl th.a-code,#antbl td.a-code{width:6%}
+  #antbl th:nth-child(5),#antbl td:nth-child(5){width:17%}
+  /* Keep enough room for labels such as 26' Value (QAR) / 26' Value (OMR). */
+  #antbl th.a-va,#antbl td.a-va,#antbl th.a-vb,#antbl td.a-vb{width:9%;min-width:110px}
   #antbl th.a-diff,#antbl td.a-diff{width:6%}
   #antbl th.a-stock,#antbl td.a-stock{width:4.5%}
-  #antbl th.a-last,#antbl td.a-last{width:7%}
+  #antbl th.a-last,#antbl td.a-last{width:7.5%}
 }
 #antbl th{position:sticky;top:0;z-index:3;background:var(--ink);color:#EAF2F0;text-align:left;
   padding:9px 8px;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;white-space:nowrap}
@@ -717,7 +718,10 @@ body.mdopen #mdWrap{display:block}
 #antbl tr.cat td.catname{color:var(--ink)}
 #antbl tr.nsup td.a-last{white-space:nowrap}
 #antbl td.a-cust{max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#antbl td.a-site{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:help}
+#antbl td.a-site{
+  overflow:visible;text-overflow:clip;white-space:normal;cursor:help;
+  line-height:1.25;overflow-wrap:anywhere;word-break:normal
+}
 #antbl tbody tr:not(.cat) td.a-cust{color:var(--muted);font-size:11px}
 #antbl td.desc{max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #antbl .gap{display:inline-block;margin-left:6px;font-size:10px;color:var(--muted);
@@ -729,7 +733,7 @@ body.mdopen #mdWrap{display:block}
   #antbl th.a-cat,#antbl td.a-cat,#antbl th.a-code,#antbl td.a-code,
   #antbl th.a-va,#antbl td.a-va{display:none}
   #antbl td.a-cust{max-width:110px}
-  #antbl td.a-site{max-width:180px}
+  #antbl td.a-site{max-width:none;white-space:normal;overflow-wrap:anywhere}
   #antbl td.desc{max-width:150px}
   #antbl th,#antbl td{padding:6px 5px;font-size:11.5px}
 }
