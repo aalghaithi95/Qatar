@@ -1947,7 +1947,7 @@ function applyCurrencyConversion(){
   A=null; LIVE=null; AN=null; PRSCAN=null; AREASCAN=null;
   syncCurrencyControl();
 }
-var DATA_VERSION = 26;
+var DATA_VERSION = 24;
 
 /* ---------- gviz over JSONP (no CORS, works from a static page) ---------- */
 var gvSeq = 0;
@@ -2194,9 +2194,9 @@ function cint(t){
 function itemKey(t){
   return String(t == null ? '' : t).replace(/\s+/g,' ').trim();
 }
-/* Keep the same customer-exclusion scope for both Volume and Value.
-   This customer was already excluded from Volume; Value now follows that exact
-   same row-inclusion metric so the two measures reconcile to the same source scope. */
+/* ABDUL HAMEED LIQUIDATION SALES is value-only for reporting: its sales value
+   remains in every value calculation, but its Volume Cases is excluded from all
+   dashboard quantity totals, drilldowns and promotion-volume calculations. */
 function qtyExcludedCustomer(t){
   return itemKey(t).toUpperCase() === 'ABDUL HAMEED LIQUIDATION SALES';
 }
@@ -2316,9 +2316,8 @@ function loadAll(progress, ok, fail){
     if (ii === undefined){ badItems++; ii = OTHER; }    /* counted, never listed */
     if (abs < 0) return;
     var m = mm, y = yy;
-    var metricExcluded = qtyExcludedCustomer(f[C_CUST]);
-    var v = metricExcluded ? 0 : cnum(f[C_SALES]);
-    var qRaw = metricExcluded ? 0 : cnum(f[C_CASES]);
+    var v = cnum(f[C_SALES]);
+    var qRaw = qtyExcludedCustomer(f[C_CUST]) ? 0 : cnum(f[C_CASES]);
     var qConv = Math.abs(rowConv) > 0.0000000001 ? (qRaw / rowConv) : qRaw;
     /* last active salesman = whoever serviced the outlet on its most recent
        shipping month; returns alone do not count as activity. Conversion does not
@@ -2572,7 +2571,7 @@ function loadViaGviz(progress, ok, fail){
           var ii = imap[itemKey(item)];
           if (ii === undefined) continue;               /* not on the master item list */
           var val = num(cell(rows[r],2)), qtyRaw = num(cell(rows[r],3)), div = num(cell(rows[r],4));
-          if (qtyExcludedCustomer(sites[si][0])){ val = 0; qtyRaw = 0; }
+          if (qtyExcludedCustomer(sites[si][0])) qtyRaw = 0;
           var qtyConv = Math.abs(div) > 0.0000000001 ? (qtyRaw / div) : qtyRaw;
           if (!val && !qtyRaw) continue;
           buf.push(si, ii, p, val, qtyRaw, qtyConv);
@@ -8809,25 +8808,16 @@ function boot(){
     } catch(e){ fail('The embedded dashboard data could not be opened: ' + e.message); }
     return;
   }
-
-  /* Live Qatar dashboard: always read the Google Sheet first.
-     The device snapshot is now fallback-only, so opening the dashboard cannot
-     silently reuse stale Sales QAR values after the source data changes. */
-  showLoader('Reading the latest Google Sheet data…');
-  loadAll(setProgress, function(){
-    afterLoad(false);
-    hideLoader();
-  }, function(msg){
-    snapshotLoad(function(snap){
-      if (snap){
-        applySnapshot(snap);
-        afterLoad(false);
-        hideLoader();
-        setStatus('error', msg + ' Showing the last saved copy from this device.');
-      } else {
-        fail(msg);
-      }
-    });
+  showLoader('Looking for data on this device…');
+  snapshotLoad(function(snap){
+    if (snap){
+      applySnapshot(snap);
+      afterLoad(false);
+      hideLoader();
+      return;
+    }
+    showLoader('Reading the sheet…');
+    loadAll(setProgress, function(){ afterLoad(false); hideLoader(); }, fail);
   });
 }
 if (window.requestAnimationFrame) requestAnimationFrame(function(){ setTimeout(boot, 20); });
