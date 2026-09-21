@@ -196,6 +196,9 @@ tr.cat td{background:#DFE6E2;font-weight:600;border-bottom:1px solid var(--line)
 tr.cat:hover td{background:#DFE6E2}
 tr.cat td.catname{letter-spacing:.02em}
 tfoot td{position:sticky;bottom:0;background:var(--ink);color:#fff;font-weight:600;padding:9px;border-top:1px solid var(--ink)}
+/* Item Performance: keep the sticky Grand Total above the sticky category rows. */
+#mainScroll #tbl tfoot td{z-index:10;background:var(--ink);box-shadow:0 -2px 5px rgba(9,24,22,.18)}
+#mainScroll #tbl thead th{z-index:11}
 .desc{max-width:340px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pill{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.07em;text-transform:uppercase;padding:1px 5px;border-radius:2px;border:1px solid}
 .pill.promo{color:var(--accent-2);border-color:#E7C57F;background:#FBF3E1}
@@ -1484,7 +1487,7 @@ body.immonthly #imWrap .imcard{max-width:1500px}
     </div>
   </div>
 
-  <div class="panel">
+  <div class="panel" id="lostPanel" style="display:none">
     <div class="panel-head">
       <h2 id="lostHead">No supply this year</h2>
       <span class="count" id="lostCount"></span>
@@ -3256,6 +3259,12 @@ function lastLabel(p){
   return '<span class="mono" style="font-size:11px'+(old?';color:var(--neg)':'')+'">'+MONTHS[d.month]+" '"+String(d.year).slice(2)+'</span>';
 }
 var AREA_SCOPE = [];
+/* The Regular/Promo checkboxes belong to Item Performance only. The independent
+   Overview, Channel Wise, Customer Wise and Category Wise views use their own
+   sales-type selectors and always keep the full invoice mix. */
+function itemPerformanceTypeEnabled(i){
+  return ITEMS[i] && (ITEMS[i][3] === 'Promotion' ? state.showPromo : state.showRegular);
+}
 function buildRows(){
   AREA_SCOPE = areasInScope();
   var rows = [], q = state.q.trim().toLowerCase(), mo = monthsB();
@@ -3263,8 +3272,7 @@ function buildRows(){
     var vA=A.vA[i], vB=A.vB[i], qA=A.qA[i], qB=A.qB[i];
     var promo = ITEMS[i][3] === 'Promotion';
     if (!itemVisible(i)) continue;
-    if (promo && !state.showPromo) continue;
-    if (!promo && !state.showRegular) continue;
+    if (!itemPerformanceTypeEnabled(i)) continue;
     if (state.hideZero && promo){
       /* Hide Unsold Promo Packs:
          1) keep the existing never-sold case (zero in both comparison years);
@@ -3306,7 +3314,7 @@ function sortRows(rows){
   return rows;
 }
 
-function render(){
+function render(itemPerformanceOnly){
   if (!A){ ensureA(); }
   aggregate();
   var rows = sortRows(buildRows()), i;
@@ -3319,6 +3327,7 @@ function render(){
     if ((A.vA[i]||A.qA[i]) && !(A.vB[i]||A.qB[i])) T.lost++;
     if (!(A.vA[i]||A.qA[i]) && (A.vB[i]||A.qB[i])) T.gain++;
   }
+  if (!itemPerformanceOnly){
   /* New / Lost Customer Sites always use the latest available data,
      independent of the selected comparison years and month period.
 
@@ -3401,18 +3410,24 @@ function render(){
         lostSites?'down':'flat', lostSites ? 'lost' : '');
 
   renderVisitValueChart();
+  }
   renderAudit();
   var out = [], lastCat = -1, totStock = 0;
   for (i=0;i<rows.length;i++) totStock += rows[i].stock;
-  /* subtotals cover every item of this department in the category, including any
-     hidden from the list, so the numbers still reconcile */
+  /* Item Performance has its own total. Preserve its existing inclusion of
+     off-list/invoiced packs while respecting the two local sales-type checkboxes.
+     Top-level KPIs and all other Overview views retain the independent full-mix T. */
+  var itemT = {qA:0,qB:0,vA:0,vB:0};
   var catT = {};
   for (i=0;i<NI;i++){
+    if (!itemPerformanceTypeEnabled(i)) continue;
     var ci = catOf[i];
     if (!catT[ci]) catT[ci] = {qA:0,qB:0,vA:0,vB:0,stock:0};
     catT[ci].qA += A.qA[i]; catT[ci].qB += A.qB[i];
     catT[ci].vA += A.vA[i]; catT[ci].vB += A.vB[i];
     catT[ci].stock += stockOf(i);
+    itemT.qA += A.qA[i]; itemT.qB += A.qB[i];
+    itemT.vA += A.vA[i]; itemT.vB += A.vB[i];
   }
   function subRow(s){
     return '<tr class="cat"><td class="catname" colspan="5">'+esc(s.name)+' <span class="mono" style="font-weight:400;color:var(--muted);font-size:10px">'+s.n+' SKU</span></td>'+
@@ -3447,11 +3462,11 @@ function render(){
       '<td class="desc" data-i="'+r.i+'" role="button" tabindex="0" title="Tap for the monthly breakdown">'+esc(r.desc)+
         '<button class="nebtn m-only" type="button" data-ne="'+r.i+'" title="Near expiry quantity">NE'+
         (neQty(r.i) ? ' <b>'+nf0.format(neQty(r.i))+'</b>' : '')+'</button></td>'+
-      '<td class="num d-q25" data-l="'+state.yrB+' QTY">'+fmt(r.qB)+'</td>'+
-      '<td class="num d-q26" data-l="'+String(state.yrA).slice(2)+' QTY">'+fmt(r.qA)+'</td>'+
+      '<td class="num d-q26" data-l="'+state.yrB+' QTY">'+fmt(r.qB)+'</td>'+
+      '<td class="num d-q25" data-l="'+state.yrA+' QTY">'+fmt(r.qA)+'</td>'+
       '<td class="num d-avgq" data-l="Avg QTY">'+fmtAvg(r.avgq)+'</td>'+
-      '<td class="num d-v25" data-l="'+state.yrB+' value ('+currencyLabel()+')">'+fmt(r.vB)+arrowLY(r.vA, r.vB)+'</td>'+
-      '<td class="num d-v26" data-l="'+String(state.yrA).slice(2)+' Value ('+currencyLabel()+')">'+fmt(r.vA)+'</td>'+
+      '<td class="num d-v26" data-l="'+state.yrB+' Value ('+currencyLabel()+')">'+fmt(r.vB)+arrowLY(r.vA, r.vB)+'</td>'+
+      '<td class="num d-v25" data-l="'+state.yrA+' Value ('+currencyLabel()+')">'+fmt(r.vA)+'</td>'+
       '<td class="num d-dv" data-l="Value change">'+pctCell(r.vB,r.vA)+'</td>'+
       '<td class="num d-delta" data-l="Vs '+state.yrA+' ('+currencyLabel()+')"><span class="'+(r.delta>0?'up':(r.delta<0?'down':'flat'))+'">'+(r.delta>=0?'+':'−')+nf0.format(Math.abs(Math.round(r.delta)))+'</span></td>'+
       '<td class="num d-stock" data-l="Stock">'+stockCell(r.stock)+'</td>'+
@@ -3459,7 +3474,7 @@ function render(){
   }
   var hiddenN = 0;
   for (i=0;i<NI;i++){
-    if (itemVisible(i)) continue;
+    if (itemVisible(i) || !itemPerformanceTypeEnabled(i)) continue;
     if (A.vA[i] || A.vB[i] || A.qA[i] || A.qB[i]) hiddenN++;
   }
   var emptyMsg = 'No items match this selection.';
@@ -3472,10 +3487,10 @@ function render(){
   document.getElementById('tfoot').innerHTML =
     '<tr><td colspan="5">TOTAL — '+rows.length+' items'+
       (hiddenN ? ' listed, ' + hiddenN + ' low-volume retail packs counted but not shown' : '')+'</td>'+
-    '<td class="num">'+fmtS(T.qB)+'</td><td class="num">'+fmtS(T.qA)+'</td>'+
-    '<td class="num">'+fmtAvgS(T.qB/monthsB())+'</td>'+
-    '<td class="num">'+fmtS(T.vB)+'</td><td class="num">'+fmtS(T.vA)+'</td><td class="num">'+pctCell(T.vB,T.vA)+'</td>'+
-    '<td class="num">'+(T.vB-T.vA>=0?'+':'−')+nf0.format(Math.abs(Math.round(T.vB-T.vA)))+'</td>'+
+    '<td class="num">'+fmtS(itemT.qB)+'</td><td class="num">'+fmtS(itemT.qA)+'</td>'+
+    '<td class="num">'+fmtAvgS(itemT.qB/monthsB())+'</td>'+
+    '<td class="num">'+fmtS(itemT.vB)+'</td><td class="num">'+fmtS(itemT.vA)+'</td><td class="num">'+pctCell(itemT.vB,itemT.vA)+'</td>'+
+    '<td class="num">'+(itemT.vB-itemT.vA>=0?'+':'−')+nf0.format(Math.abs(Math.round(itemT.vB-itemT.vA)))+'</td>'+
     '<td class="num d-stock">'+fmtS(totStock)+'</td><td></td></tr>';
 
   /* with a single store selected, name the salesman who last served it */
@@ -3486,6 +3501,8 @@ function render(){
     esc(rows.length + ' items · ' + depLabel() +
         ' · ' + siteScopeLabel() + ' · ' + yearsLabel()) +
     (repName ? ' · <span class="repname">Salesman ' + esc(repName) + '</span>' : '');
+
+  if (itemPerformanceOnly) return;
 
   /* no supply in the current year */
   var lost = [], ib = yIdx(state.yrB);
@@ -4063,8 +4080,8 @@ function buildCatFilter(){
   if (msCat) msCat.refresh();
   if (msACat) msACat.refresh();
 }
-document.getElementById('showRegular').addEventListener('change', function(){ state.showRegular = this.checked; render(); });
-document.getElementById('showPromo').addEventListener('change', function(){ state.showPromo = this.checked; render(); });
+document.getElementById('showRegular').addEventListener('change', function(){ state.showRegular = this.checked; render(true); });
+document.getElementById('showPromo').addEventListener('change', function(){ state.showPromo = this.checked; render(true); });
 document.getElementById('showDecline').addEventListener('change', function(){ state.showDecline = this.checked; render(); });
 document.getElementById('grp').addEventListener('change', function(){ state.group = this.checked; render(); });
 document.getElementById('hideZero').addEventListener('change', function(){ state.hideZero = this.checked; render(); });
@@ -4904,8 +4921,6 @@ function customerWiseData(metric){
       var promo=ITEMS[i] && ITEMS[i][3]==='Promotion';
       if (CUSTWISE_SALES_TYPE==='promo' && !promo) continue;
       if (CUSTWISE_SALES_TYPE==='regular' && promo) continue;
-      if (promo && !state.showPromo) continue;
-      if (!promo && !state.showRegular) continue;
 
       var p=fp[k], yi=(p/12)|0, m=p%12;
       if (yi!==currYi && yi!==prevYi) continue;
@@ -5353,8 +5368,6 @@ function categoryWiseItemAllowed(i){
   var promo = ITEMS[i][3] === 'Promotion';
   if (CATWISE_SALES_TYPE === 'promo' && !promo) return false;
   if (CATWISE_SALES_TYPE === 'regular' && promo) return false;
-  if (promo && !state.showPromo) return false;
-  if (!promo && !state.showRegular) return false;
   if (state.cat.size && !state.cat.has(catOf[i])) return false;
   return true;
 }
