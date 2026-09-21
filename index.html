@@ -689,15 +689,15 @@ body.mdopen #mdWrap{display:block}
 @media (min-width:761px){
   /* Give code and full description their own cells, while preserving readable 26' Value (QAR) headers. */
   #antbl{min-width:1450px}
-  #antbl th.a-cust,#antbl td.a-cust{width:10%}
-  #antbl th.a-site,#antbl td.a-site{width:18%}
-  #antbl th.a-cat,#antbl td.a-cat{width:7%}
+  #antbl th.a-cust,#antbl td.a-cust{width:9%}
+  #antbl th.a-site,#antbl td.a-site{width:17%}
+  #antbl th.a-cat,#antbl td.a-cat{width:6%}
   #antbl th.a-code,#antbl td.a-code{width:9%}
   #antbl th.a-desc,#antbl td.a-desc{width:21%}
   #antbl th.a-va,#antbl td.a-va,#antbl th.a-vb,#antbl td.a-vb{width:9%;min-width:120px}
   #antbl th.a-diff,#antbl td.a-diff{width:6%}
   #antbl th.a-stock,#antbl td.a-stock{width:4%}
-  #antbl th.a-last,#antbl td.a-last{width:7%}
+  #antbl th.a-last,#antbl td.a-last{width:10%}
 }
 #antbl th{position:sticky;top:0;z-index:3;background:var(--ink);color:#EAF2F0;text-align:left;
   padding:9px 8px;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;white-space:nowrap}
@@ -720,7 +720,10 @@ body.mdopen #mdWrap{display:block}
   box-shadow:0 1px 0 var(--line)}
 #antbl tr.cat:hover td{background:#EEF1EF}
 #antbl tr.cat td.catname{color:var(--ink)}
-#antbl tr.nsup td.a-last{white-space:nowrap}
+#antbl td.a-last{white-space:nowrap}
+/* Keep the date and month-count badge beside each other inside Last Supplied. */
+#antbl td.a-last .gap{margin-left:4px;font-size:9.5px;padding:1px 5px}
+#antbl td.a-last .gap.ret{display:block;width:max-content;margin:4px 0 0}
 #antbl td.a-cust{max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #antbl td.a-site{
   overflow:visible;text-overflow:clip;white-space:normal;cursor:help;
